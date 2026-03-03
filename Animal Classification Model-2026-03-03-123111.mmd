@@ -1,0 +1,96 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+direction TB
+    class Giocatore {
+	    -vita : int
+	    -fame : int
+	    -mente : int
+	    +attacca() int
+	    +utilizzaAbilita()
+	    +utilizzaOggetto(ogg : Oggetto)
+	    +muovi()
+	    +cura(cura : int)
+	    +subisciDanno(danno : int)
+	    +perdiMente(perdita : int)
+	    +guadagnaMente(mente : int)
+	    +getInventarioConsumabili() InventarioConsumabili
+	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
+    }
+
+    class Inventario {
+	    +aggiungiOggetto(ogg : Oggetto)
+	    +togliOggetto() Oggetto
+	    +getOggetti() ArrayList
+    }
+
+    class Oggetto {
+	    -nome : String
+	    -img : ImageIcon
+	    +Oggetto(nome : String, img : ImageIcon)
+	    +getNome() String
+	    +getImg() ImageIcon
+    }
+
+    class InventarioEquipaggiabili {
+    }
+
+    class InventarioConsumabili {
+    }
+
+    class Mercenario {
+    }
+
+    class Cavaliere {
+    }
+
+    class Necromante {
+    }
+
+    class Vichingo {
+    }
+
+    class OggettoEquipaggiabile {
+    }
+
+    class OggettoConsumabile {
+    }
+
+    class OggettoEquipaggiabileOffensivo {
+    }
+
+    class OggettoEquipaggiabileDifensivo {
+    }
+
+    class OggettoConsumabileCurativo {
+    }
+
+    class OggettoConsumabileMentale {
+    }
+
+    class OggettoConsumabileCommestibile {
+    }
+
+	<<abstract>> Giocatore
+	<<abstract>> Inventario
+	<<abstract>> Oggetto
+
+    Inventario <|-- InventarioEquipaggiabili
+    Inventario <|-- InventarioConsumabili
+    Giocatore <|-- Mercenario
+    Giocatore <|-- Cavaliere
+    Giocatore <|-- Necromante
+    Giocatore <|-- Vichingo
+    Oggetto <|-- OggettoEquipaggiabile
+    Oggetto <|-- OggettoConsumabile
+    OggettoEquipaggiabile <|-- OggettoEquipaggiabileOffensivo
+    OggettoEquipaggiabile <|-- OggettoEquipaggiabileDifensivo
+    OggettoConsumabile <|-- OggettoConsumabileCurativo
+    OggettoConsumabile <|-- OggettoConsumabileMentale
+    OggettoConsumabile <|-- OggettoConsumabileCommestibile
+    Giocatore "1" --o "1" InventarioConsumabili : "-consumabili"
+    Giocatore "1" --o "1" InventarioEquipaggiabili : "-equipaggiabili"
+    InventarioConsumabili "1" --> "n" OggettoConsumabile : "-consumabili"
+    InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : "-equipaggiabili"
