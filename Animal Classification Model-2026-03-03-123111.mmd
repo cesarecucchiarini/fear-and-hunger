@@ -9,7 +9,7 @@ direction TB
 	    -fame : int
 	    -mente : int
 	    +attacca() int
-	    +utilizzaAbilita()
+	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
 	    +muovi()
 	    +cura(cura : int)
@@ -23,7 +23,7 @@ direction TB
     class Inventario {
 	    +aggiungiOggetto(ogg : Oggetto)
 	    +togliOggetto() Oggetto
-	    +getOggetti() ArrayList
+	    +getOggetti() ArrayList~Oggetto~
     }
 
     class Oggetto {
@@ -41,15 +41,19 @@ direction TB
     }
 
     class Mercenario {
+      +utilizzaAbilita()
     }
 
     class Cavaliere {
+      +utilizzaAbilita()
     }
 
     class Necromante {
+      +utilizzaAbilita()
     }
 
     class Vichingo {
+      +utilizzaAbilita()
     }
 
     class OggettoEquipaggiabile {
@@ -73,6 +77,22 @@ direction TB
     class OggettoConsumabileCommestibile {
     }
 
+    class Nemico{
+      <<abstract>>
+    }
+
+    class GestoreGioco{
+
+    }
+
+    class Mappa{
+
+    }
+
+    class GestoreInput{
+
+    }
+
 	<<abstract>> Giocatore
 	<<abstract>> Inventario
 	<<abstract>> Oggetto
@@ -90,7 +110,8 @@ direction TB
     OggettoConsumabile <|-- OggettoConsumabileCurativo
     OggettoConsumabile <|-- OggettoConsumabileMentale
     OggettoConsumabile <|-- OggettoConsumabileCommestibile
-    Giocatore "1" --o "1" InventarioConsumabili : "-consumabili"
-    Giocatore "1" --o "1" InventarioEquipaggiabili : "-equipaggiabili"
-    InventarioConsumabili "1" --> "n" OggettoConsumabile : "-consumabili"
-    InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : "-equipaggiabili"
+    Giocatore "1" --o "1" InventarioConsumabili : -consumabili
+    Giocatore "1" --o "1" InventarioEquipaggiabili : -equipaggiabili
+    InventarioConsumabili "1" --> "n" OggettoConsumabile : -consumabili
+    InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : -equipaggiabili
+    GestoreGioco "1" --> "1" Giocatore : -giocatore
