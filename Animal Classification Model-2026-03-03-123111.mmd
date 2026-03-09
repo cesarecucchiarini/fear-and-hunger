@@ -8,6 +8,7 @@ direction TB
 	    -vita : int
 	    -fame : int
 	    -mente : int
+        -sprite : ImageIcon
 	    +attacca() int
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
@@ -16,8 +17,8 @@ direction TB
 	    +subisciDanno(danno : int)
 	    +perdiMente(perdita : int)
 	    +guadagnaMente(mente : int)
-	    +getInventarioConsumabili() InventarioConsumabili
-	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
+        +setOggetto(oggetto : OggettoEquipaggiabile)
+        +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
     }
 
     class Inventario {
@@ -32,6 +33,15 @@ direction TB
 	    +Oggetto(nome : String, img : ImageIcon)
 	    +getNome() String
 	    +getImg() ImageIcon
+    }
+
+    class Party{
+        +aggiungiMembro(giocatore : Giocatore)
+        +rimuoviMembro(giocatore : Giocatore)
+        +getParty() ArrayList~Giocatore~
+        +getInventarioConsumabili() InventarioConsumabili
+	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
+        +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
     }
 
     class InventarioEquipaggiabili {
@@ -62,19 +72,17 @@ direction TB
     class OggettoConsumabile {
     }
 
-    class OggettoEquipaggiabileOffensivo {
+    class TipoOggettoEquipaggiabile{
+        <<Enum>>
+        DIFENSIVO 
+        OFFENSIVO
     }
 
-    class OggettoEquipaggiabileDifensivo {
-    }
-
-    class OggettoConsumabileCurativo {
-    }
-
-    class OggettoConsumabileMentale {
-    }
-
-    class OggettoConsumabileCommestibile {
+    class TipoOggettoEquipaggiabile{
+        <<Enum>>
+        COMMESTIBILE 
+        CURATIVO 
+        MENTALE
     }
 
     class Nemico{
@@ -82,7 +90,14 @@ direction TB
     }
 
     class GestoreGioco{
-
+        -posizione : int[]
+        +GestoreGioco(party : Party, mappa : Mappa)
+        +muovi(int x, int y)
+        +controllaEvento()
+        +iniziaCombattimento()
+        +apriInventario()
+        +trovaOggetto()
+        +trovaAlleato()
     }
 
     class Mappa{
@@ -91,6 +106,21 @@ direction TB
 
     class GestoreInput{
 
+    }
+
+    class GestoreCombattimento{
+        +iniziaCombattimento(party : Party, nemico : Nemico)
+    }
+
+    class Eventi{
+        <<Enum>>
+        NEMICO
+        OGGETTO
+        ALLEATO
+    }
+
+    class GeneratoreMappa{
+        +generaMappa()$
     }
 
 	<<abstract>> Giocatore
@@ -105,13 +135,16 @@ direction TB
     Giocatore <|-- Vichingo
     Oggetto <|-- OggettoEquipaggiabile
     Oggetto <|-- OggettoConsumabile
-    OggettoEquipaggiabile <|-- OggettoEquipaggiabileOffensivo
-    OggettoEquipaggiabile <|-- OggettoEquipaggiabileDifensivo
-    OggettoConsumabile <|-- OggettoConsumabileCurativo
-    OggettoConsumabile <|-- OggettoConsumabileMentale
-    OggettoConsumabile <|-- OggettoConsumabileCommestibile
-    Giocatore "1" --o "1" InventarioConsumabili : -consumabili
-    Giocatore "1" --o "1" InventarioEquipaggiabili : -equipaggiabili
+    Party "1" --> "1" InventarioConsumabili : -consumabili
+    Party "1" --> "1" InventarioEquipaggiabili : -equipaggiabili
     InventarioConsumabili "1" --> "n" OggettoConsumabile : -consumabili
     InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : -equipaggiabili
-    GestoreGioco "1" --> "1" Giocatore : -giocatore
+    GestoreGioco "1" --> "1" Party : -party
+    Party "1" --> "1...4" Giocatore : -giocatori
+    GestoreInput "1" --> "1" GestoreGioco : -gestoreGioco
+    GestoreInput "1" --> "1" GestoreCombattimento : -gestoreCombattimento
+    GestoreCombattimento "1" <-- GestoreGioco : -gestoreCombattimento
+    GestoreGioco "1" --> "1" Mappa : -mappa
+    Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoDifensivo
+    Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoOffensivo
+    GeneratoreMappa "1" ..> "1" Mappa
