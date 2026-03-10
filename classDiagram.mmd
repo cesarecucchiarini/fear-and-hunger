@@ -8,7 +8,7 @@ direction TB
 	    -vita : int
 	    -fame : int
 	    -mente : int
-        -sprite : ImageIcon
+	    -sprite : ImageIcon
 	    +attacca() int
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
@@ -17,8 +17,8 @@ direction TB
 	    +subisciDanno(danno : int)
 	    +perdiMente(perdita : int)
 	    +guadagnaMente(mente : int)
-        +setOggetto(oggetto : OggettoEquipaggiabile)
-        +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
+	    +setOggetto(oggetto : OggettoEquipaggiabile)
+	    +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
     }
 
     class Inventario {
@@ -35,13 +35,13 @@ direction TB
 	    +getImg() ImageIcon
     }
 
-    class Party{
-        +aggiungiMembro(giocatore : Giocatore)
-        +rimuoviMembro(giocatore : Giocatore)
-        +getParty() ArrayList~Giocatore~
-        +getInventarioConsumabili() InventarioConsumabili
+    class Party {
+	    +aggiungiMembro(giocatore : Giocatore)
+	    +rimuoviMembro(giocatore : Giocatore)
+	    +getParty() ArrayList~Giocatore~
+	    +getInventarioConsumabili() InventarioConsumabili
 	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
-        +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
+	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
     }
 
     class InventarioEquipaggiabili {
@@ -51,19 +51,19 @@ direction TB
     }
 
     class Mercenario {
-      +utilizzaAbilita()
+	    +utilizzaAbilita()
     }
 
     class Cavaliere {
-      +utilizzaAbilita()
+	    +utilizzaAbilita()
     }
 
     class Necromante {
-      +utilizzaAbilita()
+	    +utilizzaAbilita()
     }
 
     class Vichingo {
-      +utilizzaAbilita()
+	    +utilizzaAbilita()
     }
 
     class OggettoEquipaggiabile {
@@ -72,60 +72,82 @@ direction TB
     class OggettoConsumabile {
     }
 
-    class TipoOggettoEquipaggiabile{
-        <<Enum>>
-        DIFENSIVO 
-        OFFENSIVO
+    class TipoOggettoEquipaggiabile {
+	    DIFENSIVO
+	    OFFENSIVO
+	    COMMESTIBILE
+	    CURATIVO
+	    MENTALE
     }
 
-    class TipoOggettoEquipaggiabile{
-        <<Enum>>
-        COMMESTIBILE 
-        CURATIVO 
-        MENTALE
+    class Nemico {
+	    -vita : int
+	    -danno : int
+	    -sprite : ImageIcon
+	    +attacca() int*
     }
 
-    class Nemico{
-      <<abstract>>
+    class GestoreGioco {
+	    -posizione : int[]
+	    -mappaCreabili : HashMap~Integer, Consumer~Creabile~~
+	    +GestoreGioco(party : Party, mappa : Mappa)
+	    +muovi(int x, int y)
+	    +controllaEvento()
+	    +iniziaCombattimento()
+	    +apriInventario()
+	    +trovaOggetto()
+	    +trovaAlleato()
+	    +generaCreabile(id : int) Creabile
     }
 
-    class GestoreGioco{
-        -posizione : int[]
-        +GestoreGioco(party : Party, mappa : Mappa)
-        +muovi(int x, int y)
-        +controllaEvento()
-        +iniziaCombattimento()
-        +apriInventario()
-        +trovaOggetto()
-        +trovaAlleato()
+    class Mappa {
+	    +getCella(x : int, y : int) Cella
     }
 
-    class Mappa{
-
+    class Cella {
+	    -tipo : int
+	    -idCreabile : int
+	    +getInfos() int[]
     }
 
-    class GestoreInput{
-
+    class GestoreInput {
     }
 
-    class GestoreCombattimento{
-        +iniziaCombattimento(party : Party, nemico : Nemico)
+    class GestoreCombattimento {
+	    +iniziaCombattimento(party : Party, nemico : Nemico)
     }
 
-    class Eventi{
-        <<Enum>>
-        NEMICO
-        OGGETTO
-        ALLEATO
+    class TipoCella {
+	    NEMICO
+	    OGGETTO
+	    ALLEATO
+	    VUOTO
+	    MURO
     }
 
-    class GeneratoreMappa{
-        +generaMappa()$
+    class GeneratoreMappa {
+	    +generaMappa()$
+    }
+
+    class Creabile {
+    }
+
+    class Maneba {
+    }
+
+    class Guardia {
+    }
+
+    class Trotur {
     }
 
 	<<abstract>> Giocatore
 	<<abstract>> Inventario
 	<<abstract>> Oggetto
+	<<enum>> TipoOggettoEquipaggiabile
+	<<abstract>> Nemico
+	<<enum>> TipoCella
+	<<interface>> Creabile
 
     Inventario <|-- InventarioEquipaggiabili
     Inventario <|-- InventarioConsumabili
@@ -148,3 +170,9 @@ direction TB
     Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoDifensivo
     Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoOffensivo
     GeneratoreMappa "1" ..> "1" Mappa
+    Mappa "1" *-- "n" Cella : -celle
+    Nemico ..|> Creabile
+    Oggetto ..|> Creabile
+    Maneba --|> Nemico
+    Guardia --|> Nemico
+    Trotur --|> Nemico
