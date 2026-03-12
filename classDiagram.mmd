@@ -75,6 +75,9 @@ direction TB
     class TipoOggettoEquipaggiabile {
 	    DIFENSIVO
 	    OFFENSIVO
+    }
+
+    class TipoOggettoConsumabile {
 	    COMMESTIBILE
 	    CURATIVO
 	    MENTALE
@@ -89,10 +92,11 @@ direction TB
 
     class GestoreGioco {
 	    -posizione : int[]
+      -tipoCella : TipoCella
 	    -mappaCreabili : HashMap~Integer, Consumer~Creabile~~
 	    +GestoreGioco(party : Party, mappa : Mappa)
-	    +muovi(int x, int y)
-	    +controllaEvento()
+	    +muovi(movX : int, movY : int)
+      +interazioneCreabile()
 	    +iniziaCombattimento()
 	    +apriInventario()
 	    +trovaOggetto()
@@ -101,13 +105,19 @@ direction TB
     }
 
     class Mappa {
-	    +getCella(x : int, y : int) Cella
+	    +getInfosCella(x : int, y : int) int[]
+      +setStatoCella(stato : int)
     }
 
     class Cella {
+      +VISITATA : int
+      +NON_VISITATA : int
+      +COMPLETATA : int
 	    -tipo : int
 	    -idCreabile : int
+      -stato : int
 	    +getInfos() int[]
+      +setStato(stato : int)
     }
 
     class GestoreInput {
@@ -118,11 +128,11 @@ direction TB
     }
 
     class TipoCella {
+      VUOTO
+	    MURO
 	    NEMICO
 	    OGGETTO
 	    ALLEATO
-	    VUOTO
-	    MURO
     }
 
     class GeneratoreMappa {
@@ -145,6 +155,7 @@ direction TB
 	<<abstract>> Inventario
 	<<abstract>> Oggetto
 	<<enum>> TipoOggettoEquipaggiabile
+  <<enum>> TipoOggettoConsumabile
 	<<abstract>> Nemico
 	<<enum>> TipoCella
 	<<interface>> Creabile
@@ -176,3 +187,4 @@ direction TB
     Maneba --|> Nemico
     Guardia --|> Nemico
     Trotur --|> Nemico
+    GestoreGioco"1" --> "1"Creabile : -creabileCella
