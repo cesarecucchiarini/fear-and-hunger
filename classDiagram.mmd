@@ -5,11 +5,8 @@ config:
 classDiagram
 direction TB
     class Giocatore {
-	    -vita : int
 	    -fame : int
 	    -mente : int
-        -attacco : int
-	    -sprite : ImageIcon
 	    +attacca() int
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
@@ -39,7 +36,7 @@ direction TB
     class Party {
 	    +aggiungiMembro(giocatore : Giocatore)
 	    +rimuoviMembro(giocatore : Giocatore)
-	    +getParty() ArrayList~Giocatore~
+	    +getParty() ArrayList~Giocabile~
 	    +getInventarioConsumabili() InventarioConsumabili
 	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
 	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
@@ -98,19 +95,15 @@ direction TB
     }
 
     class Nemico {
-	    -vita : int
-	    -danno : int
-	    -sprite : ImageIcon
-	    +attacca() int*
     }
 
     class GestoreGioco {
 	    -posizione : int[]
-      -tipoCella : TipoCella
+        -tipoCella : TipoCella
 	    -mappaCreabili : HashMap~Integer, Consumer~Creabile~~
 	    +GestoreGioco(party : Party, mappa : Mappa)
 	    +muovi(movX : int, movY : int)
-      +interazioneCreabile()
+        +interazioneCreabile()
 	    +iniziaCombattimento()
 	    +apriInventario()
 	    +trovaOggetto()
@@ -175,6 +168,14 @@ direction TB
         +scriviMesaggio(msg : String)
     }
 
+    class Giocabile{
+        <<abstract>>
+        -vita : int 
+        -danno : int
+        -sprite : ImageIcon
+        +attacca() int*
+    }
+
 	<<abstract>> Giocatore
 	<<abstract>> Inventario
 	<<abstract>> Oggetto
@@ -190,6 +191,7 @@ direction TB
     Giocatore <|-- Cavaliere
     Giocatore <|-- Necromante
     Giocatore <|-- Vichingo
+    Giocatore --|> Giocabile
     Oggetto <|-- OggettoEquipaggiabile
     Oggetto <|-- OggettoConsumabile
     Party "1" --> "1" InventarioConsumabili : -consumabili
@@ -197,7 +199,7 @@ direction TB
     InventarioConsumabili "1" --> "n" OggettoConsumabile : -consumabili
     InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : -equipaggiabili
     GestoreGioco "1" --> "1" Party : -party
-    Party "1" --> "1...4" Giocatore : -giocatori
+    Party "1" --> "1...4" Giocabile : -personaggi
     GestoreInput "1" --> "1" Party : -party
     GestoreInput "1" --> "1" GestoreGioco : -gestoreGioco
     GestoreInput "1" --> "1" GestoreCombattimento : -gestoreCombattimento
@@ -214,3 +216,4 @@ direction TB
     Trotur --|> Nemico
     GestoreGioco "1" --> "1" Creabile : -creabileCella 
     GestoreGioco "1" --> "1" Logger : -logger
+    Nemico --|> Giocabile
