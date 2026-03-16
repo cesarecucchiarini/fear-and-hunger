@@ -8,6 +8,7 @@ direction TB
 	    -vita : int
 	    -fame : int
 	    -mente : int
+        -attacco : int
 	    -sprite : ImageIcon
 	    +attacca() int
 	    +utilizzaAbilita()*
@@ -42,6 +43,7 @@ direction TB
 	    +getInventarioConsumabili() InventarioConsumabili
 	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
 	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
+        +usaOggetto(giocatore : Giocatore, oggetto : OggettoConsumabile)
     }
 
     class InventarioEquipaggiabili {
@@ -67,9 +69,21 @@ direction TB
     }
 
     class OggettoEquipaggiabile {
+        -statPrincipale : int
+        -agilita : int
+        -tipo : TipoOggettoEquipaggiabile
+        +OggettoEquipaggiabile(statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
+        +getStatPtincipale() int 
+        +getAgilita() int 
+        +getTipo() TipoOgettoEquipaggiabile
     }
 
     class OggettoConsumabile {
+        -statPrincipale : int 
+        -tipo : TipoOggettoConsumabile
+        +OggettoConsumabile(statprincipale : int, tipo : TipoOggettoConsumabile)
+        +getStatPtincipale() int 
+        +getTipo() TipoOggettoConsumabile
     }
 
     class TipoOggettoEquipaggiabile {
@@ -125,10 +139,11 @@ direction TB
 
     class GestoreCombattimento {
 	    +iniziaCombattimento(party : Party, nemico : Nemico)
+        +calcolaAttacco() int
     }
 
     class TipoCella {
-      VUOTO
+        VUOTO
 	    MURO
 	    NEMICO
 	    OGGETTO
@@ -143,19 +158,28 @@ direction TB
     }
 
     class Maneba {
+        +attacca() int
     }
 
     class Guardia {
+        +attacca() int
     }
 
     class Trotur {
+        +attacca() int
+    }
+
+    class Logger{
+        -textArea : JTextArea
+        +Logger(textArea : JTextArea)
+        +scriviMesaggio(msg : String)
     }
 
 	<<abstract>> Giocatore
 	<<abstract>> Inventario
 	<<abstract>> Oggetto
 	<<enum>> TipoOggettoEquipaggiabile
-  <<enum>> TipoOggettoConsumabile
+    <<enum>> TipoOggettoConsumabile
 	<<abstract>> Nemico
 	<<enum>> TipoCella
 	<<interface>> Creabile
@@ -174,9 +198,10 @@ direction TB
     InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : -equipaggiabili
     GestoreGioco "1" --> "1" Party : -party
     Party "1" --> "1...4" Giocatore : -giocatori
+    GestoreInput "1" --> "1" Party : -party
     GestoreInput "1" --> "1" GestoreGioco : -gestoreGioco
     GestoreInput "1" --> "1" GestoreCombattimento : -gestoreCombattimento
-    GestoreCombattimento "1" <-- GestoreGioco : -gestoreCombattimento
+    GestoreCombattimento "1" <--> "1" GestoreGioco : -gestoreCombattimento
     GestoreGioco "1" --> "1" Mappa : -mappa
     Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoDifensivo
     Giocatore "1" --> "1" OggettoEquipaggiabile : -oggettoOffensivo
@@ -187,4 +212,5 @@ direction TB
     Maneba --|> Nemico
     Guardia --|> Nemico
     Trotur --|> Nemico
-    GestoreGioco"1" --> "1"Creabile : -creabileCella
+    GestoreGioco "1" --> "1" Creabile : -creabileCella 
+    GestoreGioco "1" --> "1" Logger : -logger
