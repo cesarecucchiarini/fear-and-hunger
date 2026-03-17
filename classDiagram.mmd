@@ -11,10 +11,11 @@ direction TB
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
 	    +muovi()
-	    +cura(cura : int)
-	    +subisciDanno(danno : int)
+        +controllaMorte() boolean
 	    +perdiMente(perdita : int)
-	    +guadagnaMente(mente : int)
+	    +guadagnaMente(guadagno : int)
+        +perdiFame(perdita : int)
+        +guadagnaFame(guadagno : int)
 	    +setOggetto(oggetto : OggettoEquipaggiabile)
 	    +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
     }
@@ -34,13 +35,15 @@ direction TB
     }
 
     class Party {
-	    +aggiungiMembro(giocatore : Giocatore)
-	    +rimuoviMembro(giocatore : Giocatore)
+	    +aggiungiMembro(giocabile : Giocabile)
+	    +rimuoviMembro(giocabile : Giocabile)
 	    +getParty() ArrayList~Giocabile~
+        +getGiocatori() ArrayList~Giocatore~
 	    +getInventarioConsumabili() InventarioConsumabili
 	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
 	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
         +usaOggetto(giocatore : Giocatore, oggetto : OggettoConsumabile)
+        +raccogliOggetto(oggetto : Oggetto)
     }
 
     class InventarioEquipaggiabili {
@@ -101,7 +104,7 @@ direction TB
 	    -posizione : int[]
         -tipoCella : TipoCella
 	    -mappaCreabili : HashMap~Integer, Consumer~Creabile~~
-	    +GestoreGioco(party : Party, mappa : Mappa)
+	    +GestoreGioco(leader : Giocatore,logger : Logger, mappa : Mappa)
 	    +muovi(movX : int, movY : int)
         +interazioneCreabile()
 	    +iniziaCombattimento()
@@ -109,6 +112,7 @@ direction TB
 	    +trovaOggetto()
 	    +trovaAlleato()
 	    +generaCreabile(id : int) Creabile
+        +finePartita()
     }
 
     class Mappa {
@@ -174,6 +178,12 @@ direction TB
         -danno : int
         -sprite : ImageIcon
         +attacca() int*
+        +getDanno() int 
+        +getVita() int 
+        +getSprite() ImageIcon
+        +guadagnaVita(guadagno : int)
+        +perdiVita(perdita : int)
+        +controllaMorte() boolean
     }
 
 	<<abstract>> Giocatore
