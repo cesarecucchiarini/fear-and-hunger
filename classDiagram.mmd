@@ -7,6 +7,7 @@ direction TB
     class Giocatore {
 	    -fame : int
 	    -mente : int
+        +Giocatore(nome : String, path : String)
 	    +attacca() int
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
@@ -20,36 +21,29 @@ direction TB
 	    +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
     }
 
-    class Inventario {
-	    +aggiungiOggetto(ogg : Oggetto)
-	    +togliOggetto() Oggetto
-	    +getOggetti() ArrayList~Oggetto~
-    }
-
-    class Oggetto {
-	    -nome : String
-	    -img : ImageIcon
-	    +Oggetto(nome : String, img : ImageIcon)
-	    +getNome() String
-	    +getImg() ImageIcon
-    }
-
     class Party {
 	    +aggiungiMembro(giocabile : Giocabile)
 	    +rimuoviMembro(giocabile : Giocabile)
 	    +getParty() ArrayList~Giocabile~
         +getGiocatori() ArrayList~Giocatore~
-	    +getInventarioConsumabili() InventarioConsumabili
-	    +getInventarioEquipaggiabili() InventarioEquipaggiabili
+	    +getOggettiConsumabili() ArrayList~OggettoConsumabile~
+	    +getOggettiEquipaggiabili() ArrayList~OggettoEquipaggiabile~
 	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
         +usaOggetto(giocatore : Giocatore, oggetto : OggettoConsumabile)
-        +raccogliOggetto(oggetto : Oggetto)
+        +aggiungiOggetto(oggetto : OggettoConsumabile)
+        +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
     }
 
     class InventarioEquipaggiabili {
+        +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
+	    +togliOggetto(oggetto : OggettoEquipaggiabile)
+	    +getOggetti() ArrayList~OggettoEquipaggiabile~
     }
 
     class InventarioConsumabili {
+        +aggiungiOggetto(oggetto : OggettoConsumabile)
+	    +togliOggetto(oggetto : OggettoConsumabile)
+	    +getOggetti() ArrayList~OggettoConsumabile~
     }
 
     class Mercenario {
@@ -72,17 +66,25 @@ direction TB
         -statPrincipale : int
         -agilita : int
         -tipo : TipoOggettoEquipaggiabile
-        +OggettoEquipaggiabile(statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
-        +getStatPtincipale() int 
+        -nome : String
+	    -sprite : ImageIcon
+	    +getNome() String
+	    +getSprite() ImageIcon
+        +OggettoEquipaggiabile(nome : String, path : String, statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
+        +getStatPrincipale() int 
         +getAgilita() int 
-        +getTipo() TipoOgettoEquipaggiabile
+        +getTipo() TipoOggettoEquipaggiabile
     }
 
     class OggettoConsumabile {
         -statPrincipale : int 
         -tipo : TipoOggettoConsumabile
-        +OggettoConsumabile(statprincipale : int, tipo : TipoOggettoConsumabile)
-        +getStatPtincipale() int 
+        -nome : String
+	    -sprite : ImageIcon
+	    +getNome() String
+	    +getSprite() ImageIcon
+        +OggettoConsumabile(nome : String, path : String, statprincipale : int, tipo : TipoOggettoConsumabile)
+        +getStatPrincipale() int 
         +getTipo() TipoOggettoConsumabile
     }
 
@@ -174,11 +176,16 @@ direction TB
 
     class Giocabile{
         <<abstract>>
+        -agilita : int
         -vita : int 
         -danno : int
         -sprite : ImageIcon
+        -nome : String
+        +Giocabile(nome : String, path : String)
         +attacca() int*
-        +getDanno() int 
+        +schiva() boolean
+        +getDanno() int
+        +getAgilita() int
         +getVita() int 
         +getSprite() ImageIcon
         +guadagnaVita(guadagno : int)
@@ -187,23 +194,19 @@ direction TB
     }
 
 	<<abstract>> Giocatore
-	<<abstract>> Inventario
-	<<abstract>> Oggetto
 	<<enum>> TipoOggettoEquipaggiabile
     <<enum>> TipoOggettoConsumabile
 	<<abstract>> Nemico
 	<<enum>> TipoCella
 	<<interface>> Creabile
 
-    Inventario <|-- InventarioEquipaggiabili
-    Inventario <|-- InventarioConsumabili
     Giocatore <|-- Mercenario
     Giocatore <|-- Cavaliere
     Giocatore <|-- Necromante
     Giocatore <|-- Vichingo
     Giocatore --|> Giocabile
-    Oggetto <|-- OggettoEquipaggiabile
-    Oggetto <|-- OggettoConsumabile
+    Creabile <|-- OggettoEquipaggiabile
+    Creabile <|-- OggettoConsumabile
     Party "1" --> "1" InventarioConsumabili : -consumabili
     Party "1" --> "1" InventarioEquipaggiabili : -equipaggiabili
     InventarioConsumabili "1" --> "n" OggettoConsumabile : -consumabili
@@ -220,7 +223,6 @@ direction TB
     GeneratoreMappa "1" ..> "1" Mappa
     Mappa "1" *-- "n" Cella : -celle
     Nemico ..|> Creabile
-    Oggetto ..|> Creabile
     Maneba --|> Nemico
     Guardia --|> Nemico
     Trotur --|> Nemico

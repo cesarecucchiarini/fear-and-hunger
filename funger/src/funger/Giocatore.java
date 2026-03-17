@@ -11,17 +11,31 @@ package funger;
 public abstract class Giocatore extends Giocabile{
     private int fame;
     private int mente;
+    private OggettoEquipaggiabile oggettoOffensivo = null;
+    private OggettoEquipaggiabile oggettoDifensivo = null;
 
-    public Giocatore(int fame, int mente, int vita, int danno, String path) {
-        super(vita, danno, path);
-        this.fame = fame;
-        this.mente = mente;
+    public Giocatore(String nome, String path) {
+        super(nome, path);
+        this.fame = 100;
+        this.mente = 100;
     }
     
-    //da modificare con l'aggiunta di oggetti
+    /**
+     * 
+     * il danno viene aumentato dalla stat dell'oggetto offensivo
+     */
     @Override
     public int attacca(){
-        return getDanno();
+        return getDanno() + (oggettoOffensivo != null ? oggettoOffensivo.getStatPrincipale() : 0);
+    }
+    
+    /**
+     * 
+     * il danno viene diminuito dalla stat dell'oggetto difensivo
+     */
+    @Override
+    public void perdiVita(int perdita){
+        super.perdiVita(Math.max(0, perdita - (oggettoDifensivo != null ? oggettoDifensivo.getStatPrincipale() : 0)));
     }
     
     public abstract void utilizzaAbilita();

@@ -13,16 +13,22 @@ import javax.swing.ImageIcon;
 public abstract class Giocabile {
     private int vita;
     private int danno;
+    private String nome;
     private ImageIcon sprite;
     
-    public Giocabile(int vita, int danno, String path){
-        this.vita = vita;
-        this.danno = danno;
+    public Giocabile(String nome, String path){
+        this.nome = nome;
+        this.vita = 100;
+        this.danno = 100;
         this.sprite = new ImageIcon(path);
     }
     
     public abstract int attacca();
 
+    public String getNome(){
+        return nome;
+    }
+    
     public int getVita() {
         return vita;
     }

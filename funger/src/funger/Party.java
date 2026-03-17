@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Party {
     ArrayList<Giocabile> personaggi = new ArrayList<>();
     GestoreGioco gestoreGioco;
+    private InventarioConsumabili invConsumabili = new InventarioConsumabili();
+    private InventarioEquipaggiabili invEquipaggiabili = new InventarioEquipaggiabili();
     
     public Party(Giocatore leader, GestoreGioco gestoreGioco){
         personaggi.add(leader);
@@ -57,4 +59,19 @@ public class Party {
         return temp;
     }
     
+    public ArrayList<OggettoConsumabile> getOggettiConsumabili(){
+        return invConsumabili.getOggetti();
+    }
+    
+    public ArrayList<OggettoEquipaggiabile> getOggettiEquipaggiabili(){
+        return invEquipaggiabili.getOggetti();
+    }
+    
+    public void aggiungiOggetto(OggettoEquipaggiabile oggetto){
+        invEquipaggiabili.aggiungiOggetto(oggetto);
+    }
+    
+    public void aggiungiOggetto(OggettoConsumabile oggetto){
+        invConsumabili.aggiungiOggetto(oggetto);
+    }
 }
