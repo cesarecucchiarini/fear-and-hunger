@@ -15,7 +15,7 @@ public class Funger {
      */
     public static void main(String[] args) {
         Mappa m = new Mappa(3);
-        for(Cella[] riga : m.getGriglia()){
+        for(Cella[] riga : m.getGriglia(true)){
             for(Cella c : riga){
                 System.out.print(c != null ? "*" : "o");
             }

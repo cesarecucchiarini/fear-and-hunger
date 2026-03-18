@@ -27,7 +27,7 @@ public class Mappa {
             griglia[0][i] = muro;
             griglia[righe+1][i] = muro;
             griglia[i][0] = muro;
-            griglia[1][righe+1] = muro;
+            griglia[i][righe+1] = muro;
         }
     }
     
@@ -37,14 +37,28 @@ public class Mappa {
     }
     
     public int[] getInfosCella(int x, int y){
-        return griglia[x][y].getInfos();
+        return griglia[x+1][y+1].getInfos();
     }
     
     public void setStatoCella(int stato, int x, int y){
-        griglia[x][y].setStato(stato);
+        griglia[x+1][y+1].setStato(stato);
     }
     
-    public Cella[][] getGriglia(){
-        return griglia;
+    /**
+     * 
+     * @param bordo serve a decidere se contare o no il bordo per il ritorno
+     * @return ritorna la griglia con o senza bordo
+     */
+    public Cella[][] getGriglia(boolean bordo){
+        if(bordo)
+            return griglia;
+        
+        Cella[][] g = new Cella[righe][righe];
+        for(int i = 1; i < righe+1; i++){
+            for(int j = 1; j < righe+1; j++){
+                g[i-1][j-1] = griglia[i][j];
+            }
+        }
+        return g;
     }
 }
