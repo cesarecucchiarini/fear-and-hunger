@@ -74,4 +74,19 @@ public class Party {
     public void aggiungiOggetto(OggettoConsumabile oggetto){
         invConsumabili.aggiungiOggetto(oggetto);
     }
+    
+    /**
+     * l'oggetto tolto dal giocatore torna nell'inventario
+     * @param giocatore giocatore a cui assegnare l'oggetto
+     * @param oggetto oggetto da assegnare
+     * 
+     */
+    public void cambiaOggetto(Giocatore giocatore, OggettoEquipaggiabile oggetto){
+        invEquipaggiabili.rimuoviOggetto(oggetto);
+        invEquipaggiabili.aggiungiOggetto(giocatore.setOggettoEquipaggiabile(oggetto));
+    }
+        
+    public void usaOggetto(Giocabile giocabile, OggettoConsumabile oggetto){
+        giocabile.consumaOggetto(oggetto);
+    }
 }

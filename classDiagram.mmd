@@ -18,7 +18,9 @@ direction TB
         +perdiFame(perdita : int)
         +guadagnaFame(guadagno : int)
 	    +setOggetto(oggetto : OggettoEquipaggiabile)
-	    +getOggetto(tipo : TipoOggettoEquipaggiabile) OggettoEquipaggiabile
+	    +getOggettoDifensivo() OggettoEquipaggiabile
+        +getOggettoOffensivo() OggettoEquipaggiabile
+        +consumaOggetto(oggetto : OggettoConsumabile)
     }
 
     class Party {
@@ -115,6 +117,7 @@ direction TB
 	    +trovaAlleato()
 	    +generaCreabile(id : int) Creabile
         +finePartita()
+
     }
 
     class Mappa {
@@ -191,6 +194,7 @@ direction TB
         +guadagnaVita(guadagno : int)
         +perdiVita(perdita : int)
         +controllaMorte() boolean
+        +consumaOggetto(oggetto : OggettoConsumabile)
     }
 
 	<<abstract>> Giocatore
@@ -229,3 +233,4 @@ direction TB
     GestoreGioco "1" --> "1" Creabile : -creabileCella 
     GestoreGioco "1" --> "1" Logger : -logger
     Nemico --|> Giocabile
+    Giocabile <--> GestoreGioco

@@ -15,12 +15,14 @@ public abstract class Giocabile {
     private int danno;
     private String nome;
     private ImageIcon sprite;
+    private GestoreGioco gestoreGioco;
     
-    public Giocabile(String nome, String path){
+    public Giocabile(String nome, String path, GestoreGioco gestoreGioco){
         this.nome = nome;
         this.vita = 100;
         this.danno = 100;
         this.sprite = new ImageIcon(path);
+        this.gestoreGioco = gestoreGioco;
     }
     
     public abstract int attacca();
@@ -55,5 +57,10 @@ public abstract class Giocabile {
      */
     public boolean controllaMorte(){
         return vita == 0;
+    }
+    
+    public void consumaOggetto(OggettoConsumabile oggetto){
+        if(oggetto.getTipo().equals(TipoOggettoConsumabile.CURATIVO))
+            guadagnaVita(oggetto.getStatPrincipale());
     }
 }

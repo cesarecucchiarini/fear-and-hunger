@@ -14,8 +14,8 @@ public abstract class Giocatore extends Giocabile{
     private OggettoEquipaggiabile oggettoOffensivo = null;
     private OggettoEquipaggiabile oggettoDifensivo = null;
 
-    public Giocatore(String nome, String path) {
-        super(nome, path);
+    public Giocatore(String nome, String path, GestoreGioco gestoreGioco) {
+        super(nome, path, gestoreGioco);
         this.fame = 100;
         this.mente = 100;
     }
@@ -23,6 +23,7 @@ public abstract class Giocatore extends Giocabile{
     /**
      * 
      * il danno viene aumentato dalla stat dell'oggetto offensivo
+     * @return danno finale
      */
     @Override
     public int attacca(){
@@ -71,5 +72,40 @@ public abstract class Giocatore extends Giocabile{
     
     public void guadagnaFame(int guadagno){
         fame = Math.min(100, fame+guadagno);
+    }
+    
+    /**
+     * 
+     * @param oggetto
+     * @return ritorna l'OggettoEquipaggiabile appena tolto
+     */
+    public OggettoEquipaggiabile setOggettoEquipaggiabile(OggettoEquipaggiabile oggetto){
+        OggettoEquipaggiabile t;
+        if(oggetto.getTipo().equals(TipoOggettoEquipaggiabile.DIFENSIVO)){
+            t = oggettoDifensivo;
+            oggettoDifensivo = oggetto;
+        }
+        else{
+            t = oggettoOffensivo;
+            oggettoOffensivo = oggetto;
+        }
+        return t;
+    }
+
+    public OggettoEquipaggiabile getOggettoOffensivo() {
+        return oggettoOffensivo;
+    }
+
+    public OggettoEquipaggiabile getOggettoDifensivo() {
+        return oggettoDifensivo;
+    }
+    
+    @Override
+    public void consumaOggetto(OggettoConsumabile oggetto){
+        switch(oggetto.getTipo()){
+            case TipoOggettoConsumabile.CURATIVO -> {guadagnaVita(oggetto.getStatPrincipale());}
+            case TipoOggettoConsumabile.COMMESTIBILE -> {guadagnaFame(oggetto.getStatPrincipale());}
+            case TipoOggettoConsumabile.MENTALE -> {guadagnaMente(oggetto.getStatPrincipale());}
+        }
     }
 }

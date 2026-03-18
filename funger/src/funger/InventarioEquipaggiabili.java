@@ -13,8 +13,12 @@ import java.util.ArrayList;
 public class InventarioEquipaggiabili {
     private ArrayList<OggettoEquipaggiabile> oggetti = new ArrayList<>();
     
+    /**
+     * 
+     * @param oggetto l'oggetto non verra aggiunto in caso sia null
+     */
     public void aggiungiOggetto(OggettoEquipaggiabile oggetto){
-        oggetti.add(oggetto);
+        if(oggetto != null)oggetti.add(oggetto);
     }
     
     public void rimuoviOggetto(OggettoEquipaggiabile oggetto){
