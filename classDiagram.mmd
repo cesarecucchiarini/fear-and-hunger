@@ -121,8 +121,13 @@ direction TB
     }
 
     class Mappa {
+        -righe : int 
+        -numCella : int
+        +Mappa(righe : int)
+        +getGriglia() Cella[][]
+        +aggiungiCella(cella : Cella)
 	    +getInfosCella(x : int, y : int) int[]
-      +setStatoCella(stato : int)
+        +setStatoCella(stato : int, x : int, y : int)
     }
 
     class Cella {
@@ -150,6 +155,7 @@ direction TB
 	    NEMICO
 	    OGGETTO
 	    ALLEATO
+        FINE
     }
 
     class GeneratoreMappa {

@@ -13,5 +13,6 @@ public enum TipoCella {
     MURO,
     NEMICO,
     OGGETTO,
-    ALLEATO
+    ALLEATO,
+    FINE
 }

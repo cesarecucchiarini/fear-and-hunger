@@ -9,5 +9,11 @@ package funger;
  * @author cucchiarini.cesare
  */
 public class GestoreMappa {
-    
+    public static Mappa generaMappa(){
+        Mappa mappa = new Mappa(10);
+        
+        
+        
+        return mappa;
+    }
 }
