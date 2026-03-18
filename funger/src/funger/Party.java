@@ -16,6 +16,11 @@ public class Party {
     private InventarioConsumabili invConsumabili = new InventarioConsumabili();
     private InventarioEquipaggiabili invEquipaggiabili = new InventarioEquipaggiabili();
     
+    /**
+     * 
+     * @param leader leader del party
+     * @param gestoreGioco gestore da utilizzare per scrivere i log
+     */
     public Party(Giocatore leader, GestoreGioco gestoreGioco){
         personaggi.add(leader);
         this.gestoreGioco = gestoreGioco;
@@ -31,17 +36,20 @@ public class Party {
     }
     
     /**
-     * 
+     * rimuove il membro morto e finisce il gioco in caso il membro morto sia il leader
      * @param giocabile membro morto da rimuovere
      */
     public void rimuoviMembro(Giocabile giocabile){
-        //logica in caso di morte del leader
         if(giocabile.equals(personaggi.get(0))){
             gestoreGioco.fineGioco();
         }
         personaggi.remove(giocabile);
     }
 
+    /**
+     * 
+     * @return lista dei personaggi del party
+     */
     public ArrayList<Giocabile> getPersonaggi(){
         return personaggi;
     }
@@ -59,24 +67,40 @@ public class Party {
         return temp;
     }
     
+    /**
+     * 
+     * @return lista di OggettoConsumabile nell'inventario
+     */
     public ArrayList<OggettoConsumabile> getOggettiConsumabili(){
         return invConsumabili.getOggetti();
     }
     
+    /**
+     * 
+     * @return lista di OggettoEquipaggiabile nell'inventario
+     */
     public ArrayList<OggettoEquipaggiabile> getOggettiEquipaggiabili(){
         return invEquipaggiabili.getOggetti();
     }
     
+    /**
+     * 
+     * @param oggetto oggettoEquipaggiabile da aggiungere all'inventario
+     */
     public void aggiungiOggetto(OggettoEquipaggiabile oggetto){
         invEquipaggiabili.aggiungiOggetto(oggetto);
     }
     
+    /**
+     * 
+     * @param oggetto oggettoConsumabile da aggiungere all'inventario
+     */
     public void aggiungiOggetto(OggettoConsumabile oggetto){
         invConsumabili.aggiungiOggetto(oggetto);
     }
     
     /**
-     * l'oggetto tolto dal giocatore torna nell'inventario
+     * scambia un OggettoEquipaggiabile del Giocatore con uno nell'inventario
      * @param giocatore giocatore a cui assegnare l'oggetto
      * @param oggetto oggetto da assegnare
      * 
@@ -86,6 +110,11 @@ public class Party {
         invEquipaggiabili.aggiungiOggetto(giocatore.setOggettoEquipaggiabile(oggetto));
     }
         
+    /**
+     * 
+     * @param giocabile Giocabile su cui utilizzare l'OggettoConsumabile
+     * @param oggetto OggettoConsumabile da utilizzare
+     */
     public void usaOggetto(Giocabile giocabile, OggettoConsumabile oggetto){
         giocabile.consumaOggetto(oggetto);
     }

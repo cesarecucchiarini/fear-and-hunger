@@ -39,6 +39,9 @@ public abstract class Giocatore extends Giocabile{
         super.perdiVita(Math.max(0, perdita - (oggettoDifensivo != null ? oggettoDifensivo.getStatPrincipale() : 0)));
     }
     
+    /**
+     * abilita del Giocatore
+     */
     public abstract void utilizzaAbilita();
     
     /**
@@ -58,18 +61,34 @@ public abstract class Giocatore extends Giocabile{
         return super.controllaMorte() || fame == 0 || mente == 0;
     }
     
+    /**
+     * 
+     * @param perdita mente persa
+     */
     public void perdiMente(int perdita){
         mente = Math.max(0, mente - perdita);
     }
     
+    /**
+     * 
+     * @param guadagno mente guadagnata
+     */
     public void guadagnaMente(int guadagno){
         mente = Math.min(100, mente+guadagno);
     }
     
+    /**
+     * 
+     * @param perdita fame persa
+     */
     public void perdiFame(int perdita){
         fame = Math.max(0, fame - perdita);
     }
     
+    /**
+     * 
+     * @param guadagno fame guadagnata
+     */
     public void guadagnaFame(int guadagno){
         fame = Math.min(100, fame+guadagno);
     }
@@ -92,10 +111,18 @@ public abstract class Giocatore extends Giocabile{
         return t;
     }
 
+    /**
+     * 
+     * @return oggetto equipaggiabile offensivo
+     */
     public OggettoEquipaggiabile getOggettoOffensivo() {
         return oggettoOffensivo;
     }
 
+    /**
+     * 
+     * @return oggetto equipaggiabile difensivo
+     */
     public OggettoEquipaggiabile getOggettoDifensivo() {
         return oggettoDifensivo;
     }

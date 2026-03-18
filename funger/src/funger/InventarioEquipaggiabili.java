@@ -11,20 +11,31 @@ import java.util.ArrayList;
  * @author sergi
  */
 public class InventarioEquipaggiabili {
+    /**
+     * oggetti contenuti nell'inventario
+     */
     private ArrayList<OggettoEquipaggiabile> oggetti = new ArrayList<>();
     
     /**
      * 
-     * @param oggetto l'oggetto non verra aggiunto in caso sia null
+     * @param oggetto oggetto da aggiungere
      */
     public void aggiungiOggetto(OggettoEquipaggiabile oggetto){
         if(oggetto != null)oggetti.add(oggetto);
     }
     
+    /**
+     * 
+     * @param oggetto oggetto da rimuovere
+     */
     public void rimuoviOggetto(OggettoEquipaggiabile oggetto){
         oggetti.remove(oggetto);     
     }
     
+    /**
+     * 
+     * @return oggetti contenuti nell'inventario
+     */
     public ArrayList<OggettoEquipaggiabile> getOggetti(){
         return oggetti;
     }

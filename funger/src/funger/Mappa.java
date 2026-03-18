@@ -10,7 +10,6 @@ package funger;
  */
 public class Mappa {
     private Cella[][] griglia;
-    private int numCella;
     private int righe;
     
     /**
@@ -18,7 +17,6 @@ public class Mappa {
      * @param righe larghezza e lunghezza della mappa 
      */
     public Mappa(int righe){
-        numCella = 0;
         this.righe = righe;
         griglia = new Cella[righe+2][righe+2];
         
@@ -31,15 +29,42 @@ public class Mappa {
         }
     }
     
+    /**
+     *
+     * @param cella cella da aggiungere
+     */
     public void aggiungiCella(Cella cella){
+        int numCella = righe * righe;
         griglia[(int) (numCella / righe) + 1][(numCella % righe) + 1] = cella;
         numCella++;
     }
     
+    /**
+     * 
+     * @param x posizione della cella
+     * @param y posizione della cella
+     * @return informazioni sulla cella
+     */
     public int[] getInfosCella(int x, int y){
         return griglia[x+1][y+1].getInfos();
     }
     
+    /**
+     * 
+     * @param x posizione della cella
+     * @param y posizione della cella
+     * @return tipo della cella
+     */
+    public TipoCella getTipoCella(int x, int y){
+        return griglia[x+1][y+1].getTipo();
+    }
+    
+    /**
+     * 
+     * @param stato nuovo stato della cella
+     * @param x posizione della cella
+     * @param y posizione della cella
+     */
     public void setStatoCella(int stato, int x, int y){
         griglia[x+1][y+1].setStato(stato);
     }

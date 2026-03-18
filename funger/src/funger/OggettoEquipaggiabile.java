@@ -17,6 +17,14 @@ public abstract class OggettoEquipaggiabile implements Creabile{
     private int agilita;
     private TipoOggettoEquipaggiabile tipo;
 
+    /**
+     * 
+     * @param nome nome dell'oggetto
+     * @param statPrincipale aumento della statistica dato dall'oggetto
+     * @param agilita modifica alla statistica di agilita data dall'oggetto
+     * @param tipo tipo dell'oggetto
+     * @param path percorso dell'immagine
+     */
     public OggettoEquipaggiabile(String nome, int statPrincipale, int agilita, TipoOggettoEquipaggiabile tipo, String path) {
         this.nome = nome;
         this.statPrincipale = statPrincipale;
@@ -25,22 +33,42 @@ public abstract class OggettoEquipaggiabile implements Creabile{
         sprite = new ImageIcon(path);
     }
 
+    /**
+     * 
+     * @return nome dell'oggetto
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * 
+     * @return immagine dell'oggetto
+     */
     public ImageIcon getSprite() {
         return sprite;
     }
 
+    /**
+     * 
+     * @return statistica principale dell'oggetto
+     */
     public int getStatPrincipale() {
         return statPrincipale;
     }
 
+    /**
+     * 
+     * @return modifica dell'agilita dell'oggetto
+     */
     public int getAgilita() {
         return agilita;
     }
 
+    /**
+     * 
+     * @return tipo dell'oggetto
+     */
     public TipoOggettoEquipaggiabile getTipo() {
         return tipo;
     }

@@ -45,10 +45,18 @@ public class Cella {
         return new int[]{idCreabile, stato};
     }
     
+    /**
+     * 
+     * @return tipo della cella
+     */
     public TipoCella getTipo(){
         return tipo;
     }
     
+    /**
+     * 
+     * @param stato nuovo stato da assegnare alla cella
+     */
     public void setStato(int stato){
         this.stato = stato;
         if(stato == COMPLETATA) idCreabile = 0;

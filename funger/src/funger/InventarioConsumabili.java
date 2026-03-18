@@ -11,16 +11,31 @@ import java.util.ArrayList;
  * @author sergi
  */
 public class InventarioConsumabili {
+    /**
+     * oggetti contenuti nell'inventario
+     */
     private ArrayList<OggettoConsumabile> oggetti = new ArrayList<>();
     
+    /**
+     * 
+     * @param oggetto oggetto da aggiungere
+     */
     public void aggiungiOggetto(OggettoConsumabile oggetto){
         oggetti.add(oggetto);
     }
     
+    /**
+     * 
+     * @param oggetto oggetto da rimuovere 
+     */
     public void rimuoviOggetto(OggettoConsumabile oggetto){
         oggetti.remove(oggetto);     
     }
     
+    /**
+     * 
+     * @return oggetti contenuti nell'inventario
+     */
     public ArrayList<OggettoConsumabile> getOggetti(){
         return oggetti;
     }

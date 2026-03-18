@@ -16,6 +16,13 @@ public abstract class OggettoConsumabile implements Creabile{
     private int statPrincipale;
     private TipoOggettoConsumabile tipo;
 
+    /**
+     * 
+     * @param nome nome dell'oggetto
+     * @param path percorso dell'immagine
+     * @param statPrincipale statistica da controllare in caso di consumo
+     * @param tipo tipo di oggetto, indica la statistica interessata
+     */
     public OggettoConsumabile(String nome, String path, int statPrincipale, TipoOggettoConsumabile tipo) {
         this.nome = nome;
         this.sprite = new ImageIcon(path);
@@ -23,18 +30,34 @@ public abstract class OggettoConsumabile implements Creabile{
         this.tipo = tipo;
     }
 
+    /**
+     * 
+     * @return nome dell'oggetto
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * 
+     * @return immagine dell'oggetto
+     */
     public ImageIcon getSprite() {
         return sprite;
     }
 
+    /**
+     * 
+     * @return statistica dell'oggetto
+     */
     public int getStatPrincipale() {
         return statPrincipale;
     }
 
+    /**
+     * 
+     * @return tipo dell'oggetto
+     */
     public TipoOggettoConsumabile getTipo() {
         return tipo;
     }
