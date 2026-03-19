@@ -17,13 +17,14 @@ public class Funger {
         Mappa m = GestoreMappa.generaMappa();
         for(Cella[] riga : m.getGriglia(true)){
             for(Cella c : riga){
-                if(c == null) System.out.print("O");
+                if(c == null) System.out.print(" ");
                 else
                     switch(c.getTipo()){
                         case TipoCella.INIZIO -> {System.out.print("I");}
                         case TipoCella.FINE -> {System.out.print("F");}
                         case TipoCella.MURO -> {System.out.print("#");}
                         case TipoCella.VUOTO -> {System.out.print("V");}
+                        case TipoCella.PIENO -> {System.out.print("P");}
                     }
             }
             System.out.print("\n");

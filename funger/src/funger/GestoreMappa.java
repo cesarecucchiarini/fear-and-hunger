@@ -29,7 +29,7 @@ public class GestoreMappa {
         
         ArrayList<int[]> celle = generaPercorso(mappa, posInizio, posFine);
         
-        
+        generaCelleCasuali(mappa, celle);
         
         return mappa;
     }
