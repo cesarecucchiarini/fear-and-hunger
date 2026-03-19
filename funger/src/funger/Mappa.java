@@ -105,4 +105,14 @@ public class Mappa {
         }
         return g;
     }
+    
+    /**
+     * 
+     * @param x ascisa della cella
+     * @param y ordinata della cella
+     * @return true se la cella è gia stata creata
+     */
+    public boolean cellaInizializzata(int x, int y){
+        return griglia[x+1][y+1] != null;
+    }
 }

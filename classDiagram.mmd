@@ -7,43 +7,43 @@ direction TB
     class Giocatore {
 	    -fame : int
 	    -mente : int
-        +Giocatore(nome : String, path : String)
+	    +Giocatore(nome : String, path : String)
 	    +attacca() int
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
 	    +muovi()
-        +controllaMorte() boolean
+	    +controllaMorte() boolean
 	    +perdiMente(perdita : int)
 	    +guadagnaMente(guadagno : int)
-        +perdiFame(perdita : int)
-        +guadagnaFame(guadagno : int)
+	    +perdiFame(perdita : int)
+	    +guadagnaFame(guadagno : int)
 	    +setOggetto(oggetto : OggettoEquipaggiabile)
 	    +getOggettoDifensivo() OggettoEquipaggiabile
-        +getOggettoOffensivo() OggettoEquipaggiabile
-        +consumaOggetto(oggetto : OggettoConsumabile)
+	    +getOggettoOffensivo() OggettoEquipaggiabile
+	    +consumaOggetto(oggetto : OggettoConsumabile)
     }
 
     class Party {
 	    +aggiungiMembro(giocabile : Giocabile)
 	    +rimuoviMembro(giocabile : Giocabile)
 	    +getParty() ArrayList~Giocabile~
-        +getGiocatori() ArrayList~Giocatore~
+	    +getGiocatori() ArrayList~Giocatore~
 	    +getOggettiConsumabili() ArrayList~OggettoConsumabile~
 	    +getOggettiEquipaggiabili() ArrayList~OggettoEquipaggiabile~
 	    +cambiaOggetto(giocatore : Giocatore, oggetto : OggettoEquipaggiabile)
-        +usaOggetto(giocatore : Giocatore, oggetto : OggettoConsumabile)
-        +aggiungiOggetto(oggetto : OggettoConsumabile)
-        +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
+	    +usaOggetto(giocatore : Giocatore, oggetto : OggettoConsumabile)
+	    +aggiungiOggetto(oggetto : OggettoConsumabile)
+	    +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
     }
 
     class InventarioEquipaggiabili {
-        +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
+	    +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
 	    +togliOggetto(oggetto : OggettoEquipaggiabile)
 	    +getOggetti() ArrayList~OggettoEquipaggiabile~
     }
 
     class InventarioConsumabili {
-        +aggiungiOggetto(oggetto : OggettoConsumabile)
+	    +aggiungiOggetto(oggetto : OggettoConsumabile)
 	    +togliOggetto(oggetto : OggettoConsumabile)
 	    +getOggetti() ArrayList~OggettoConsumabile~
     }
@@ -64,30 +64,42 @@ direction TB
 	    +utilizzaAbilita()
     }
 
+    class Girl {
+	    +utilizzaAbilita()
+    }
+
+    class Moonless {
+	    +utilizzaAbilita()
+    }
+
+    class Demonchild {
+	    +utilizzaAbilita()
+    }
+
     class OggettoEquipaggiabile {
-        -statPrincipale : int
-        -agilita : int
-        -tipo : TipoOggettoEquipaggiabile
-        -nome : String
+	    -statPrincipale : int
+	    -agilita : int
+	    -tipo : TipoOggettoEquipaggiabile
+	    -nome : String
 	    -sprite : ImageIcon
 	    +getNome() String
 	    +getSprite() ImageIcon
-        +OggettoEquipaggiabile(nome : String, path : String, statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
-        +getStatPrincipale() int 
-        +getAgilita() int 
-        +getTipo() TipoOggettoEquipaggiabile
+	    +OggettoEquipaggiabile(nome : String, path : String, statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
+	    +getStatPrincipale() int
+	    +getAgilita() int
+	    +getTipo() TipoOggettoEquipaggiabile
     }
 
     class OggettoConsumabile {
-        -statPrincipale : int 
-        -tipo : TipoOggettoConsumabile
-        -nome : String
+	    -statPrincipale : int
+	    -tipo : TipoOggettoConsumabile
+	    -nome : String
 	    -sprite : ImageIcon
 	    +getNome() String
 	    +getSprite() ImageIcon
-        +OggettoConsumabile(nome : String, path : String, statprincipale : int, tipo : TipoOggettoConsumabile)
-        +getStatPrincipale() int 
-        +getTipo() TipoOggettoConsumabile
+	    +OggettoConsumabile(nome : String, path : String, statprincipale : int, tipo : TipoOggettoConsumabile)
+	    +getStatPrincipale() int
+	    +getTipo() TipoOggettoConsumabile
     }
 
     class TipoOggettoEquipaggiabile {
@@ -106,40 +118,39 @@ direction TB
 
     class GestoreGioco {
 	    -posizione : int[]
-        -tipoCella : TipoCella
+	    -tipoCella : TipoCella
 	    -mappaCreabili : HashMap~Integer, Creabile~
 	    +GestoreGioco(leader : Giocatore,logger : Logger, mappa : Mappa)
 	    +muovi(movX : int, movY : int)
-        +interazioneCreabile()
+	    +interazioneCreabile()
 	    +iniziaCombattimento()
 	    +apriInventario()
 	    +trovaOggetto()
 	    +trovaAlleato()
 	    +generaCreabile(id : int) Creabile
-        +finePartita()
-
+	    +finePartita()
     }
 
     class Mappa {
-        -righe : int 
-        -numCella : int
-        +Mappa(righe : int)
-        +getGriglia(bordo : boolean) Cella[][]
-        +aggiungiCella(cella : Cella)
-		+aggiungiCella(cella : Cella, x : int, y : int)
+	    -righe : int
+	    -numCella : int
+	    +Mappa(righe : int)
+	    +getGriglia(bordo : boolean) Cella[][]
+	    +aggiungiCella(cella : Cella)
+	    +aggiungiCella(cella : Cella, x : int, y : int)
 	    +getInfosCella(x : int, y : int) int[]
-        +setStatoCella(stato : int, x : int, y : int)
+	    +setStatoCella(stato : int, x : int, y : int)
     }
 
     class Cella {
-      +VISITATA : int
-      +NON_VISITATA : int
-      +COMPLETATA : int
+	    +VISITATA : int
+	    +NON_VISITATA : int
+	    +COMPLETATA : int
 	    -tipo : int
 	    -idCreabile : int
-      -stato : int
+	    -stato : int
 	    +getInfos() int[]
-      +setStato(stato : int)
+	    +setStato(stato : int)
     }
 
     class GestoreInput {
@@ -147,77 +158,80 @@ direction TB
 
     class GestoreCombattimento {
 	    +iniziaCombattimento(party : Party, nemico : Nemico)
-        +calcolaAttacco() int
+	    +calcolaAttacco() int
     }
 
     class TipoCella {
-        VUOTO
+	    VUOTO
 	    MURO
 	    PIENO
-        FINE
-		INIZIO
+	    FINE
+	    INIZIO
     }
 
     class GeneratoreMappa {
-		-grandezzaMappa : int$
+	    -grandezzaMappa : int$
 	    +generaMappa()$
-		+inizializzaMappa(mappa : Mappa) int[][]$
-		+generaPercorso(mappa : Mappa, posInizio : int[], posFine : int[])$
-		+generaCelleCasuali(mappa : Mappa)$
+	    +inizializzaMappa(mappa : Mappa) int[][]$
+	    +generaPercorso(mappa : Mappa, posInizio : int[], posFine : int[])$
+	    +generaCelleCasuali(mappa : Mappa)$
     }
 
     class Creabile {
     }
 
     class Maneba {
-        +attacca() int
+	    +attacca() int
     }
 
     class Guardia {
-        +attacca() int
+	    +attacca() int
     }
 
     class Trotur {
-        +attacca() int
+	    +attacca() int
     }
 
-    class Logger{
-        -textArea : JTextArea
-        +Logger(textArea : JTextArea)
-        +scriviMesaggio(msg : String)
+    class Logger {
+	    -textArea : JTextArea
+	    +Logger(textArea : JTextArea)
+	    +scriviMesaggio(msg : String)
     }
 
-    class Giocabile{
-        <<abstract>>
-        -agilita : int
-        -vita : int 
-        -danno : int
-        -sprite : ImageIcon
-        -nome : String
-        +Giocabile(nome : String, path : String)
-        +attacca() int*
-        +schiva() boolean
-        +getDanno() int
-        +getAgilita() int
-        +getVita() int 
-        +getSprite() ImageIcon
-        +guadagnaVita(guadagno : int)
-        +perdiVita(perdita : int)
-        +controllaMorte() boolean
-        +consumaOggetto(oggetto : OggettoConsumabile)
+    class Giocabile {
+	    -agilita : int
+	    -vita : int
+	    -danno : int
+	    -sprite : ImageIcon
+	    -nome : String
+	    +Giocabile(nome : String, path : String)
+	    +attacca() int*
+	    +schiva() boolean
+	    +getDanno() int
+	    +getAgilita() int
+	    +getVita() int
+	    +getSprite() ImageIcon
+	    +guadagnaVita(guadagno : int)
+	    +perdiVita(perdita : int)
+	    +controllaMorte() boolean
+	    +consumaOggetto(oggetto : OggettoConsumabile)
     }
 
 	<<abstract>> Giocatore
 	<<enum>> TipoOggettoEquipaggiabile
-    <<enum>> TipoOggettoConsumabile
+	<<enum>> TipoOggettoConsumabile
 	<<abstract>> Nemico
 	<<enum>> TipoCella
 	<<interface>> Creabile
+	<<abstract>> Giocabile
 
     Giocatore <|-- Mercenario
     Giocatore <|-- Cavaliere
     Giocatore <|-- Necromante
     Giocatore <|-- Vichingo
+    Giocatore <|-- Moonless
+    Giocatore <|-- Girl
+    Giocatore <|-- Demonchild
     Giocatore --|> Giocabile
     Creabile <|-- OggettoEquipaggiabile
     Creabile <|-- OggettoConsumabile
@@ -240,7 +254,7 @@ direction TB
     Maneba --|> Nemico
     Guardia --|> Nemico
     Trotur --|> Nemico
-    GestoreGioco "1" --> "1" Creabile : -creabileCella 
+    GestoreGioco "1" --> "1" Creabile : -creabileCella
     GestoreGioco "1" --> "1" Logger : -logger
     Nemico --|> Giocabile
     Giocabile <--> GestoreGioco

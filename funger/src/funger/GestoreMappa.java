@@ -5,8 +5,6 @@
 package funger;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -29,7 +27,9 @@ public class GestoreMappa {
         int[] posInizio = posizioni[0];
         int[] posFine = posizioni[1];
         
-        generaPercorso(mappa, posInizio, posFine);
+        ArrayList<int[]> celle = generaPercorso(mappa, posInizio, posFine);
+        
+        
         
         return mappa;
     }
@@ -57,8 +57,12 @@ public class GestoreMappa {
      * @param mappa mappa da modificare
      * @param posInizio posizione dell'inizio
      * @param posFine posizione della fine
+     * @return celle aggiunte
      */
-    public static void generaPercorso(Mappa mappa, int[] posInizio, int[] posFine){
+    public static ArrayList<int[]> generaPercorso(Mappa mappa, int[] posInizio, int[] posFine){
+        ArrayList<int[]> celle = new ArrayList<>();
+        celle.add(posInizio);
+        celle.add(posFine);
         int[] posAttuale = posInizio;
         while((Math.abs(posAttuale[0] - posFine[0]) + Math.abs(posAttuale[1] - posFine[1])) != 1){
             if((posAttuale[0] - posFine[0] != 0)) 
@@ -67,19 +71,78 @@ public class GestoreMappa {
                 posAttuale = new int[] {posAttuale[0], posAttuale[1] + ((posAttuale[1] - posFine[1]) < 0 ? 1 : -1)};
             
             mappa.aggiungiCella(new Cella(TipoCella.VUOTO), posAttuale[0], posAttuale[1]);
+            celle.add(posAttuale);
         }
+        return celle;
     }
     
     /**
      * 
      * @param mappa mappa a per cui generare le celle
+     * @param celle celle mappate
      */
-    public static void generaCelleCasuali(Mappa mappa, int[] posInizio, int[] posFine){
-        int numCelle = (grandezzaMappa * grandezzaMappa) - (Math.abs(posInizio[0] - posFine[0]) + Math.abs(posInizio[1] - posFine[1])) +1;
-        TipoCella tipo;
-        int idCreabile;
-        for(int i = 0; i < numCelle; i++){
-            mappa.aggiungiCella(new Cella());
+    public static void generaCelleCasuali(Mappa mappa, ArrayList<int[]> celle){
+        ArrayList<int[]> celleNuove = new ArrayList<>();
+        
+        for(int[] pos : celle){
+            celleNuove.addAll(generaCelleAdiacenti(mappa, pos[0], pos[1]));
         }
+        
+        if(!celleNuove.isEmpty())
+            generaCelleCasuali(mappa, celleNuove);
+    }
+    
+    /**
+     * genera 4 celle adiacenti alla cella passata
+     * @param mappa mappa da modificare
+     * @param x ascissa della cella
+     * @param y ordinata della cella
+     * @return posizioni delle celle create
+     */
+    public static ArrayList<int[]> generaCelleAdiacenti(Mappa mappa, int x, int y){
+        ArrayList<int[]> celleCreate = new ArrayList<>();
+        Cella c;
+        
+        if(!mappa.cellaInizializzata(x+1, y)){
+            c = generaCellaCasuale();
+            mappa.aggiungiCella(c, x+1, y);
+            if(!c.getTipo().equals(TipoCella.MURO))
+                celleCreate.add(new int[]{x+1, y});
+        }
+        if(!mappa.cellaInizializzata(x-1, y)){
+            c = generaCellaCasuale();
+            mappa.aggiungiCella(c, x-1, y);
+            if(!c.getTipo().equals(TipoCella.MURO))
+                celleCreate.add(new int[]{x-1, y});
+        }
+        if(!mappa.cellaInizializzata(x, y+1)){
+            c = generaCellaCasuale();
+            mappa.aggiungiCella(c, x, y+1);
+            if(!c.getTipo().equals(TipoCella.MURO))
+                celleCreate.add(new int[]{x, y+1});
+        }
+        if(!mappa.cellaInizializzata(x, y-1)){
+            c = generaCellaCasuale();
+            mappa.aggiungiCella(c, x, y-1);
+            if(!c.getTipo().equals(TipoCella.MURO))
+                celleCreate.add(new int[]{x, y-1});
+        }
+        
+        return celleCreate;
+    }
+    
+    /**
+     * 
+     * @return cella creata casualmente
+     */
+    public static Cella generaCellaCasuale(){
+        Cella c;
+        switch(rnd.nextInt(3)){
+            default -> {c = new Cella();}
+            case 1 -> {c = new Cella(TipoCella.VUOTO);}
+            case 2 -> {c = new Cella(TipoCella.PIENO);}
+        }
+        
+        return c;
     }
 }
