@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author sergi
  */
-public abstract class OggettoEquipaggiabile implements Creabile{
+public class OggettoEquipaggiabile implements Creabile{
     private String nome;
     private ImageIcon sprite;
     private int statPrincipale;

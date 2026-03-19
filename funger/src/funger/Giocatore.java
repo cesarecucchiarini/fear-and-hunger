@@ -14,8 +14,8 @@ public abstract class Giocatore extends Giocabile{
     private OggettoEquipaggiabile oggettoOffensivo = null;
     private OggettoEquipaggiabile oggettoDifensivo = null;
 
-    public Giocatore(String nome, String path, GestoreGioco gestoreGioco) {
-        super(nome, path, gestoreGioco);
+    public Giocatore(String nome, String path) {
+        super(nome, path);
         this.fame = 100;
         this.mente = 100;
     }

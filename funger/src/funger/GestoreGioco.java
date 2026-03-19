@@ -14,6 +14,7 @@ import java.util.Map;
 public class GestoreGioco {
     private HashMap<Integer, Creabile> mappaCreabili;
     private Party party;
+    private Mappa mappa;
     
     /**
      * 
@@ -21,6 +22,8 @@ public class GestoreGioco {
      */
     public GestoreGioco(Giocatore leader){
         party = new Party(leader, this);
+        mappaCreabili = GestoreFile.leggiCreabili();
+        mappa = GestoreMappa.generaMappa(mappaCreabili.keySet().stream().mapToInt(Integer::intValue).toArray());
     }
     
     /**

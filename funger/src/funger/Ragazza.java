@@ -8,16 +8,15 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public class Cavaliere extends Giocatore{
+public class Ragazza extends Giocatore{
 
-    public Cavaliere(String nome, String path) {
+    public Ragazza(String nome, String path) {
         super(nome, path);
     }
 
     @Override
     public void utilizzaAbilita() {
-
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
     
 }

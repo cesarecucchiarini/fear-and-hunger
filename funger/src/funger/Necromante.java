@@ -8,6 +8,14 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public class Necromante{
+public class Necromante extends Giocatore{
+
+    public Necromante(String nome, String path) {
+        super(nome, path);
+    }
     
+    @Override
+    public void utilizzaAbilita(){
+        
+    }
 }

@@ -8,6 +8,15 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public class Demonchild {
+public class Demonchild extends Giocatore{
+
+    public Demonchild(String nome, String path) {
+        super(nome, path);
+    }
+
+    @Override
+    public void utilizzaAbilita() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

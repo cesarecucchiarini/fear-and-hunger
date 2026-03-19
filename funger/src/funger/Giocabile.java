@@ -22,7 +22,6 @@ public abstract class Giocabile {
     private int danno;
     private String nome;
     private ImageIcon sprite;
-    private GestoreGioco gestoreGioco;
     
     /**
      * 
@@ -30,12 +29,11 @@ public abstract class Giocabile {
      * @param path percorso dell'immagine
      * @param gestoreGioco gestore da utilizzare per scrivere i log
      */
-    public Giocabile(String nome, String path, GestoreGioco gestoreGioco){
+    public Giocabile(String nome, String path){
         this.nome = nome;
         this.vita = 100;
         this.danno = 100;
         this.sprite = new ImageIcon(path);
-        this.gestoreGioco = gestoreGioco;
     }
     
     /**

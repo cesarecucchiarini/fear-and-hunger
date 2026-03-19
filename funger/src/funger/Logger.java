@@ -4,20 +4,20 @@
  */
 package funger;
 
+import javax.swing.JTextArea;
+
 /**
  *
  * @author cucchiarini.cesare
  */
-public class Cavaliere extends Giocatore{
+public class Logger {
+    private static JTextArea textArea;
 
-    public Cavaliere(String nome, String path) {
-        super(nome, path);
-    }
-
-    @Override
-    public void utilizzaAbilita() {
-
+    public static void assegnaTextArea(JTextArea textArea) {
+        Logger.textArea = textArea;
     }
     
-    
+    public static void scriviLog(String msg){
+        textArea.append(msg);
+    }
 }
