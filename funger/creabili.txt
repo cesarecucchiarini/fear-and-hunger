@@ -1,0 +1,7 @@
+necromante,Enki
+vichingo,Ragnvalrd
+mercenario,cahara
+cavaliere,D'Arc
+ragazza,Girl
+moonless,Moonless
+demonchild,Demonchild
