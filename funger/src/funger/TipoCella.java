@@ -11,8 +11,7 @@ package funger;
 public enum TipoCella {
     VUOTO,
     MURO,
-    NEMICO,
-    OGGETTO,
-    ALLEATO,
-    FINE
+    PIENO,
+    FINE,
+    INIZIO
 }

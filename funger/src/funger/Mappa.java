@@ -11,6 +11,7 @@ package funger;
 public class Mappa {
     private Cella[][] griglia;
     private int righe;
+    private int numCella;
     
     /**
      * crea la mappa e la inizializza con i bordi sotto forma di muro
@@ -18,6 +19,7 @@ public class Mappa {
      */
     public Mappa(int righe){
         this.righe = righe;
+        numCella = 0;
         griglia = new Cella[righe+2][righe+2];
         
         Cella muro = new Cella();
@@ -30,13 +32,30 @@ public class Mappa {
     }
     
     /**
-     *
+     * aggiunge una cella in uno spazio vuoto senza overridare alcuna cella
      * @param cella cella da aggiungere
      */
     public void aggiungiCella(Cella cella){
-        int numCella = righe * righe;
-        griglia[(int) (numCella / righe) + 1][(numCella % righe) + 1] = cella;
+        if(numCella > righe*righe) return;
+        
+        int x = (int) (numCella / righe) + 1;
+        int y = (numCella % righe) + 1;
+        if(griglia[x][y] == null) griglia[x][y] = cella;
+        else{
+            numCella++;
+            aggiungiCella(cella);
+        }
         numCella++;
+    }
+    
+    /**
+     * 
+     * @param cella cella da aggiungere
+     * @param x riga in cui aggiungerla
+     * @param y colonna in cui aggiungerla
+     */
+    public void aggiungiCella(Cella cella, int x, int y){
+        griglia[x+1][y+1] = cella;
     }
     
     /**

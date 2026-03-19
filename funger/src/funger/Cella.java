@@ -29,6 +29,16 @@ public class Cella {
     }
     
     /**
+     * inizializza la cella senza creabile
+     * @param tipo 
+     */
+    public Cella(TipoCella tipo){
+        this.tipo = tipo;
+        this.idCreabile = 0;
+        stato = NON_VISITATA;
+    }
+    
+    /**
      * inizializza la cella come muro
      */
     public Cella(){

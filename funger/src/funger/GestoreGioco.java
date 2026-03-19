@@ -4,12 +4,16 @@
  */
 package funger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author cucchiarini.cesare
  */
 public class GestoreGioco {
-    Party party;
+    private HashMap<Integer, Creabile> mappaCreabili;
+    private Party party;
     
     /**
      * 

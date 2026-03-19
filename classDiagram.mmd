@@ -107,7 +107,7 @@ direction TB
     class GestoreGioco {
 	    -posizione : int[]
         -tipoCella : TipoCella
-	    -mappaCreabili : HashMap~Integer, Consumer~Creabile~~
+	    -mappaCreabili : HashMap~Integer, Creabile~
 	    +GestoreGioco(leader : Giocatore,logger : Logger, mappa : Mappa)
 	    +muovi(movX : int, movY : int)
         +interazioneCreabile()
@@ -126,6 +126,7 @@ direction TB
         +Mappa(righe : int)
         +getGriglia(bordo : boolean) Cella[][]
         +aggiungiCella(cella : Cella)
+		+aggiungiCella(cella : Cella, x : int, y : int)
 	    +getInfosCella(x : int, y : int) int[]
         +setStatoCella(stato : int, x : int, y : int)
     }
@@ -152,14 +153,17 @@ direction TB
     class TipoCella {
         VUOTO
 	    MURO
-	    NEMICO
-	    OGGETTO
-	    ALLEATO
+	    PIENO
         FINE
+		INIZIO
     }
 
     class GeneratoreMappa {
+		-grandezzaMappa : int$
 	    +generaMappa()$
+		+inizializzaMappa(mappa : Mappa) int[][]$
+		+generaPercorso(mappa : Mappa, posInizio : int[], posFine : int[])$
+		+generaCelleCasuali(mappa : Mappa)$
     }
 
     class Creabile {
