@@ -22,7 +22,7 @@ public class GestoreMappa {
      * @return mappa generata con inizio, fine, un percorso che porta alla fine, e stanze casuali
      */
     public static Mappa generaMappa(){        
-        Mappa mappa = new Mappa(10);
+        Mappa mappa = new Mappa(grandezzaMappa);
         
         int[][] posizioni = inizializzaMappa(mappa);
         
