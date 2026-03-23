@@ -36,17 +36,12 @@ direction TB
         +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
     }
 
-    class InventarioEquipaggiabili {
-        +aggiungiOggetto(oggetto : OggettoEquipaggiabile)
-	    +togliOggetto(oggetto : OggettoEquipaggiabile)
-	    +getOggetti() ArrayList~OggettoEquipaggiabile~
-    }
-
-    class InventarioConsumabili {
-        +aggiungiOggetto(oggetto : OggettoConsumabile)
-	    +togliOggetto(oggetto : OggettoConsumabile)
-	    +getOggetti() ArrayList~OggettoConsumabile~
-    }
+	class Inventario{
+		+aggiungiOggetto(oggetto : Oggetto)
+	    +togliOggetto(oggetto : Oggetto)
+		+getOggettiEquipaggiabili() ArrayList~OggettoEquipaggiabile~
+		+getOggettiConsumabili() ArrayList~OggettoConsumabile~
+	}
 
     class Mercenario {
 	    +utilizzaAbilita()
@@ -63,15 +58,19 @@ direction TB
     class Vichingo {
 	    +utilizzaAbilita()
     }
-
-    class OggettoEquipaggiabile {
-        -statPrincipale : int
-        -agilita : int
-        -tipo : TipoOggettoEquipaggiabile
-        -nome : String
-	    -sprite : ImageIcon
-	    +getNome() String
+	
+	class Oggetto{
+		-nome : String
+		-sprite : ImageIcon
+		+getNome() String
 	    +getSprite() ImageIcon
+		+Oggetto(nome : String, path : String)
+	}
+	
+    class OggettoEquipaggiabile {        
+        -agilita : int
+        -tipo : TipoOggettoEquipaggiabile    
+		-statPrincipale : int
         +OggettoEquipaggiabile(nome : String, path : String, statprincipale : int, agilita : int, tipo :TipoOgettoEquipaggiabile)
         +getStatPrincipale() int 
         +getAgilita() int 
@@ -81,10 +80,6 @@ direction TB
     class OggettoConsumabile {
         -statPrincipale : int 
         -tipo : TipoOggettoConsumabile
-        -nome : String
-	    -sprite : ImageIcon
-	    +getNome() String
-	    +getSprite() ImageIcon
         +OggettoConsumabile(nome : String, path : String, statprincipale : int, tipo : TipoOggettoConsumabile)
         +getStatPrincipale() int 
         +getTipo() TipoOggettoConsumabile
@@ -207,6 +202,7 @@ direction TB
         +consumaOggetto(oggetto : OggettoConsumabile)
     }
 
+	<<abstract>> Oggetto
 	<<abstract>> Giocatore
 	<<enum>> TipoOggettoEquipaggiabile
     <<enum>> TipoOggettoConsumabile
@@ -214,17 +210,16 @@ direction TB
 	<<enum>> TipoCella
 	<<interface>> Creabile
 
-    Giocatore <|-- Mercenario
+    Oggetto<|--OggettoEquipaggiabile
+	Oggetto<|--OggettoConsumabile
+	Giocatore <|-- Mercenario
     Giocatore <|-- Cavaliere
     Giocatore <|-- Necromante
     Giocatore <|-- Vichingo
     Giocatore --|> Giocabile
-    Creabile <|-- OggettoEquipaggiabile
-    Creabile <|-- OggettoConsumabile
-    Party "1" --> "1" InventarioConsumabili : -consumabili
-    Party "1" --> "1" InventarioEquipaggiabili : -equipaggiabili
-    InventarioConsumabili "1" --> "n" OggettoConsumabile : -consumabili
-    InventarioEquipaggiabili "1" --> "n" OggettoEquipaggiabile : -equipaggiabili
+    Creabile <|-- Oggetto
+    Party "1" --> "1" Inventario : -inventario
+	Inventario "1" --> "n" Oggetto : -oggetti
     GestoreGioco "1" --> "1" Party : -party
     Party "1" --> "1...4" Giocabile : -personaggi
     GestoreInput "1" --> "1" Party : -party
