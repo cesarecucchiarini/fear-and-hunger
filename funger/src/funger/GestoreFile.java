@@ -83,7 +83,7 @@ public class GestoreFile {
                     case "offensivo" -> {tipo = TipoOggettoEquipaggiabile.OFFENSIVO;}
                     case "difensivo" -> {tipo = TipoOggettoEquipaggiabile.DIFENSIVO;}                
                 }
-                c = (Creabile)new OggettoEquipaggiabile(split[1], split[0]+".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipo);
+                c = (Creabile)new OggettoEquipaggiabile(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipo, split[0]+".png");
                 
                 mappaCreabili.put(c.hashCode(), c);
             }
