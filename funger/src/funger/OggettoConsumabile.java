@@ -10,9 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author sergi
  */
-public class OggettoConsumabile implements Creabile{
-    private String nome;
-    private ImageIcon sprite;
+public class OggettoConsumabile extends Oggetto{
     private int statPrincipale;
     private TipoOggettoConsumabile tipo;
 
@@ -24,26 +22,9 @@ public class OggettoConsumabile implements Creabile{
      * @param tipo tipo di oggetto, indica la statistica interessata
      */
     public OggettoConsumabile(String nome, String path, int statPrincipale, TipoOggettoConsumabile tipo) {
-        this.nome = nome;
-        this.sprite = new ImageIcon(path);
+        super(nome, path);
         this.statPrincipale = statPrincipale;
         this.tipo = tipo;
-    }
-
-    /**
-     * 
-     * @return nome dell'oggetto
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * 
-     * @return immagine dell'oggetto
-     */
-    public ImageIcon getSprite() {
-        return sprite;
     }
 
     /**

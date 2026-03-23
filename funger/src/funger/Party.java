@@ -11,10 +11,9 @@ import java.util.ArrayList;
  * @author cucchiarini.cesare
  */
 public class Party {
-    ArrayList<Giocabile> personaggi = new ArrayList<>();
-    GestoreGioco gestoreGioco;
-    private InventarioConsumabili invConsumabili = new InventarioConsumabili();
-    private InventarioEquipaggiabili invEquipaggiabili = new InventarioEquipaggiabili();
+    private ArrayList<Giocabile> personaggi = new ArrayList<>();
+    private GestoreGioco gestoreGioco;
+    private Inventario inventario = new Inventario();
     
     /**
      * 
@@ -72,7 +71,7 @@ public class Party {
      * @return lista di OggettoConsumabile nell'inventario
      */
     public ArrayList<OggettoConsumabile> getOggettiConsumabili(){
-        return invConsumabili.getOggetti();
+        return inventario.getOggettiConsumabili();
     }
     
     /**
@@ -80,23 +79,15 @@ public class Party {
      * @return lista di OggettoEquipaggiabile nell'inventario
      */
     public ArrayList<OggettoEquipaggiabile> getOggettiEquipaggiabili(){
-        return invEquipaggiabili.getOggetti();
+        return inventario.getOggettiEquipaggiabili();
     }
     
     /**
      * 
-     * @param oggetto oggettoEquipaggiabile da aggiungere all'inventario
+     * @param oggetto oggetto da aggiungere all'inventario
      */
-    public void aggiungiOggetto(OggettoEquipaggiabile oggetto){
-        invEquipaggiabili.aggiungiOggetto(oggetto);
-    }
-    
-    /**
-     * 
-     * @param oggetto oggettoConsumabile da aggiungere all'inventario
-     */
-    public void aggiungiOggetto(OggettoConsumabile oggetto){
-        invConsumabili.aggiungiOggetto(oggetto);
+    public void aggiungiOggetto(Oggetto oggetto){
+        inventario.aggiungiOggetto(oggetto);
     }
     
     /**
@@ -106,8 +97,8 @@ public class Party {
      * 
      */
     public void cambiaOggetto(Giocatore giocatore, OggettoEquipaggiabile oggetto){
-        invEquipaggiabili.rimuoviOggetto(oggetto);
-        invEquipaggiabili.aggiungiOggetto(giocatore.setOggettoEquipaggiabile(oggetto));
+        inventario.rimuoviOggetto(oggetto);
+        inventario.aggiungiOggetto(giocatore.setOggettoEquipaggiabile(oggetto));
     }
         
     /**

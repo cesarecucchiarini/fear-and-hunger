@@ -10,9 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author sergi
  */
-public class OggettoEquipaggiabile implements Creabile{
-    private String nome;
-    private ImageIcon sprite;
+public class OggettoEquipaggiabile extends Oggetto{
     private int statPrincipale;
     private int agilita;
     private TipoOggettoEquipaggiabile tipo;
@@ -25,28 +23,11 @@ public class OggettoEquipaggiabile implements Creabile{
      * @param tipo tipo dell'oggetto
      * @param path percorso dell'immagine
      */
-    public OggettoEquipaggiabile(String nome, String path, int statPrincipale, int agilita, TipoOggettoEquipaggiabile tipo) {
-        this.nome = nome;
+    public OggettoEquipaggiabile(String nome, int statPrincipale, int agilita, TipoOggettoEquipaggiabile tipo, String path) {
+        super(nome, path);
         this.statPrincipale = statPrincipale;
         this.agilita = agilita;
         this.tipo = tipo;
-        sprite = new ImageIcon(path);
-    }
-
-    /**
-     * 
-     * @return nome dell'oggetto
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * 
-     * @return immagine dell'oggetto
-     */
-    public ImageIcon getSprite() {
-        return sprite;
     }
 
     /**
