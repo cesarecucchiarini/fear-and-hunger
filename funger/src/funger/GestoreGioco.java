@@ -23,7 +23,7 @@ public class GestoreGioco {
     public GestoreGioco(Giocatore leader){
         party = new Party(leader, this);
         mappaCreabili = GestoreFile.leggiCreabili();
-        mappa = GestoreMappa.generaMappa(mappaCreabili.keySet().stream().mapToInt(Integer::intValue).toArray());
+        mappa = GestoreMappa.generaMappa(mappaCreabili.keySet().toArray(new Integer[mappaCreabili.size()]));
     }
     
     /**

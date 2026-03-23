@@ -138,7 +138,8 @@ direction TB
 	    +getGriglia(bordo : boolean) Cella[][]
 	    +aggiungiCella(cella : Cella)
 	    +aggiungiCella(cella : Cella, x : int, y : int)
-	    +getInfosCella(x : int, y : int) int[]
+	    +getIdCreabileCella(x : int, y : int) int 
+		+getStatoCella(int x, int y) int
 	    +setStatoCella(stato : int, x : int, y : int)
     }
 
@@ -149,7 +150,8 @@ direction TB
 	    -tipo : int
 	    -idCreabile : int
 	    -stato : int
-	    +getInfos() int[]
+	    +getIdCrebile() int
+		+getStato() int
 	    +setStato(stato : int)
     }
 
@@ -171,7 +173,9 @@ direction TB
 
     class GeneratoreMappa {
 	    -grandezzaMappa : int$
-	    +generaMappa()$
+		-rnd : Random
+		-idSet : Integer[]
+	    +generaMappa(idSet1 : Integer[])$
 	    +inizializzaMappa(mappa : Mappa) int[][]$
 	    +generaPercorso(mappa : Mappa, posInizio : int[], posFine : int[])$
 	    +generaCelleCasuali(mappa : Mappa)$

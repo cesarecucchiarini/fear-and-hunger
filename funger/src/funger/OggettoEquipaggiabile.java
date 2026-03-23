@@ -25,7 +25,7 @@ public class OggettoEquipaggiabile implements Creabile{
      * @param tipo tipo dell'oggetto
      * @param path percorso dell'immagine
      */
-    public OggettoEquipaggiabile(String nome, int statPrincipale, int agilita, TipoOggettoEquipaggiabile tipo, String path) {
+    public OggettoEquipaggiabile(String nome, String path, int statPrincipale, int agilita, TipoOggettoEquipaggiabile tipo) {
         this.nome = nome;
         this.statPrincipale = statPrincipale;
         this.agilita = agilita;

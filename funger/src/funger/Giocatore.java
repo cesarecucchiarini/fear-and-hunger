@@ -8,7 +8,7 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public abstract class Giocatore extends Giocabile{
+public abstract class Giocatore extends Giocabile implements Creabile{
     private int fame;
     private int mente;
     private OggettoEquipaggiabile oggettoOffensivo = null;

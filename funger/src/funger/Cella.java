@@ -49,17 +49,25 @@ public class Cella {
     
     /**
      * 
-     * @return id dell'oggetto nella cella, stato della cella
+     * @return stato della cella
      */
-    public int[] getInfos(){
-        return new int[]{idCreabile, stato};
+    public int getStato(){
+        return stato;
     }
-    
+
+    /**
+     * 
+     * @return id dell'oggetto nella cella
+     */
+    public int getIdCreabile() {
+        return idCreabile;
+    }
+
     /**
      * 
      * @return tipo della cella
      */
-    public TipoCella getTipo(){
+    public TipoCella getTipo() {
         return tipo;
     }
     

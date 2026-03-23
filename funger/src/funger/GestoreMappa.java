@@ -14,12 +14,14 @@ import java.util.Random;
 public class GestoreMappa {
     private static int grandezzaMappa = 10;
     private static Random rnd  = new Random();
+    private static Integer[] idSet;
     
     /**
-     * @param idSet set degli id dei creabili
+     * @param idSet1 set degli id dei creabili
      * @return mappa generata con inizio, fine, un percorso che porta alla fine, e stanze casuali
      */
-    public static Mappa generaMappa(int[] idSet){        
+    public static Mappa generaMappa(Integer[] idSet1){
+        idSet = idSet1;
         Mappa mappa = new Mappa(grandezzaMappa);
         
         int[][] posizioni = inizializzaMappa(mappa);
@@ -29,7 +31,7 @@ public class GestoreMappa {
         
         ArrayList<int[]> celle = generaPercorso(mappa, posInizio, posFine);
         
-        generaCelleCasuali(mappa, celle, idSet);
+        generaCelleCasuali(mappa, celle);
         
         return mappa;
     }
@@ -81,15 +83,15 @@ public class GestoreMappa {
      * @param mappa mappa a per cui generare le celle
      * @param celle celle mappate
      */
-    public static void generaCelleCasuali(Mappa mappa, ArrayList<int[]> celle, int[] idSet){
+    public static void generaCelleCasuali(Mappa mappa, ArrayList<int[]> celle){
         ArrayList<int[]> celleNuove = new ArrayList<>();
         
         for(int[] pos : celle){
-            celleNuove.addAll(generaCelleAdiacenti(mappa, pos[0], pos[1], idSet));
+            celleNuove.addAll(generaCelleAdiacenti(mappa, pos[0], pos[1]));
         }
         
         if(!celleNuove.isEmpty())
-            generaCelleCasuali(mappa, celleNuove, idSet);
+            generaCelleCasuali(mappa, celleNuove);
     }
     
     /**
@@ -99,30 +101,30 @@ public class GestoreMappa {
      * @param y ordinata della cella
      * @return posizioni delle celle create
      */
-    public static ArrayList<int[]> generaCelleAdiacenti(Mappa mappa, int x, int y, int[] idSet){
+    public static ArrayList<int[]> generaCelleAdiacenti(Mappa mappa, int x, int y){
         ArrayList<int[]> celleCreate = new ArrayList<>();
         Cella c;
         
         if(!mappa.cellaInizializzata(x+1, y)){
-            c = generaCellaCasuale(idSet);
+            c = generaCellaCasuale();
             mappa.aggiungiCella(c, x+1, y);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x+1, y});
         }
         if(!mappa.cellaInizializzata(x-1, y)){
-            c = generaCellaCasuale(idSet);
+            c = generaCellaCasuale();
             mappa.aggiungiCella(c, x-1, y);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x-1, y});
         }
         if(!mappa.cellaInizializzata(x, y+1)){
-            c = generaCellaCasuale(idSet);
+            c = generaCellaCasuale();
             mappa.aggiungiCella(c, x, y+1);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x, y+1});
         }
         if(!mappa.cellaInizializzata(x, y-1)){
-            c = generaCellaCasuale(idSet);
+            c = generaCellaCasuale();
             mappa.aggiungiCella(c, x, y-1);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x, y-1});
@@ -135,7 +137,7 @@ public class GestoreMappa {
      *  
      * @return cella creata casualmente
      */
-    public static Cella generaCellaCasuale(int[] idSet){
+    public static Cella generaCellaCasuale(){
         Cella c;
         switch(rnd.nextInt(3)){
             default -> {c = new Cella();}

@@ -4,6 +4,8 @@
  */
 package funger;
 
+import java.util.HashMap;
+
 /**
  *
  * @author cucchiarini.cesare
@@ -14,9 +16,11 @@ public class Funger {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Mappa m = GestoreMappa.generaMappa();
+        HashMap<Integer, Creabile> mappa = GestoreFile.leggiCreabili();
+        Mappa m = GestoreMappa.generaMappa(mappa.keySet().toArray(new Integer[mappa.size()]));
         for(Cella[] riga : m.getGriglia(true)){
             for(Cella c : riga){
+                /*
                 if(c == null) System.out.print(" ");
                 else
                     switch(c.getTipo()){
@@ -26,6 +30,12 @@ public class Funger {
                         case TipoCella.VUOTO -> {System.out.print("V");}
                         case TipoCella.PIENO -> {System.out.print("P");}
                     }
+                */
+                
+                if(c != null){
+                    if(c.getTipo().equals(TipoCella.PIENO) && c.getIdCreabile() != 0)
+                        System.out.println(mappa.get(c.getIdCreabile()).getClass().getCanonicalName());
+                }
             }
             System.out.print("\n");
         }

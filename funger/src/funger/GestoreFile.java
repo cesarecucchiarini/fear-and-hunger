@@ -14,8 +14,17 @@ import java.util.HashMap;
 public class GestoreFile {
     public static HashMap<Integer, Creabile> leggiCreabili(){
         HashMap<Integer, Creabile> mappaCreabili = new HashMap<>();
+        mappaCreabili.put(0, null);
         
-        try(BufferedReader r = new BufferedReader(new FileReader("creabili.txt"))){
+        leggiGiocatori(mappaCreabili);
+        leggiOggettiConsumabili(mappaCreabili);
+        leggiOggettiEquipaggiabili(mappaCreabili);
+        
+        return mappaCreabili;
+    }
+    
+    public static void leggiGiocatori(HashMap mappaCreabili){
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/giocatori.txt"))){
             Creabile c = null;
             String line;
             String[] split;
@@ -37,7 +46,48 @@ public class GestoreFile {
             }
         }
         catch(IOException e){}
-        
-        return mappaCreabili;
+    }
+    
+    public static void leggiOggettiConsumabili(HashMap mappaCreabili){
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiConsumabili.txt"))){
+            Creabile c;
+            String line;
+            String[] split;
+            TipoOggettoConsumabile tipo = null;
+            while((line = r.readLine()) != null){
+                split = line.split(",");
+                
+                switch(split[3]){
+                    case "curativo" -> {tipo = TipoOggettoConsumabile.CURATIVO;}
+                    case "mentale" -> {tipo = TipoOggettoConsumabile.MENTALE;}
+                    case "commestibile" -> {tipo = TipoOggettoConsumabile.COMMESTIBILE;}
+                }
+                c = (Creabile)new OggettoConsumabile(split[1], split[0]+".png", Integer.parseInt(split[2]), tipo);
+                
+                mappaCreabili.put(c.hashCode(), c);
+            }
+        }
+        catch(IOException e){}
+    }
+    
+    public static void leggiOggettiEquipaggiabili(HashMap mappaCreabili){
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiEquipaggiabili.txt"))){
+            Creabile c;
+            String line;
+            String[] split;
+            TipoOggettoEquipaggiabile tipo = null;
+            while((line = r.readLine()) != null){
+                split = line.split(",");
+                
+                switch(split[4]){
+                    case "offensivo" -> {tipo = TipoOggettoEquipaggiabile.OFFENSIVO;}
+                    case "difensivo" -> {tipo = TipoOggettoEquipaggiabile.DIFENSIVO;}                
+                }
+                c = (Creabile)new OggettoEquipaggiabile(split[1], split[0]+".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipo);
+                
+                mappaCreabili.put(c.hashCode(), c);
+            }
+        }
+        catch(IOException e){}
     }
 }

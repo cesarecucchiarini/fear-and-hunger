@@ -27,7 +27,6 @@ public abstract class Giocabile {
      * 
      * @param nome nome del Giocabile
      * @param path percorso dell'immagine
-     * @param gestoreGioco gestore da utilizzare per scrivere i log
      */
     public Giocabile(String nome, String path){
         this.nome = nome;

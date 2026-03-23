@@ -62,10 +62,20 @@ public class Mappa {
      * 
      * @param x posizione della cella
      * @param y posizione della cella
-     * @return informazioni sulla cella
+     * @return creabile nella cella
      */
-    public int[] getInfosCella(int x, int y){
-        return griglia[x+1][y+1].getInfos();
+    public int getIdCreabileCella(int x, int y){
+        return griglia[x+1][y+1].getIdCreabile();
+    }
+    
+    /**
+     * 
+     * @param x posizione della cella
+     * @param y posizione della cella
+     * @return stato della cella
+     */
+    public int getstatoCella(int x, int y){
+        return griglia[x+1][y+1].getStato();
     }
     
     /**
