@@ -13,6 +13,7 @@ public abstract class Giocatore extends Giocabile implements Creabile{
     private int mente;
     private OggettoEquipaggiabile oggettoOffensivo = null;
     private OggettoEquipaggiabile oggettoDifensivo = null;
+    private GestoreGioco gestoreGioco;
 
     public Giocatore(String nome, String path) {
         super(nome, path);

@@ -76,7 +76,6 @@ public class Cella {
      * @param stato nuovo stato da assegnare alla cella
      */
     public void setStato(int stato){
-        this.stato = stato;
-        if(stato == COMPLETATA) idCreabile = 0;
+        this.stato = stato; 
     }
 }
