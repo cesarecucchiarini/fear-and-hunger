@@ -14,14 +14,12 @@ import java.util.Random;
 public class GestoreMappa {
     private static int grandezzaMappa = 10;
     private static Random rnd  = new Random();
-    private static Integer[] idSet;
     
     /**
-     * @param idSet1 set degli id dei creabili
+     * 
      * @return mappa generata con inizio, fine, un percorso che porta alla fine, e stanze casuali
      */
-    public static Mappa generaMappa(Integer[] idSet1){
-        idSet = idSet1;
+    public static Mappa generaMappa(){
         Mappa mappa = new Mappa(grandezzaMappa);
         
         int[][] posizioni = inizializzaMappa(mappa);
@@ -142,7 +140,7 @@ public class GestoreMappa {
         switch(rnd.nextInt(3)){
             default -> {c = new Cella();}
             case 1 -> {c = new Cella(TipoCella.VUOTO);}
-            case 2 -> {c = new Cella(TipoCella.PIENO, idSet[rnd.nextInt(idSet.length)]);}
+            case 2 -> {c = new Cella(TipoCella.PIENO, );}
         }
         
         return c;

@@ -114,7 +114,6 @@ direction TB
     class GestoreGioco {
 	    -posizione : int[]
 	    -tipoCella : TipoCella
-	    -mappaCreabili : HashMap~Integer, Creabile~
 	    +GestoreGioco(leader : Giocatore,logger : Logger, mappa : Mappa)
 	    +muovi(movX : int, movY : int)
 	    +interazioneCreabile()
@@ -122,7 +121,6 @@ direction TB
 	    +apriInventario()
 	    +trovaOggetto()
 	    +trovaAlleato()
-	    +generaCreabile(id : int) Creabile
 	    +finePartita()
     }
 
@@ -133,7 +131,7 @@ direction TB
 	    +getGriglia(bordo : boolean) Cella[][]
 	    +aggiungiCella(cella : Cella)
 	    +aggiungiCella(cella : Cella, x : int, y : int)
-	    +getIdCreabileCella(x : int, y : int) int 
+	    +getIdCreabileCella(x : int, y : int) String 
 		+getStatoCella(int x, int y) int
 	    +setStatoCella(stato : int, x : int, y : int)
     }
@@ -143,9 +141,9 @@ direction TB
 	    +NON_VISITATA : int
 	    +COMPLETATA : int
 	    -tipo : int
-	    -idCreabile : int
+	    -idCreabile : String
 	    -stato : int
-	    +getIdCrebile() int
+	    +getIdCrebile() String
 		+getStato() int
 	    +setStato(stato : int)
     }
@@ -192,9 +190,9 @@ direction TB
     }
 
     class Logger {
-	    -textArea : JTextArea
-	    +Logger(textArea : JTextArea)
-	    +scriviMesaggio(msg : String)
+	    -textArea : JTextArea $
+	    +Logger(textArea : JTextArea)$
+	    +scriviMesaggio(msg : String)$
     }
 
     class Giocabile {
@@ -214,6 +212,13 @@ direction TB
 	    +perdiVita(perdita : int)
 	    +controllaMorte() boolean
 	    +consumaOggetto(oggetto : OggettoConsumabile)
+    }
+
+    class GestoreCreabili{
+        -creabili : HashMap~String, ArrayList~Creabile~~ $
+        +aggiungiCreabile(creabile : Creabile)$
+        +getCreabile(id : String) Creabile $
+
     }
 
 	<<abstract>> Oggetto
@@ -254,6 +259,5 @@ direction TB
     Guardia --|> Nemico
     Trotur --|> Nemico
     GestoreGioco "1" --> "1" Creabile : -creabileCella
-    GestoreGioco "1" --> "1" Logger : -logger
     Nemico --|> Giocabile
     Giocabile <--> GestoreGioco
