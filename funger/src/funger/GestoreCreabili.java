@@ -5,7 +5,7 @@
 package funger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 /**
@@ -13,7 +13,16 @@ import java.util.Random;
  * @author cucchiarini.cesare
  */
 public class GestoreCreabili {
-    private static HashMap<String, ArrayList<Creabile>> mappaCreabili = new HashMap<>();
+    /**
+     * mappa dei creabili, contiene il tipo di creabile e i creabili a esso associati
+     */
+    private static LinkedHashMap<String, ArrayList<Creabile>> mappaCreabili = new LinkedHashMap<>();
+    
+    /**
+     * lista delle probabilita di apparizione di ogni tipo di creabile
+     */
+    private static ArrayList<Integer> listaProbabilita = new ArrayList<>();
+    private static int totaleProbabilita = 0;
     
     /**
      * 
@@ -40,6 +49,15 @@ public class GestoreCreabili {
     
     /**
      * 
+     * @param probabilita probabilita da aggiungere alla lista
+     */
+    public static void aggiungiProbabilita(Integer probabilita){
+        listaProbabilita.add(probabilita);
+        totaleProbabilita += probabilita;
+    }
+    
+    /**
+     * 
      * @param id id del creabile in forma "Tipo" +"_"+ "Numero"
      * @return creabile correlato all'id
      */
@@ -49,10 +67,19 @@ public class GestoreCreabili {
     }
     
     /**
-     * ritorna l'id di un creabile scelto casualmente
+     * ritorna l'id di un creabile scelto casualmente o scelto in base alla probabilita di apparizione
+     * @param probabilita true - creabile scelto casualmene in base a una probabilita, false - creabile scelto a caso
      * @return id di un creabile a caso
      */
-    public static String getRandomIdCreabile(){
+    public static String getRandomIdCreabile(boolean probabilita){
+        return probabilita ? getIdCreabileProbabile() : getIdCreabileRandom();
+    }
+    
+    /**
+     * 
+     * @return id casuale di un creabile
+     */
+    public static String getIdCreabileRandom(){
         Random rnd = new Random();
         String id;
         int len = mappaCreabili.size();
@@ -65,23 +92,25 @@ public class GestoreCreabili {
     }
     
     /**
-     * ritorna un creabile casuale scelto in base al tipo specificato, oppure un id casuale in caso il tipo specificato non esista
-     * @param tipo tipo scelto
-     * @return id scelto casualmente
+     * 
+     * @return id casuale di un creabile, tenendo conto della probabilita
      */
-    public static String getRandomIdCreabile(String tipo){
+    public static String getIdCreabileProbabile(){
+        String id = "";
         Random rnd = new Random();
-        String id = tipo;
-        int len;
-        try{
-            len = mappaCreabili.get(id).size();
-        }
-        catch(Exception e){
-            return getRandomIdCreabile();
-        }
+        int perc = rnd.nextInt(1, totaleProbabilita+1);
         
-        id += "_" + rnd.nextInt(len);
+        for(int i = 0; i < listaProbabilita.size(); i++){
+            if(perc <= listaProbabilita.get(i)){
+                id = (String) mappaCreabili.keySet().toArray()[i];
+                id += "_" + rnd.nextInt(mappaCreabili.get(id).size());
+                return id;
+            }
+            else{
+                perc -= listaProbabilita.get(i);
+            }
+        }
         
         return id;
-    }
+    }    
 }

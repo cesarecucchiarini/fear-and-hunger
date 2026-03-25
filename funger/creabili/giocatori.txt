@@ -1,3 +1,4 @@
+1
 necromante,Enki
 vichingo,Ragnvalrd
 mercenario,cahara

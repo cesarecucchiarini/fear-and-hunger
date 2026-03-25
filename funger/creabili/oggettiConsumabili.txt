@@ -1,3 +1,0 @@
-blueVial,pozione blu,20,curativo
-wineVial,boccia di vino,40,mentale
-moldyBread,pane con muffa,30,commestibile

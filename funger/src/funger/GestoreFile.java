@@ -11,17 +11,23 @@ import java.io.*;
  * @author cucchiarini.cesare
  */
 public class GestoreFile {
+    /**
+     * legge i file degli oggetti creabili e li aggiunge al gestore dei creabili
+     */
     public static void leggiCreabili(){
         leggiGiocatori();
-        leggiOggettiConsumabili();
-        leggiOggettiEquipaggiabili();
+        leggiOggetti();
     }
     
+    /**
+     * legge il file dei giocatori e aggiunge i giocatori al gestore dei creabili
+     */
     public static void leggiGiocatori(){
         try(BufferedReader r = new BufferedReader(new FileReader("creabili/giocatori.txt"))){
             Creabile c = null;
             String line;
             String[] split;
+            GestoreCreabili.aggiungiProbabilita(Integer.valueOf(r.readLine()));
             while((line = r.readLine()) != null){
                 split = line.split(",");
                 
@@ -42,43 +48,35 @@ public class GestoreFile {
         catch(IOException e){}
     }
     
-    public static void leggiOggettiConsumabili(){
-        try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiConsumabili.txt"))){
+    /**
+     * legge il file degli oggetti e li agiunge al gestore dei creabili
+     */
+    public static void leggiOggetti(){
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggetti.txt"))){
             Creabile c;
             String line;
             String[] split;
-            TipoOggettoConsumabile tipo = null;
+            TipoOggettoConsumabile tipoConsumabile = null;
+            TipoOggettoEquipaggiabile tipoEquipaggiabile = null;
+            GestoreCreabili.aggiungiProbabilita(Integer.valueOf(r.readLine()));
+            
             while((line = r.readLine()) != null){
                 split = line.split(",");
-                
-                switch(split[3]){
-                    case "curativo" -> {tipo = TipoOggettoConsumabile.CURATIVO;}
-                    case "mentale" -> {tipo = TipoOggettoConsumabile.MENTALE;}
-                    case "commestibile" -> {tipo = TipoOggettoConsumabile.COMMESTIBILE;}
+                if(split.length == 4){
+                    switch(split[3]){
+                        case "curativo" -> {tipoConsumabile = TipoOggettoConsumabile.CURATIVO;}
+                        case "mentale" -> {tipoConsumabile = TipoOggettoConsumabile.MENTALE;}
+                        case "commestibile" -> {tipoConsumabile = TipoOggettoConsumabile.COMMESTIBILE;}
+                    }
+                    c = (Creabile)new OggettoConsumabile(split[1], split[0]+".png", Integer.parseInt(split[2]), tipoConsumabile);
                 }
-                c = (Creabile)new OggettoConsumabile(split[1], split[0]+".png", Integer.parseInt(split[2]), tipo);
-                
-                GestoreCreabili.aggiungiCreabile(c);
-            }
-        }
-        catch(IOException e){}
-    }
-    
-    public static void leggiOggettiEquipaggiabili(){
-        try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiEquipaggiabili.txt"))){
-            Creabile c;
-            String line;
-            String[] split;
-            TipoOggettoEquipaggiabile tipo = null;
-            while((line = r.readLine()) != null){
-                split = line.split(",");
-                
-                switch(split[4]){
-                    case "offensivo" -> {tipo = TipoOggettoEquipaggiabile.OFFENSIVO;}
-                    case "difensivo" -> {tipo = TipoOggettoEquipaggiabile.DIFENSIVO;}                
+                else{
+                    switch(split[4]){
+                    case "offensivo" -> {tipoEquipaggiabile = TipoOggettoEquipaggiabile.OFFENSIVO;}
+                    case "difensivo" -> {tipoEquipaggiabile = TipoOggettoEquipaggiabile.DIFENSIVO;}                
+                    }
+                    c = (Creabile)new OggettoEquipaggiabile(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipoEquipaggiabile, split[0]+".png");
                 }
-                c = (Creabile)new OggettoEquipaggiabile(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipo, split[0]+".png");
-                
                 GestoreCreabili.aggiungiCreabile(c);
             }
         }

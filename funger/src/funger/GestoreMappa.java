@@ -141,7 +141,7 @@ public class GestoreMappa {
         switch(rnd.nextInt(3)){
             default -> {c = new Cella();}
             case 1 -> {c = new Cella(TipoCella.VUOTO);}
-            case 2 -> {c = new Cella(TipoCella.PIENO, GestoreCreabili.getRandomIdCreabile());}
+            case 2 -> {c = new Cella(TipoCella.PIENO, GestoreCreabili.getRandomIdCreabile(true));}
         }
         
         return c;

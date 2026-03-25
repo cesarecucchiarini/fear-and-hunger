@@ -215,12 +215,22 @@ direction TB
     }
 
     class GestoreCreabili{
-        -creabili : HashMap~String, ArrayList~Creabile~~ $
+        -creabili : LinkedHashMap~String, ArrayList~Creabile~~ $
+		-listaProbabilita : ArrayList~Integer~ $
+		-totaleProbabilita : int $
         +aggiungiCreabile(creabile : Creabile)$
+		+aggiungiProbabilita(probabilita : Integer) $
         +getCreabile(id : String) Creabile $
-		+getRandomIdCreabile() String $
-
+		+getRandomIdCreabile(probabilita : boolean) String $
+		+getIdCreabileProbabile() String $
+		+getIdCreabileRandom() String $	
     }
+	
+	class GestoreFile{
+		+leggiCreabili()$
+		+leggiGiocatori()$
+		+leggiOggetti()$
+	}
 
 	<<abstract>> Oggetto
 	<<abstract>> Giocatore

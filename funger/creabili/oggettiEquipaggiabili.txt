@@ -1,2 +1,0 @@
-shortSword,spada corta,20,0,offensivo
-leatherVest,veste di pelle,10,5,difensivo

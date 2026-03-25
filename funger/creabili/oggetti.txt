@@ -1,0 +1,6 @@
+0
+blueVial,pozione blu,20,curativo
+wineVial,boccia di vino,40,mentale
+moldyBread,pane con muffa,30,commestibile
+shortSword,spada corta,20,0,offensivo
+leatherVest,veste di pelle,10,5,difensivo
