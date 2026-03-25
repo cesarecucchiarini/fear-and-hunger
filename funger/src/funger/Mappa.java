@@ -64,7 +64,7 @@ public class Mappa {
      * @param y posizione della cella
      * @return creabile nella cella
      */
-    public int getIdCreabileCella(int x, int y){
+    public String getIdCreabileCella(int x, int y){
         return griglia[x+1][y+1].getIdCreabile();
     }
     

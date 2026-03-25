@@ -16,9 +16,7 @@ public class Funger {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*
-        HashMap<Integer, Creabile> mappa = GestoreFile.leggiCreabili();
-        Mappa m = GestoreMappa.generaMappa(mappa.keySet().toArray(new Integer[mappa.size()]));
+        Mappa m = GestoreMappa.generaMappa();
         for(Cella[] riga : m.getGriglia(true)){
             for(Cella c : riga){
                 /*
@@ -31,18 +29,19 @@ public class Funger {
                         case TipoCella.VUOTO -> {System.out.print("V");}
                         case TipoCella.PIENO -> {System.out.print("P");}
                     }
-                
+                */
                 
                 if(c != null){
-                    if(c.getTipo().equals(TipoCella.PIENO) && c.getIdCreabile() != 0)
-                        System.out.println(mappa.get(c.getIdCreabile()).getClass().getCanonicalName());
+                    if(c.getTipo().equals(TipoCella.PIENO))
+                        System.out.println(c.getIdCreabile());
                 }
             }
             System.out.print("\n");
         }
     }
-    */
+    /*
         OggettoConsumabile og = new OggettoConsumabile("a", "a", 0, TipoOggettoConsumabile.COMMESTIBILE);
         System.out.print(og.getClass().getName() + "\n" + og.getClass().getCanonicalName() + "\n" + og.getClass().getSimpleName());
     } 
+    */
 }

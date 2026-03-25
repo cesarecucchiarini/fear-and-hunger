@@ -20,6 +20,7 @@ public class GestoreMappa {
      * @return mappa generata con inizio, fine, un percorso che porta alla fine, e stanze casuali
      */
     public static Mappa generaMappa(){
+        GestoreFile.leggiCreabili();
         Mappa mappa = new Mappa(grandezzaMappa);
         
         int[][] posizioni = inizializzaMappa(mappa);
@@ -140,7 +141,7 @@ public class GestoreMappa {
         switch(rnd.nextInt(3)){
             default -> {c = new Cella();}
             case 1 -> {c = new Cella(TipoCella.VUOTO);}
-            case 2 -> {c = new Cella(TipoCella.PIENO, );}
+            case 2 -> {c = new Cella(TipoCella.PIENO, GestoreCreabili.getRandomIdCreabile());}
         }
         
         return c;

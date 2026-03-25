@@ -5,25 +5,19 @@
 package funger;
 
 import java.io.*;
-import java.util.HashMap;
 
 /**
  *
  * @author cucchiarini.cesare
  */
 public class GestoreFile {
-    public static HashMap<Integer, Creabile> leggiCreabili(){
-        HashMap<Integer, Creabile> mappaCreabili = new HashMap<>();
-        mappaCreabili.put(0, null);
-        
-        leggiGiocatori(mappaCreabili);
-        leggiOggettiConsumabili(mappaCreabili);
-        leggiOggettiEquipaggiabili(mappaCreabili);
-        
-        return mappaCreabili;
+    public static void leggiCreabili(){
+        leggiGiocatori();
+        leggiOggettiConsumabili();
+        leggiOggettiEquipaggiabili();
     }
     
-    public static void leggiGiocatori(HashMap mappaCreabili){
+    public static void leggiGiocatori(){
         try(BufferedReader r = new BufferedReader(new FileReader("creabili/giocatori.txt"))){
             Creabile c = null;
             String line;
@@ -42,13 +36,13 @@ public class GestoreFile {
                 }
                 
                 if(c != null)
-                    mappaCreabili.put(c.hashCode(), c);
+                    GestoreCreabili.aggiungiCreabile(c);
             }
         }
         catch(IOException e){}
     }
     
-    public static void leggiOggettiConsumabili(HashMap mappaCreabili){
+    public static void leggiOggettiConsumabili(){
         try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiConsumabili.txt"))){
             Creabile c;
             String line;
@@ -64,13 +58,13 @@ public class GestoreFile {
                 }
                 c = (Creabile)new OggettoConsumabile(split[1], split[0]+".png", Integer.parseInt(split[2]), tipo);
                 
-                mappaCreabili.put(c.hashCode(), c);
+                GestoreCreabili.aggiungiCreabile(c);
             }
         }
         catch(IOException e){}
     }
     
-    public static void leggiOggettiEquipaggiabili(HashMap mappaCreabili){
+    public static void leggiOggettiEquipaggiabili(){
         try(BufferedReader r = new BufferedReader(new FileReader("creabili/oggettiEquipaggiabili.txt"))){
             Creabile c;
             String line;
@@ -85,7 +79,7 @@ public class GestoreFile {
                 }
                 c = (Creabile)new OggettoEquipaggiabile(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipo, split[0]+".png");
                 
-                mappaCreabili.put(c.hashCode(), c);
+                GestoreCreabili.aggiungiCreabile(c);
             }
         }
         catch(IOException e){}

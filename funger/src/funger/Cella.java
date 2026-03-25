@@ -15,14 +15,14 @@ public class Cella {
     
     private TipoCella tipo;
     private int stato;
-    private int idCreabile;
+    private String idCreabile;
     
     /**
      * 
      * @param tipo tipo di cella
      * @param idCreabile oggetto creabile della cella, 0 se non c'è un oggetto creabile
      */
-    public Cella(TipoCella tipo, int idCreabile) {
+    public Cella(TipoCella tipo, String idCreabile) {
         this.tipo = tipo;
         this.idCreabile = idCreabile;
         stato = NON_VISITATA;
@@ -34,7 +34,7 @@ public class Cella {
      */
     public Cella(TipoCella tipo){
         this.tipo = tipo;
-        this.idCreabile = 0;
+        this.idCreabile = null;
         stato = NON_VISITATA;
     }
     
@@ -43,7 +43,7 @@ public class Cella {
      */
     public Cella(){
         this.tipo = TipoCella.MURO;
-        this.idCreabile = 0;
+        this.idCreabile = null;
         stato = NON_VISITATA;
     }
     
@@ -59,7 +59,7 @@ public class Cella {
      * 
      * @return id dell'oggetto nella cella
      */
-    public int getIdCreabile() {
+    public String getIdCreabile() {
         return idCreabile;
     }
 
