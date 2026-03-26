@@ -1,4 +1,4 @@
-100
+0
 necromante,Enki,100,15
 vichingo,Ragnvalrd,100,15
 mercenario,cahara,100,15

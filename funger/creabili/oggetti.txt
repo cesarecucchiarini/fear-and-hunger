@@ -1,4 +1,4 @@
-100
+0
 oggettoConsumabile,blueVial,pozione blu,20,curativo
 oggettoConsumabile,wineVial,boccia di vino,40,mentale
 oggettoConsumabile,moldyBread,pane con muffa,30,commestibile

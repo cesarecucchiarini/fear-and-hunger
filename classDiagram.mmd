@@ -232,6 +232,10 @@ direction TB
 		+leggiGiocatori()$
 		+leggiOggetti()$
 	}
+	
+	class FormScelta{
+	
+	}
 
 	<<abstract>> Oggetto
 	<<abstract>> Giocatore
@@ -242,6 +246,7 @@ direction TB
 	<<interface>> Creabile
 	<<abstract>> Giocabile
 
+	FormScelta --|> JFrame
     Oggetto<|--OggettoEquipaggiabile
 	Oggetto<|--OggettoConsumabile
 	Giocatore <|-- Mercenario
