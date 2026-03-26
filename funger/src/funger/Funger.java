@@ -16,7 +16,7 @@ public class Funger {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Mappa m = GestoreMappa.generaMappa();
+        Mappa m = GestoreMappa.generaMappa(new GestoreGioco());
         for(Cella[] riga : m.getGriglia(true)){
             for(Cella c : riga){
                 /*

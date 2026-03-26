@@ -1,8 +1,8 @@
-1
-necromante,Enki
-vichingo,Ragnvalrd
-mercenario,cahara
-cavaliere,D'Arc
-ragazza,Girl
-moonless,Moonless
-demonchild,Demonchild
+100
+necromante,Enki,100,15
+vichingo,Ragnvalrd,100,15
+mercenario,cahara,100,15
+cavaliere,D'Arc,100,15
+ragazza,Girl,100,15
+moonless,Moonless,100,15
+demonchild,Demonchild,100,15

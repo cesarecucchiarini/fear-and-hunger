@@ -22,24 +22,28 @@ public abstract class Giocabile {
     private int danno;
     private String nome;
     private ImageIcon sprite;
-    
+    private GestoreGioco gestoreGioco;
     /**
      * 
      * @param nome nome del Giocabile
      * @param path percorso dell'immagine
+     * @param vita vita del Gioacbile
+     * @param danno danno dell'attacco del Giocabile
+     * @param gestoreGioco gestore del gioco, serve per effettuare gli attacchi
      */
-    public Giocabile(String nome, String path){
+    public Giocabile(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco){
         this.nome = nome;
-        this.vita = 100;
-        this.danno = 100;
+        this.vita = vita;
+        this.danno = danno;
         this.sprite = new ImageIcon(path);
+        this.gestoreGioco = gestoreGioco;
     }
     
     /**
      * 
-     * @return danno causato
+     * permette al Giocabile di attaccare, tramite il gestore del gioco
      */
-    public abstract int attacca();
+    public abstract void attacca();
 
     /**
      * 

@@ -4,8 +4,6 @@
  */
 package funger;
 
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author sergi

@@ -8,17 +8,18 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public class Ragazza extends Giocatore{
+public class Maneba extends Nemico{
 
-    public Ragazza(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+    public Maneba(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
         super(nome, path, vita, danno, gestoreGioco);
     }
-
     
     
-
     @Override
-    public void utilizzaAbilita() {
+    public void attacca(){
     }
+
+
+    
     
 }

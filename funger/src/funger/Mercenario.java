@@ -10,9 +10,11 @@ package funger;
  */
 public class Mercenario extends Giocatore{
 
-    public Mercenario(String nome, String path) {
-        super(nome, path);
+    public Mercenario(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+        super(nome, path, vita, danno, gestoreGioco);
     }
+
+    
 
     @Override
     public void utilizzaAbilita() {

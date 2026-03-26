@@ -10,9 +10,13 @@ package funger;
  */
 public class Moonless extends Giocatore{
 
-    public Moonless(String nome, String path) {
-        super(nome, path);
+    public Moonless(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+        super(nome, path, vita, danno, gestoreGioco);
     }
+
+    
+
+    
 
     @Override
     public void utilizzaAbilita() {

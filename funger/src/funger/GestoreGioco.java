@@ -14,13 +14,16 @@ public class GestoreGioco {
     private Party party;
     private Mappa mappa;
     
+    public GestoreGioco(){
+    }
+    
     /**
-     * 
+     * genera mappa e party
      * @param leader leader del party
      */
-    public GestoreGioco(Giocatore leader){
+    public void inizializza(Giocatore leader){
         party = new Party(leader, this);
-        mappa = GestoreMappa.generaMappa();
+        mappa = GestoreMappa.generaMappa(this);
     }
     
     /**

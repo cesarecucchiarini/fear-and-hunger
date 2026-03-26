@@ -19,8 +19,8 @@ public class GestoreMappa {
      * 
      * @return mappa generata con inizio, fine, un percorso che porta alla fine, e stanze casuali
      */
-    public static Mappa generaMappa(){
-        GestoreFile.leggiCreabili();
+    public static Mappa generaMappa(GestoreGioco g){
+        GestoreFile.leggiCreabili(g);
         Mappa mappa = new Mappa(grandezzaMappa);
         
         int[][] posizioni = inizializzaMappa(mappa);

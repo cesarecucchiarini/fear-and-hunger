@@ -8,6 +8,10 @@ package funger;
  *
  * @author cucchiarini.cesare
  */
-public class Nemico implements Creabile{
+public abstract class Nemico extends Giocabile implements Creabile{
+
+    public Nemico(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+        super(nome, path, vita, danno, gestoreGioco);
+    }
     
 }

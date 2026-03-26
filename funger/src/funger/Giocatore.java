@@ -13,22 +13,15 @@ public abstract class Giocatore extends Giocabile implements Creabile{
     private int mente;
     private OggettoEquipaggiabile oggettoOffensivo = null;
     private OggettoEquipaggiabile oggettoDifensivo = null;
-    private GestoreGioco gestoreGioco;
 
-    public Giocatore(String nome, String path) {
-        super(nome, path);
+    public Giocatore(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+        super(nome, path, vita, danno, gestoreGioco);
         this.fame = 100;
         this.mente = 100;
     }
-    
-    /**
-     * 
-     * il danno viene aumentato dalla stat dell'oggetto offensivo
-     * @return danno finale
-     */
+
     @Override
-    public int attacca(){
-        return getDanno() + (oggettoOffensivo != null ? oggettoOffensivo.getStatPrincipale() : 0);
+    public void attacca(){
     }
     
     /**

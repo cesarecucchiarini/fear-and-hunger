@@ -5,44 +5,56 @@
 package funger;
 
 import java.io.*;
+import java.util.Map;
 
 /**
  *
  * @author cucchiarini.cesare
  */
 public class GestoreFile {
+    
+    private static Map<String, CharacterFactory> CHARACTER_FACTORIES = Map.of(
+                "cavaliere", Cavaliere::new,
+                "mercenario", Mercenario::new,
+                "vichingo", Vichingo::new,
+                "necromante", Necromante::new,
+                "ragazza", Ragazza::new,
+                "moonless", Moonless::new,
+                "demonchild", Demonchild::new,
+                "maneba", Maneba::new,
+                "trotur", Trotur::new,
+                "guardia", Guardia::new
+            );
+    private static GestoreGioco gestoreGioco;
+    
     /**
      * legge i file degli oggetti creabili e li aggiunge al gestore dei creabili
      */
-    public static void leggiCreabili(){
+    public static void leggiCreabili(GestoreGioco g){
+        gestoreGioco = g;
         leggiGiocatori();
         leggiOggetti();
+        leggiNemici();
     }
     
     /**
      * legge il file dei giocatori e aggiunge i giocatori al gestore dei creabili
      */
-    public static void leggiGiocatori(){
+    public static void leggiGiocatori(){  
         try(BufferedReader r = new BufferedReader(new FileReader("creabili/giocatori.txt"))){
-            Creabile c = null;
             String line;
             String[] split;
             GestoreCreabili.aggiungiProbabilita(Integer.valueOf(r.readLine()));
+            
             while((line = r.readLine()) != null){
                 split = line.split(",");
-                
-                switch(split[0]){
-                    case "cavaliere" -> {c = (Creabile)new Cavaliere(split[1], split[0]+".png");}
-                    case "mercenario"-> {c = (Creabile)new Mercenario(split[1], split[0]+".png");}
-                    case "vichingo"-> {c = (Creabile)new Vichingo(split[1], split[0]+".png");}
-                    case "necromante" -> {c = (Creabile)new Necromante(split[1], split[0]+".png");}
-                    case "ragazza" -> {c = (Creabile)new Ragazza(split[1], split[0]+".png");}
-                    case "moonless" -> {c = (Creabile)new Moonless(split[1], split[0]+".png");}
-                    case "demonchild" -> {c = (Creabile)new Demonchild(split[1], split[0]+".png");}
-                }
-                
-                if(c != null)
+                String type = split[0];
+
+                CharacterFactory factory = CHARACTER_FACTORIES.get(type);
+                if (factory != null) {
+                    Creabile c = factory.createGiocatore(split[1], type + ".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), gestoreGioco);
                     GestoreCreabili.aggiungiCreabile(c);
+                }
             }
         }
         catch(IOException e){}
@@ -62,24 +74,45 @@ public class GestoreFile {
             
             while((line = r.readLine()) != null){
                 split = line.split(",");
-                if(split.length == 4){
-                    switch(split[3]){
-                        case "curativo" -> {tipoConsumabile = TipoOggettoConsumabile.CURATIVO;}
-                        case "mentale" -> {tipoConsumabile = TipoOggettoConsumabile.MENTALE;}
-                        case "commestibile" -> {tipoConsumabile = TipoOggettoConsumabile.COMMESTIBILE;}
-                    }
-                    c = (Creabile)new OggettoConsumabile(split[1], split[0]+".png", Integer.parseInt(split[2]), tipoConsumabile);
+                if(split[0].equals("oggettoConsumabile")){
+                    tipoConsumabile = TipoOggettoConsumabile.valueOf(split[4].toUpperCase());
+                    c = (Creabile)new OggettoConsumabile(split[2], split[1]+".png", Integer.parseInt(split[3]), tipoConsumabile);
                 }
                 else{
-                    switch(split[4]){
-                    case "offensivo" -> {tipoEquipaggiabile = TipoOggettoEquipaggiabile.OFFENSIVO;}
-                    case "difensivo" -> {tipoEquipaggiabile = TipoOggettoEquipaggiabile.DIFENSIVO;}                
-                    }
-                    c = (Creabile)new OggettoEquipaggiabile(split[1], Integer.parseInt(split[2]), Integer.parseInt(split[3]), tipoEquipaggiabile, split[0]+".png");
+                    tipoEquipaggiabile = TipoOggettoEquipaggiabile.valueOf(split[5].toUpperCase());
+                    c = (Creabile)new OggettoEquipaggiabile(split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile, split[1]+".png");
                 }
                 GestoreCreabili.aggiungiCreabile(c);
             }
         }
         catch(IOException e){}
+    }
+    
+    /**
+     * legge il file dei giocatori e aggiunge i giocatori al gestore dei creabili
+     */
+    public static void leggiNemici(){  
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/nemici.txt"))){
+            String line;
+            String[] split;
+            GestoreCreabili.aggiungiProbabilita(Integer.valueOf(r.readLine()));
+            
+            while((line = r.readLine()) != null){
+                split = line.split(",");
+                String type = split[0];
+
+                CharacterFactory factory = CHARACTER_FACTORIES.get(type);
+                if (factory != null) {
+                    Creabile c = factory.createGiocatore(split[1], type + ".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), gestoreGioco);
+                    GestoreCreabili.aggiungiCreabile(c);
+                }
+            }
+        }
+        catch(IOException e){}
+    }
+    
+    @FunctionalInterface
+    interface CharacterFactory {
+        Creabile createGiocatore(String name, String path, int vita, int danno, GestoreGioco gestoreGioco);
     }
 }

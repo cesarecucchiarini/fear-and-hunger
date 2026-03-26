@@ -10,9 +10,13 @@ package funger;
  */
 public class Demonchild extends Giocatore{
 
-    public Demonchild(String nome, String path) {
-        super(nome, path);
+    public Demonchild(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
+        super(nome, path, vita, danno, gestoreGioco);
     }
+
+    
+
+    
 
     @Override
     public void utilizzaAbilita() {

@@ -8,7 +8,7 @@ direction TB
 	    -fame : int
 	    -mente : int
 	    +Giocatore(nome : String, path : String)
-	    +attacca() int
+	    +attacca()
 	    +utilizzaAbilita()*
 	    +utilizzaOggetto(ogg : Oggetto)
 	    +muovi()
@@ -114,7 +114,8 @@ direction TB
     class GestoreGioco {
 	    -posizione : int[]
 	    -tipoCella : TipoCella
-	    +GestoreGioco(leader : Giocatore,logger : Logger, mappa : Mappa)
+	    +GestoreGioco()
+		+inizializza(leader : Giocatore, logger : Logger)
 	    +muovi(movX : int, movY : int)
 	    +interazioneCreabile()
 	    +iniziaCombattimento()
@@ -168,7 +169,7 @@ direction TB
 	    -grandezzaMappa : int$
 		-rnd : Random
 		-idSet : Integer[]
-	    +generaMappa(idSet1 : Integer[])$
+	    +generaMappa(g : GestoreGioco)$
 	    +inizializzaMappa(mappa : Mappa) int[][]$
 	    +generaPercorso(mappa : Mappa, posInizio : int[], posFine : int[])$
 	    +generaCelleCasuali(mappa : Mappa)$
@@ -178,15 +179,15 @@ direction TB
     }
 
     class Maneba {
-	    +attacca() int
+	    +attacca()
     }
 
     class Guardia {
-	    +attacca() int
+	    +attacca()
     }
 
     class Trotur {
-	    +attacca() int
+	    +attacca()
     }
 
     class Logger {
@@ -202,7 +203,7 @@ direction TB
 	    -sprite : ImageIcon
 	    -nome : String
 	    +Giocabile(nome : String, path : String)
-	    +attacca() int*
+	    +attacca()*
 	    +schiva() boolean
 	    +getDanno() int
 	    +getAgilita() int
