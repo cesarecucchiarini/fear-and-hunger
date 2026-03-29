@@ -6,6 +6,11 @@ package funger;
 
 import java.awt.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.*;
 
 /**
@@ -18,31 +23,71 @@ public class FormScelta extends javax.swing.JFrame {
 
     
     private GestoreGioco gestoreGioco;
+    private HashMap<Giocatore, String> mappaPersonaggi = new HashMap<>();
     /**
      * Creates new form FormScelta
      */
     public FormScelta() {
         initComponents();
         gestoreGioco = new GestoreGioco();
+        GestoreFile.setGestoreGioco(gestoreGioco);
         this.setLayout(new BorderLayout());
         
+        generaScelta();
+        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setVisible(true);
+    }
+    
+    public void generaScelta(){
+        mappaPersonaggi = GestoreFile.leggiInizio();
         JPanel panelScelta = new JPanel();
         panelScelta.setBorder(BorderFactory.createEmptyBorder(10,30,10,30));
-        panelScelta.setLayout(new GridLayout(1, 4, 10, 0));        
-        for(int i = 0; i < 4; i++){
+        panelScelta.setLayout(new GridLayout(1, 4, 10, 0));
+        
+        for(Map.Entry<Giocatore, String> entry : mappaPersonaggi.entrySet()){
             JPanel p = new JPanel();
             p.setBorder(BorderFactory.createLineBorder(Color.black));
             p.setLayout(new BorderLayout());
-            p.add(new JLabel("Personaggio"), BorderLayout.CENTER);
-            p.add(new JButton("scegli"), BorderLayout.SOUTH);
+            
+            p.add(new JLabel(entry.getKey().getSprite()), BorderLayout.CENTER);
+            
+            JButton bottoneScelta = new JButton("Scegli");         
+            bottoneScelta.setAlignmentX(CENTER_ALIGNMENT);
+            bottoneScelta.setFont(bottoneScelta.getFont().deriveFont(20.0f));
+            
+            bottoneScelta.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    gestoreGioco.inizializza(entry.getKey());
+                }
+            });
+            
+            JButton bottoneInfo = new JButton("Info");
+            bottoneInfo.setAlignmentX(CENTER_ALIGNMENT);
+            bottoneInfo.setFont(bottoneScelta.getFont());
+            
+            bottoneInfo.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    JOptionPane.showMessageDialog(null, entry.getValue());
+                }
+            });
+             
+            JPanel panelBottoni = new JPanel();
+            panelBottoni.setLayout(new BoxLayout(panelBottoni, BoxLayout.Y_AXIS));
+            panelBottoni.add(bottoneScelta);
+            panelBottoni.add(bottoneInfo);
+            panelBottoni.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+            
+            p.add(panelBottoni, BorderLayout.SOUTH);         
             panelScelta.add(p);
         }
         panelScelta.setBackground(Color.red);
         
         this.add(panelScelta, BorderLayout.CENTER);
-        this.setVisible(true);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

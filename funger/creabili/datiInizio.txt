@@ -1,0 +1,8 @@
+necromante,Enki,100,15
+necromante
+vichingo,Ragnvalrd,100,15
+vichingo
+mercenario,cahara,100,15
+mercenario
+cavaliere,D'Arc,100,15
+cavaliere

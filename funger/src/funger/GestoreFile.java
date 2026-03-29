@@ -5,6 +5,7 @@
 package funger;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -26,12 +27,15 @@ public class GestoreFile {
                 "guardia", Guardia::new
             );
     private static GestoreGioco gestoreGioco;
-    
+
+    public static void setGestoreGioco(GestoreGioco gestoreGioco) {
+        GestoreFile.gestoreGioco = gestoreGioco;
+    }
+
     /**
      * legge i file degli oggetti creabili e li aggiunge al gestore dei creabili
      */
-    public static void leggiCreabili(GestoreGioco g){
-        gestoreGioco = g;
+    public static void leggiCreabili(){
         leggiGiocatori();
         leggiOggetti();
         leggiNemici();
@@ -109,6 +113,25 @@ public class GestoreFile {
             }
         }
         catch(IOException e){}
+    }
+    
+    public static HashMap<Giocatore, String> leggiInizio(){
+        HashMap<Giocatore, String> mappa = new HashMap<>();
+        try(BufferedReader r = new BufferedReader(new FileReader("creabili/datiInizio.txt"))){
+            String line;
+            String[] split;
+            
+            while((line = r.readLine()) != null){
+                split = line.split(",");
+                String type = split[0];
+
+                CharacterFactory factory = CHARACTER_FACTORIES.get(type);
+                mappa.put((Giocatore) factory.createGiocatore(split[1], type + ".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), gestoreGioco), r.readLine());
+            }
+        }
+        catch(IOException e){ System.out.println(e.getMessage());}
+        
+        return mappa;
     }
     
     @FunctionalInterface

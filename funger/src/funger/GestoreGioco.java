@@ -23,7 +23,7 @@ public class GestoreGioco {
      */
     public void inizializza(Giocatore leader){
         party = new Party(leader, this);
-        mappa = GestoreMappa.generaMappa(this);
+        mappa = GestoreMappa.generaMappa();
     }
     
     /**
