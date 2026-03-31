@@ -49,10 +49,18 @@ public class GestoreGioco {
         }        
     }
     
+    /**
+     * 
+     * @return lista dei giocabili del party
+     */
     public ArrayList<Giocabile> getParty(){
         return party.getPersonaggi();
     }
     
+    /**
+     * 
+     * @return numero di membri del party
+     */
     public int getGrandezzaParty(){
         return party.getPersonaggi().size();
     }

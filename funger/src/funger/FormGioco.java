@@ -34,6 +34,9 @@ public class FormGioco extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
+    /**
+     * crea e aggiunge al frame il panel che mostra cosa sta accandendo nella stanza
+     */
     public void creaPanelGioco(){
         panelGioco = new JPanel();
         panelGioco.setLayout(new GridLayout(1, 2));
@@ -45,12 +48,18 @@ public class FormGioco extends javax.swing.JFrame {
         this.add(panelGioco, BorderLayout.CENTER);
     }
     
+    /**
+     * aggiorna le immagini nel panel del gioco
+     */
     public void aggiornaPanelGioco(){
         panelGioco.removeAll();
         aggiornaPanelParty();
         aggiornaPanelCreabile();
     }
     
+    /**
+     * aggiorna le immagini nel panel del party
+     */
     public void aggiornaPanelParty(){
         JPanel panelParty = new JPanel();
         panelParty.setOpaque(false);
@@ -63,6 +72,9 @@ public class FormGioco extends javax.swing.JFrame {
         panelGioco.add(panelParty);
     }
     
+    /**
+     * aggiorna le pagine nel panel del creabile
+     */
     public void aggiornaPanelCreabile(){
         JPanel panelCreabile = new JPanel();
         panelCreabile.setOpaque(false);
@@ -73,30 +85,36 @@ public class FormGioco extends javax.swing.JFrame {
         panelGioco.add(panelCreabile);
     }
     
+    /**
+     * crea il panel laterale che mostra vari bottoni e log
+     */
     public void creaPanelLaterale(){
         panelLaterale = new JPanel();
         panelLaterale.setOpaque(false);
         panelLaterale.setLayout(new GridLayout(2, 1));
         
-        aggiornaPanelLaterale();
+        panelLaterale.removeAll();
+        creaTextArea();
+        creaPanelBottoni();
         
         panelLaterale.setBorder(BorderFactory.createLineBorder(Color.black));
         panelLaterale.setPreferredSize(new Dimension(300, 0));
         this.add(panelLaterale, BorderLayout.EAST);
     }
     
-    public void aggiornaPanelLaterale(){
-        panelLaterale.removeAll();
-        creaTextArea();
-        creaPanelBottoni();
-    }
-    
+    /**
+     * crea la textArea che funziona da logger e la passa alla classe Logger
+     */
     public void creaTextArea(){
         JTextArea textArea = new JTextArea();
         textArea.append("Log");
         panelLaterale.add(textArea);
+        Logger.assegnaTextArea(textArea);
     }
     
+    /**
+     * crea il panel contenente i bottoni di inventario, mappa e informazioni
+     */
     public void creaPanelBottoni(){
         JPanel panelBottoni = new JPanel();
         panelBottoni.setOpaque(false);

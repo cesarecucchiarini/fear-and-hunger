@@ -13,10 +13,18 @@ import javax.swing.JTextArea;
 public class Logger {
     private static JTextArea textArea;
 
+    /**
+     * 
+     * @param textArea textArea da assegnare al logger per scrivere le informazioni
+     */
     public static void assegnaTextArea(JTextArea textArea) {
         Logger.textArea = textArea;
     }
     
+    /**
+     * 
+     * @param msg messaggio da scrivere sul log
+     */
     public static void scriviLog(String msg){
         textArea.append(msg);
     }

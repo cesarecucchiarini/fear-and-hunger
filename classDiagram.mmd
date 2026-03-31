@@ -123,6 +123,8 @@ direction TB
 	    +trovaOggetto()
 	    +trovaAlleato()
 	    +finePartita()
+		+getParty() : ArrayList~Giocabile~
+		+getLunghezzaParty() : int
     }
 
     class Mappa {
@@ -248,7 +250,16 @@ direction TB
 	}
 	
 	class FormGioco{
-	
+		-gestoreGioco : GestoreGioco
+		-panelGioco : JPanel
+		-panelLaterale : JPanel
+		+FormGioco(gestoreGioco : GestoreGioco)
+		+aggiornaPanelGioco()
+		+creaPanelGioco()
+		+aggiornaPanelParty()
+		+aggiornaPanelCreabile()
+		+creaPanelLaterale()
+		+creaPanelBottoni()
 	}
 
 	<<abstract>> Oggetto

@@ -22,6 +22,7 @@ public class FormScelta extends javax.swing.JFrame {
     
     private GestoreGioco gestoreGioco;
     private HashMap<Giocatore, String> mappaPersonaggi = new HashMap<>();
+    
     /**
      * Creates new form FormScelta
      */
