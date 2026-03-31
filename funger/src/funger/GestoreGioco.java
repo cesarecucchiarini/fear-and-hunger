@@ -4,6 +4,8 @@
  */
 package funger;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -45,5 +47,13 @@ public class GestoreGioco {
                 party.rimuoviMembro(g);
             }
         }        
+    }
+    
+    public ArrayList<Giocabile> getParty(){
+        return party.getPersonaggi();
+    }
+    
+    public int getGrandezzaParty(){
+        return party.getPersonaggi().size();
     }
 }

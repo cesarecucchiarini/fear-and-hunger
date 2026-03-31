@@ -12,13 +12,14 @@ import javax.swing.JFrame;
  */
 public class GestoreForm {
     private static JFrame form;
+    private static GestoreGioco gestoreGioco = new GestoreGioco();
     
     public static void sceltaPersonaggio(){
-        form = new FormScelta();
+        form = new FormScelta(gestoreGioco);
     }
     
     public static void iniziaGioco(){
         form.dispose();
-        form = new FormGioco();
+        form = new FormGioco(gestoreGioco);
     }
 }

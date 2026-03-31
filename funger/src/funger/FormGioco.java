@@ -16,6 +16,8 @@ public class FormGioco extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormGioco.class.getName());
     
     private GestoreGioco gestoreGioco;
+    private JPanel panelGioco;
+    private JPanel panelLaterale;
     /**
      * Creates new form FormGioco
      */
@@ -26,18 +28,94 @@ public class FormGioco extends javax.swing.JFrame {
         this.setLayout(new BorderLayout());
         
         creaPanelGioco();
+        creaPanelLaterale();
         
+        this.getContentPane().setBackground(Color.red);
         this.setVisible(true);
     }
     
     public void creaPanelGioco(){
-        JPanel panelGioco = new JPanel();
-        panelGioco.setLayout(new GridLayout());
+        panelGioco = new JPanel();
+        panelGioco.setLayout(new GridLayout(1, 2));
         
+        aggiornaPanelGioco();
+        
+        panelGioco.setOpaque(false);
+        panelGioco.setBorder(BorderFactory.createLineBorder(Color.black));
+        this.add(panelGioco, BorderLayout.CENTER);
+    }
+    
+    public void aggiornaPanelGioco(){
+        panelGioco.removeAll();
+        aggiornaPanelParty();
+        aggiornaPanelCreabile();
+    }
+    
+    public void aggiornaPanelParty(){
         JPanel panelParty = new JPanel();
+        panelParty.setOpaque(false);
+        panelParty.setLayout(new GridLayout(1, gestoreGioco.getGrandezzaParty()));
+        
+        for(Giocabile g : gestoreGioco.getParty()){
+            panelParty.add(new JLabel("party"));
+        }
         
         panelGioco.add(panelParty);
-        this.add(panelGioco, BorderLayout.CENTER);
+    }
+    
+    public void aggiornaPanelCreabile(){
+        JPanel panelCreabile = new JPanel();
+        panelCreabile.setOpaque(false);
+        panelCreabile.setLayout(new BoxLayout(panelCreabile, BoxLayout.X_AXIS));
+        
+        panelCreabile.add(new JLabel("creabile"));
+        
+        panelGioco.add(panelCreabile);
+    }
+    
+    public void creaPanelLaterale(){
+        panelLaterale = new JPanel();
+        panelLaterale.setOpaque(false);
+        panelLaterale.setLayout(new GridLayout(2, 1));
+        
+        aggiornaPanelLaterale();
+        
+        panelLaterale.setBorder(BorderFactory.createLineBorder(Color.black));
+        panelLaterale.setPreferredSize(new Dimension(300, 0));
+        this.add(panelLaterale, BorderLayout.EAST);
+    }
+    
+    public void aggiornaPanelLaterale(){
+        panelLaterale.removeAll();
+        creaTextArea();
+        creaPanelBottoni();
+    }
+    
+    public void creaTextArea(){
+        JTextArea textArea = new JTextArea();
+        textArea.append("Log");
+        panelLaterale.add(textArea);
+    }
+    
+    public void creaPanelBottoni(){
+        JPanel panelBottoni = new JPanel();
+        panelBottoni.setOpaque(false);
+        panelBottoni.setLayout(new BoxLayout(panelBottoni, BoxLayout.Y_AXIS));
+        
+        JButton bottoneMappa = new JButton("Mappa");
+        bottoneMappa.setAlignmentX(CENTER_ALIGNMENT);
+        panelBottoni.add(bottoneMappa);
+        
+        JButton bottoneInventario = new JButton("Inventario");
+        bottoneInventario.setAlignmentX(CENTER_ALIGNMENT);
+        panelBottoni.add(bottoneInventario);
+        
+        JButton bottoneInfo = new JButton("?");
+        bottoneInfo.setAlignmentX(CENTER_ALIGNMENT);
+        panelBottoni.add(bottoneInfo);
+        
+        panelBottoni.setBorder(BorderFactory.createLineBorder(Color.black));
+        panelLaterale.add(panelBottoni, BorderLayout.EAST);
     }
     
     /**
@@ -65,30 +143,6 @@ public class FormGioco extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new FormGioco().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
