@@ -4,7 +4,6 @@
  */
 package funger;
 
-import java.util.HashMap;
 
 /**
  *
@@ -15,6 +14,7 @@ public class GestoreGioco {
     private Mappa mappa;
     
     public GestoreGioco(){
+        GestoreFile.leggiCreabili();
     }
     
     /**

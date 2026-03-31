@@ -231,9 +231,23 @@ direction TB
 		+leggiCreabili()$
 		+leggiGiocatori()$
 		+leggiOggetti()$
+		+setGestoreGioco(gestoreGioco : GestoreGioco)$
 	}
 	
 	class FormScelta{
+		-mappaPersonaggi : HashMap~Giocatore, String~
+		-gestoreGioco : GestoreGioco
+		+FormScelta()
+		+generaScelta()
+	}
+	
+	class GestoreForm{
+		-form : JFrame$
+		+iniziaGioco()$
+		+sceltaGioco()$
+	}
+	
+	class FormGioco{
 	
 	}
 
@@ -278,3 +292,4 @@ direction TB
     GestoreGioco "1" --> "1" Creabile : -creabileCella
     Nemico --|> Giocabile
     Giocabile <--> GestoreGioco
+	GestoreGioco <.. GestoreFile : -gestoreGioco

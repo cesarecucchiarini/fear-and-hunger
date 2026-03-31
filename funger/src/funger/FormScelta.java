@@ -5,12 +5,10 @@
 package funger;
 
 import java.awt.*;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import javax.swing.*;
 
 /**
@@ -60,6 +58,7 @@ public class FormScelta extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     gestoreGioco.inizializza(entry.getKey());
+                    GestoreForm.iniziaGioco();
                 }
             });
             
