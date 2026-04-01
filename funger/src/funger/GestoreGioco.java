@@ -64,4 +64,8 @@ public class GestoreGioco {
     public int getGrandezzaParty(){
         return party.getPersonaggi().size();
     }
+    
+    public void aggiungiMembro(Giocabile membro){
+        party.aggiungiMembro(membro);
+    }
 }

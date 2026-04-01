@@ -20,6 +20,7 @@ public class FormGioco extends javax.swing.JFrame {
     private JPanel panelLaterale;
     /**
      * Creates new form FormGioco
+     * @param gestoreGioco gestore da passare agli oggetti
      */
     public FormGioco(GestoreGioco gestoreGioco) {
         initComponents();
@@ -44,7 +45,6 @@ public class FormGioco extends javax.swing.JFrame {
         aggiornaPanelGioco();
         
         panelGioco.setOpaque(false);
-        panelGioco.setBorder(BorderFactory.createLineBorder(Color.black));
         this.add(panelGioco, BorderLayout.CENTER);
     }
     
@@ -53,20 +53,22 @@ public class FormGioco extends javax.swing.JFrame {
      */
     public void aggiornaPanelGioco(){
         panelGioco.removeAll();
-        aggiornaPanelParty();
-        aggiornaPanelCreabile();
+        creaPanelParty();
+        creaPanelCreabile();
     }
     
     /**
      * aggiorna le immagini nel panel del party
      */
-    public void aggiornaPanelParty(){
+    public void creaPanelParty(){
         JPanel panelParty = new JPanel();
         panelParty.setOpaque(false);
         panelParty.setLayout(new GridLayout(1, gestoreGioco.getGrandezzaParty()));
         
         for(Giocabile g : gestoreGioco.getParty()){
-            panelParty.add(new JLabel("party"));
+            JLabel immagine = new JLabel(g.getNome());
+            immagine.setHorizontalAlignment(JLabel.CENTER);
+            panelParty.add(immagine);
         }
         
         panelGioco.add(panelParty);
@@ -75,12 +77,14 @@ public class FormGioco extends javax.swing.JFrame {
     /**
      * aggiorna le pagine nel panel del creabile
      */
-    public void aggiornaPanelCreabile(){
+    public void creaPanelCreabile(){
         JPanel panelCreabile = new JPanel();
         panelCreabile.setOpaque(false);
-        panelCreabile.setLayout(new BoxLayout(panelCreabile, BoxLayout.X_AXIS));
+        panelCreabile.setLayout(new BorderLayout());       
         
-        panelCreabile.add(new JLabel("creabile"));
+        JLabel immagine = new JLabel("creabile");
+        immagine.setHorizontalAlignment(JLabel.CENTER);
+        panelCreabile.add(immagine);
         
         panelGioco.add(panelCreabile);
     }
@@ -97,7 +101,6 @@ public class FormGioco extends javax.swing.JFrame {
         creaTextArea();
         creaPanelBottoni();
         
-        panelLaterale.setBorder(BorderFactory.createLineBorder(Color.black));
         panelLaterale.setPreferredSize(new Dimension(300, 0));
         this.add(panelLaterale, BorderLayout.EAST);
     }
@@ -116,23 +119,34 @@ public class FormGioco extends javax.swing.JFrame {
      * crea il panel contenente i bottoni di inventario, mappa e informazioni
      */
     public void creaPanelBottoni(){
+        Font font = new Font("Dialog", 1, 20);
         JPanel panelBottoni = new JPanel();
         panelBottoni.setOpaque(false);
         panelBottoni.setLayout(new BoxLayout(panelBottoni, BoxLayout.Y_AXIS));
         
+        panelBottoni.add(Box.createVerticalGlue());
+        
         JButton bottoneMappa = new JButton("Mappa");
+        bottoneMappa.setFont(font);
         bottoneMappa.setAlignmentX(CENTER_ALIGNMENT);
         panelBottoni.add(bottoneMappa);
         
+        panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));
+        
         JButton bottoneInventario = new JButton("Inventario");
+        bottoneInventario.setFont(font);
         bottoneInventario.setAlignmentX(CENTER_ALIGNMENT);
         panelBottoni.add(bottoneInventario);
         
+        panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));
+        
         JButton bottoneInfo = new JButton("?");
+        bottoneInfo.setFont(font);
         bottoneInfo.setAlignmentX(CENTER_ALIGNMENT);
         panelBottoni.add(bottoneInfo);
         
-        panelBottoni.setBorder(BorderFactory.createLineBorder(Color.black));
+        panelBottoni.add(Box.createVerticalGlue());
+        
         panelLaterale.add(panelBottoni, BorderLayout.EAST);
     }
     
