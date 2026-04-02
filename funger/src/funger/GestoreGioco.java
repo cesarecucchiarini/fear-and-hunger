@@ -14,6 +14,8 @@ import java.util.ArrayList;
 public class GestoreGioco {
     private Party party;
     private Mappa mappa;
+    private int[] posizione = new int[2];
+    private FormMappa formMappa;
     
     public GestoreGioco(){
         GestoreFile.leggiCreabili();
@@ -46,6 +48,7 @@ public class GestoreGioco {
             if(g.controllaMorte()){
                 party.rimuoviMembro(g);
             }
+            formMappa.aggiornaMappaScoperta();
         }        
     }
     
@@ -67,5 +70,31 @@ public class GestoreGioco {
     
     public void aggiungiMembro(Giocabile membro){
         party.aggiungiMembro(membro);
+    }
+    
+    public int getGrandezzaMappa(){
+        return mappa.getRighe();
+    }
+    
+    public TipoCella getCella(){
+        return mappa.getTipoCella(posizione[0], posizione[1]);
+    }
+    
+    public TipoCella[] getCelleAdiacenti(){
+        TipoCella[] tipi = new TipoCella[5];
+        tipi[0] = mappa.getTipoCella(posizione[0]+1, posizione[1]);
+        tipi[1] = mappa.getTipoCella(posizione[0], posizione[1]-1);
+        tipi[2] = mappa.getTipoCella(posizione[0], posizione[1]);
+        tipi[3] = mappa.getTipoCella(posizione[0], posizione[1]+1);
+        tipi[4] = mappa.getTipoCella(posizione[0]-1, posizione[1]);
+        return tipi;
+    }
+    
+    public int[] getPosizione(){
+        return posizione;
+    }
+    
+    public void setFormMappa(FormMappa formMappa){
+        this.formMappa = formMappa;
     }
 }

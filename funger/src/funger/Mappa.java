@@ -125,4 +125,8 @@ public class Mappa {
     public boolean cellaInizializzata(int x, int y){
         return griglia[x+1][y+1] != null;
     }
+    
+    public int getRighe(){
+        return righe;
+    }
 }

@@ -5,6 +5,8 @@
 package funger;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 /**
@@ -129,6 +131,12 @@ public class FormGioco extends javax.swing.JFrame {
         JButton bottoneMappa = new JButton("Mappa");
         bottoneMappa.setFont(font);
         bottoneMappa.setAlignmentX(CENTER_ALIGNMENT);
+        bottoneMappa.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    GestoreForm.apriMappa();
+                }
+            });
         panelBottoni.add(bottoneMappa);
         
         panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));

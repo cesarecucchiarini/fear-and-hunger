@@ -12,6 +12,7 @@ import javax.swing.JFrame;
  */
 public class GestoreForm {
     private static JFrame form;
+    private static FormMappa formMappa;
     private static GestoreGioco gestoreGioco = new GestoreGioco();
     
     /**
@@ -26,6 +27,12 @@ public class GestoreForm {
      */
     public static void iniziaGioco(){
         form.dispose();
+        formMappa = new FormMappa(gestoreGioco);
+        gestoreGioco.setFormMappa(formMappa);
         form = new FormGioco(gestoreGioco);
+    }
+    
+    public static void apriMappa(){
+        formMappa.setVisible(true);
     }
 }
