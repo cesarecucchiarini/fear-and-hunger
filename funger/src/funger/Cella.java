@@ -9,9 +9,9 @@ package funger;
  * @author cucchiarini.cesare
  */
 public class Cella {
-    public final int VISITATA = 1;
-    public final int NON_VISITATA = 0;
-    public final int COMPLETATA = 2;
+    public static final int VISITATA = 1;
+    public static final int NON_VISITATA = 0;
+    public static final int COMPLETATA = 2;
     
     private TipoCella tipo;
     private int stato;

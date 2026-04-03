@@ -28,6 +28,8 @@ public class GestoreGioco {
     public void inizializza(Giocatore leader){
         party = new Party(leader, this);
         mappa = GestoreMappa.generaMappa();
+        posizione = GestoreMappa.getPosizioneInizio();
+        mappa.setStatoCella(posizione[0], posizione[1], Cella.COMPLETATA);
     }
     
     /**
@@ -43,13 +45,18 @@ public class GestoreGioco {
      * @param movY spostamento verticale
      */
     public void muovi(int movX, int movY){
-        for(Giocatore g : party.getGiocatori()){
-            g.muovi();
-            if(g.controllaMorte()){
-                party.rimuoviMembro(g);
+        if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO)){
+            for(Giocatore g : party.getGiocatori()){
+                g.muovi();
+                if(g.controllaMorte()){
+                    party.rimuoviMembro(g);
+                }
             }
-            formMappa.aggiornaMappaScoperta();
-        }        
+            posizione[0] += movX;
+            posizione[1] += movY;
+            mappa.setStatoCella(posizione[0], posizione[1], Cella.VISITATA);
+            GestoreForm.aggiornaGrigliaMappa();
+        }
     }
     
     /**
@@ -80,21 +87,23 @@ public class GestoreGioco {
         return mappa.getTipoCella(posizione[0], posizione[1]);
     }
     
-    public TipoCella[] getCelleAdiacenti(){
-        TipoCella[] tipi = new TipoCella[5];
-        tipi[0] = mappa.getTipoCella(posizione[0]+1, posizione[1]);
-        tipi[1] = mappa.getTipoCella(posizione[0], posizione[1]-1);
-        tipi[2] = mappa.getTipoCella(posizione[0], posizione[1]);
-        tipi[3] = mappa.getTipoCella(posizione[0], posizione[1]+1);
-        tipi[4] = mappa.getTipoCella(posizione[0]-1, posizione[1]);
-        return tipi;
-    }
-    
     public int[] getPosizione(){
         return posizione;
     }
     
     public void setFormMappa(FormMappa formMappa){
         this.formMappa = formMappa;
+    }
+    
+    public int getX(){
+        return posizione[0];
+    }
+    
+    public int getY(){
+        return posizione[1];
+    }
+    
+    public Mappa getMappa(){
+        return mappa;
     }
 }

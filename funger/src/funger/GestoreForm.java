@@ -30,9 +30,14 @@ public class GestoreForm {
         formMappa = new FormMappa(gestoreGioco);
         gestoreGioco.setFormMappa(formMappa);
         form = new FormGioco(gestoreGioco);
+        formMappa.aggiornaGrigliaMappa();
     }
     
     public static void apriMappa(){
-        formMappa.setVisible(true);
+        formMappa.mostraMappa();
+    }
+    
+    public static void aggiornaGrigliaMappa(){
+        formMappa.aggiornaGrigliaMappa();
     }
 }

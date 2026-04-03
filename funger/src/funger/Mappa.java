@@ -74,7 +74,7 @@ public class Mappa {
      * @param y posizione della cella
      * @return stato della cella
      */
-    public int getstatoCella(int x, int y){
+    public int getStatoCella(int x, int y){
         return griglia[x+1][y+1].getStato();
     }
     
@@ -94,7 +94,7 @@ public class Mappa {
      * @param x posizione della cella
      * @param y posizione della cella
      */
-    public void setStatoCella(int stato, int x, int y){
+    public void setStatoCella(int x, int y, int stato){
         griglia[x+1][y+1].setStato(stato);
     }
     

@@ -14,6 +14,7 @@ import java.util.Random;
 public class GestoreMappa {
     private static int grandezzaMappa = 10;
     private static Random rnd  = new Random();
+    private static int[] posizioneInizio = new int[2];
     
     /**
      * 
@@ -24,6 +25,7 @@ public class GestoreMappa {
         
         int[][] posizioni = inizializzaMappa(mappa);
         
+        posizioneInizio = posizioni[0];
         int[] posInizio = posizioni[0];
         int[] posFine = posizioni[1];
         
@@ -64,6 +66,7 @@ public class GestoreMappa {
         celle.add(posInizio);
         celle.add(posFine);
         int[] posAttuale = posInizio;
+        
         while((Math.abs(posAttuale[0] - posFine[0]) + Math.abs(posAttuale[1] - posFine[1])) != 1){
             if((posAttuale[0] - posFine[0] != 0)) 
                 posAttuale = new int[] {posAttuale[0] + ((posAttuale[0] - posFine[0]) < 0 ? 1 : -1), posAttuale[1]};
@@ -73,6 +76,7 @@ public class GestoreMappa {
             mappa.aggiungiCella(new Cella(TipoCella.VUOTO), posAttuale[0], posAttuale[1]);
             celle.add(posAttuale);
         }
+        
         return celle;
     }
     
@@ -144,5 +148,9 @@ public class GestoreMappa {
         }
         
         return c;
+    }
+    
+    public static int[] getPosizioneInizio(){
+        return posizioneInizio;
     }
 }

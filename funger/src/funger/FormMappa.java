@@ -4,8 +4,11 @@
  */
 package funger;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.util.Map;
+import javax.swing.*;
 
 /**
  *
@@ -16,7 +19,15 @@ public class FormMappa extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormMappa.class.getName());
 
     private GestoreGioco gestoreGioco;
-    private Mappa mappaScoperta;
+    private Mappa mappa;
+    private JPanel[][] grigliaPanel;
+    private Map<TipoCella, Color> mappaColori = Map.of(
+            TipoCella.MURO, Color.BLACK,
+            TipoCella.INIZIO, Color.GREEN,
+            TipoCella.FINE, Color.BLUE,
+            TipoCella.PIENO, Color.LIGHT_GRAY,
+            TipoCella.VUOTO, Color.LIGHT_GRAY
+        );
     /**
      * Creates new form FormMappa
      */
@@ -25,17 +36,50 @@ public class FormMappa extends javax.swing.JFrame {
         this.gestoreGioco = gestoreGioco;
         this.setSize(new Dimension(500, 500));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        mappaScoperta = new Mappa(gestoreGioco.getGrandezzaMappa());
+        
+        mappa = gestoreGioco.getMappa();
+        creaGrigliaMappa();
     }
     
-    public void aggiornaMappaScoperta(){
-        int[] posizione = gestoreGioco.getPosizione();
-        TipoCella[] tipi = gestoreGioco.getCelleAdiacenti();
-        mappaScoperta.aggiungiCella(new Cella(tipi[0]), posizione[0]+1, posizione[1]);
-        mappaScoperta.aggiungiCella(new Cella(tipi[1]), posizione[0], posizione[1]+1);
-        mappaScoperta.aggiungiCella(new Cella(tipi[2]), posizione[0], posizione[1]);
-        mappaScoperta.aggiungiCella(new Cella(tipi[3]), posizione[0], posizione[1]-1);
-        mappaScoperta.aggiungiCella(new Cella(tipi[4]), posizione[0]-1, posizione[1]);       
+    public void mostraMappa(){
+        aggiornaGrigliaMappa();
+        this.setVisible(true);
+    }
+    
+    public void creaGrigliaMappa(){
+        int righe = mappa.getRighe() + 2;
+        grigliaPanel = new JPanel[righe][righe];
+        this.setLayout(new GridLayout(righe, righe));
+
+        for(int i = 0; i < righe; i++){
+            for(int j = 0; j < righe; j++){
+                JPanel cella = new JPanel();
+                cella.setBorder(BorderFactory.createLineBorder(Color.black));
+                cella.setBackground(Color.DARK_GRAY);
+                grigliaPanel[i][j] = cella;
+                this.add(cella);
+            }
+        }
+    }
+    
+    public void aggiornaGrigliaMappa(){
+        int righe = mappa.getRighe();
+        
+        for(int x = 0; x < righe+1; x++){
+            for(int y = 0; y < righe+1; y++){
+                if(!mappa.cellaInizializzata(x, y))
+                    continue;
+                if(mappa.getStatoCella(x, y) != Cella.NON_VISITATA){
+                    grigliaPanel[x+1][y+1].setBackground(mappaColori.get(mappa.getTipoCella(x, y)));
+                    grigliaPanel[x][y+1].setBackground(mappaColori.get(mappa.getTipoCella(x-1, y)));
+                    grigliaPanel[x+2][y+1].setBackground(mappaColori.get(mappa.getTipoCella(x+1, y)));
+                    grigliaPanel[x+1][y].setBackground(mappaColori.get(mappa.getTipoCella(x, y-1)));
+                    grigliaPanel[x+1][y+2].setBackground(mappaColori.get(mappa.getTipoCella(x, y+1)));
+                }
+            }
+        }
+        
+        grigliaPanel[gestoreGioco.getX()+1][gestoreGioco.getY()+1].setBackground(Color.red);
     }
     /**
      * This method is called from within the constructor to initialize the form.
