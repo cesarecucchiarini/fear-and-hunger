@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author cucchiarini.cesare
  */
-public abstract class Giocabile {
+public abstract class Giocabile implements Cloneable{
     /**
      * vita del Giocabile
      */
@@ -108,5 +108,14 @@ public abstract class Giocabile {
     public void consumaOggetto(OggettoConsumabile oggetto){
         if(oggetto.getTipo().equals(TipoOggettoConsumabile.CURATIVO))
             guadagnaVita(oggetto.getStatPrincipale());
+    }
+    
+    @Override
+    public Object clone(){
+        try{
+            return super.clone();
+        }
+        catch(Exception e){}
+        return null;
     }
 }

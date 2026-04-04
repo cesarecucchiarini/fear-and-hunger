@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
  *
  * @author sergi
  */
-public abstract class Oggetto implements Creabile{
+public abstract class Oggetto implements Creabile, Cloneable{
     private String nome;
     private ImageIcon sprite;
 
@@ -27,5 +27,12 @@ public abstract class Oggetto implements Creabile{
         return sprite;
     }
     
-    
+    @Override
+    public Object clone(){
+        try{
+            return super.clone();
+        }
+        catch(Exception e){}
+        return null;
+    }
 }

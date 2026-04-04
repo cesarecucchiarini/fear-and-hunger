@@ -16,9 +16,12 @@ public class GestoreGioco {
     private Mappa mappa;
     private int[] posizione = new int[2];
     private FormMappa formMappa;
+    private boolean movimentoPossibile = true;
+    private Creabile creabileStanza;
     
     public GestoreGioco(){
         GestoreFile.leggiCreabili();
+        GestoreInput.setGestoreGioco(this);
     }
     
     /**
@@ -45,7 +48,7 @@ public class GestoreGioco {
      * @param movY spostamento verticale
      */
     public void muovi(int movX, int movY){
-        if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO)){
+        if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO) && movimentoPossibile){
             for(Giocatore g : party.getGiocatori()){
                 g.muovi();
                 if(g.controllaMorte()){
@@ -54,8 +57,21 @@ public class GestoreGioco {
             }
             posizione[0] += movX;
             posizione[1] += movY;
-            mappa.setStatoCella(posizione[0], posizione[1], Cella.VISITATA);
+            if(mappa.getStatoCella(posizione[0], posizione[1]) == Cella.NON_VISITATA)
+                mappa.setStatoCella(posizione[0], posizione[1], Cella.VISITATA);
             GestoreForm.aggiornaGrigliaMappa();
+            controllaStanza();
+        }
+    }
+    
+    public void controllaStanza(){
+        if(mappa.getTipoCella(posizione[0], posizione[1]).equals(TipoCella.PIENO) 
+                && mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
+            
+            creabileStanza = GestoreCreabili.getCreabile(mappa.getIdCreabileCella(posizione[0], posizione[1]));
+            GestoreForm.aggiornaPanelGioco();
+            if(creabileStanza instanceof Nemico)
+                movimentoPossibile = false;        
         }
     }
     
@@ -105,5 +121,13 @@ public class GestoreGioco {
     
     public Mappa getMappa(){
         return mappa;
+    }
+
+    void interagisci() {
+        if(mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
+            mappa.setStatoCella(posizione[0], posizione[1], Cella.COMPLETATA);
+            movimentoPossibile = true;
+            creabileStanza = null;
+        }
     }
 }

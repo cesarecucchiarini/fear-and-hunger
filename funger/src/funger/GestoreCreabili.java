@@ -63,7 +63,8 @@ public class GestoreCreabili {
      */
     public static Creabile getCreabile(String id){
         String[] split = id.split("_");
-        return mappaCreabili.get(split[0]).get(Integer.parseInt(split[1]));
+        Creabile c = (Creabile)mappaCreabili.get(split[0]).get(Integer.parseInt(split[1]));
+        return (Creabile) c.clone();
     }
     
     /**

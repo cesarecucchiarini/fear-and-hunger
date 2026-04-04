@@ -7,6 +7,7 @@ package funger;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
@@ -33,8 +34,10 @@ public class FormGioco extends javax.swing.JFrame {
         creaPanelGioco();
         creaPanelLaterale();
         
+        panelGioco.setFocusable(true);
         this.getContentPane().setBackground(Color.red);
         this.setVisible(true);
+        panelGioco.requestFocusInWindow();
     }
     
     /**
@@ -45,9 +48,24 @@ public class FormGioco extends javax.swing.JFrame {
         panelGioco.setLayout(new GridLayout(1, 2));
         
         aggiornaPanelGioco();
+        aggiungiListener();
         
         panelGioco.setOpaque(false);
         this.add(panelGioco, BorderLayout.CENTER);
+    }
+    
+    public void aggiungiListener() {
+        InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = this.getRootPane().getActionMap();
+
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "confermaAzione");
+
+        am.put("confermaAzione", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gestoreGioco.interagisci();
+            }
+        });
     }
     
     /**

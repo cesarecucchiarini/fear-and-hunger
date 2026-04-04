@@ -8,6 +8,6 @@ package funger;
  *
  * @author sergi
  */
-public interface Creabile {
-    
+public interface Creabile{
+    public Object clone();
 }

@@ -7,6 +7,7 @@ package funger;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.Map;
 import javax.swing.*;
 
@@ -25,7 +26,7 @@ public class FormMappa extends javax.swing.JFrame {
             TipoCella.MURO, Color.BLACK,
             TipoCella.INIZIO, Color.GREEN,
             TipoCella.FINE, Color.BLUE,
-            TipoCella.PIENO, Color.LIGHT_GRAY,
+            TipoCella.PIENO, Color.YELLOW,
             TipoCella.VUOTO, Color.LIGHT_GRAY
         );
     /**
@@ -39,6 +40,32 @@ public class FormMappa extends javax.swing.JFrame {
         
         mappa = gestoreGioco.getMappa();
         creaGrigliaMappa();
+        
+        aggiungiKeyListener();
+    }
+    
+    public void aggiungiKeyListener(){
+        InputMap im = this.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap am = this.getRootPane().getActionMap();
+
+        int[] keyCodes = {38, 40, 37, 39}; // Up, Down, Left, Right
+        String[] names = {"moveUp", "moveDown", "moveLeft", "moveRight"};
+
+        for (int i = 0; i < keyCodes.length; i++) {
+            final int keyCode = keyCodes[i];
+
+            im.put(KeyStroke.getKeyStroke(keyCode, 0), names[i]);
+
+            am.put(names[i], new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int[] mov = GestoreInput.getMappaMovimenti().get(keyCode);
+                    if (mov != null) {
+                        gestoreGioco.muovi(mov[0], mov[1]);
+                    }
+                }
+            });
+        }
     }
     
     public void mostraMappa(){
@@ -80,6 +107,9 @@ public class FormMappa extends javax.swing.JFrame {
         }
         
         grigliaPanel[gestoreGioco.getX()+1][gestoreGioco.getY()+1].setBackground(Color.red);
+        
+        this.revalidate();
+        this.repaint();
     }
     /**
      * This method is called from within the constructor to initialize the form.

@@ -35,9 +35,16 @@ public class GestoreForm {
     
     public static void apriMappa(){
         formMappa.mostraMappa();
+        formMappa.requestFocus();
     }
     
     public static void aggiornaGrigliaMappa(){
         formMappa.aggiornaGrigliaMappa();
+    }
+    
+    public static void aggiornaPanelGioco(){
+        formMappa.dispose();
+        FormGioco f = (FormGioco)form;
+        f.aggiornaPanelGioco();
     }
 }
