@@ -38,13 +38,25 @@ public class GestoreForm {
         formMappa.requestFocus();
     }
     
+    public static void chiudiMappa(){
+        formMappa.dispose();
+    }
+    
     public static void aggiornaGrigliaMappa(){
         formMappa.aggiornaGrigliaMappa();
     }
     
     public static void aggiornaPanelGioco(){
-        formMappa.dispose();
-        FormGioco f = (FormGioco)form;
-        f.aggiornaPanelGioco();
+        ((FormGioco)form).aggiornaPanelGioco();
+    }
+    
+    public static void apriCombattimento(){
+        form.dispose();
+        form = new FormCombattimento(gestoreGioco.getGestoreCombattimento());
+    }
+    
+    public static void chiudiCombattimento(){
+        form.dispose();
+        form = new FormGioco(gestoreGioco);
     }
 }

@@ -24,6 +24,10 @@ public abstract class Giocatore extends Giocabile implements Creabile{
     public void attacca(){
     }
     
+    public void guardia(){
+        
+    }
+    
     /**
      * 
      * il danno viene diminuito dalla stat dell'oggetto difensivo

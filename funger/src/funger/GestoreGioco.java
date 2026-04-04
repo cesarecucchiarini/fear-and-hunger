@@ -18,10 +18,12 @@ public class GestoreGioco {
     private FormMappa formMappa;
     private boolean movimentoPossibile = true;
     private Creabile creabileStanza;
+    private GestoreCombattimento gestoreCombattimento;
     
     public GestoreGioco(){
         GestoreFile.leggiCreabili();
         GestoreInput.setGestoreGioco(this);
+        gestoreCombattimento = new GestoreCombattimento(this);
     }
     
     /**
@@ -69,10 +71,11 @@ public class GestoreGioco {
                 && mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
             
             creabileStanza = GestoreCreabili.getCreabile(mappa.getIdCreabileCella(posizione[0], posizione[1]));
-            GestoreForm.aggiornaPanelGioco();
+            GestoreForm.chiudiMappa();
             if(creabileStanza instanceof Nemico)
-                movimentoPossibile = false;        
+                movimentoPossibile = false;
         }
+        GestoreForm.aggiornaPanelGioco();
     }
     
     /**
@@ -123,11 +126,22 @@ public class GestoreGioco {
         return mappa;
     }
 
-    void interagisci() {
+    public void interagisci() {
         if(mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
+            if(creabileStanza instanceof Nemico)
+                gestoreCombattimento.iniziaCombattimento(party.getPersonaggi(), (Nemico) creabileStanza);
             mappa.setStatoCella(posizione[0], posizione[1], Cella.COMPLETATA);
             movimentoPossibile = true;
-            creabileStanza = null;
         }
     }
+
+    public GestoreCombattimento getGestoreCombattimento() {
+        return gestoreCombattimento;
+    }
+
+    public Creabile getCreabileStanza() {
+        return creabileStanza;
+    }
+    
+    
 }

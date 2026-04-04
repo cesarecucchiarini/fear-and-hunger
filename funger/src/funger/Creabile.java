@@ -4,10 +4,16 @@
  */
 package funger;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author sergi
  */
 public interface Creabile{
     public Object clone();
+    
+    public String getNome();
+    
+    public ImageIcon getSprite();
 }

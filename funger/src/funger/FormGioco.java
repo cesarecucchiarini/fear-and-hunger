@@ -75,6 +75,9 @@ public class FormGioco extends javax.swing.JFrame {
         panelGioco.removeAll();
         creaPanelParty();
         creaPanelCreabile();
+        
+        panelGioco.revalidate();
+        panelGioco.repaint();
     }
     
     /**
@@ -102,10 +105,11 @@ public class FormGioco extends javax.swing.JFrame {
         panelCreabile.setOpaque(false);
         panelCreabile.setLayout(new BorderLayout());       
         
-        JLabel immagine = new JLabel("creabile");
-        immagine.setHorizontalAlignment(JLabel.CENTER);
-        panelCreabile.add(immagine);
-        
+        if(gestoreGioco.getCreabileStanza() != null){
+            JLabel immagine = new JLabel(gestoreGioco.getCreabileStanza().getNome());
+            immagine.setHorizontalAlignment(JLabel.CENTER);
+            panelCreabile.add(immagine);
+        }
         panelGioco.add(panelCreabile);
     }
     
@@ -131,7 +135,7 @@ public class FormGioco extends javax.swing.JFrame {
     public void creaTextArea(){
         JTextArea textArea = new JTextArea();
         textArea.append("Log");
-        panelLaterale.add(textArea);
+        panelLaterale.add(textArea, BorderLayout.CENTER);
         Logger.assegnaTextArea(textArea);
     }
     
@@ -173,7 +177,7 @@ public class FormGioco extends javax.swing.JFrame {
         
         panelBottoni.add(Box.createVerticalGlue());
         
-        panelLaterale.add(panelBottoni, BorderLayout.EAST);
+        panelLaterale.add(panelBottoni, BorderLayout.SOUTH);
     }
     
     /**
