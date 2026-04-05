@@ -12,12 +12,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -29,6 +31,8 @@ public class FormCombattimento extends javax.swing.JFrame {
 
     private GestoreCombattimento gestoreCombattimento;
     private JPanel panelCombattimento;
+    private ArrayList<JProgressBar> progressBars = new ArrayList();
+    private JButton[] bottoni = new JButton[3];
     /**
      * Creates new form FormCombattimento
      */
@@ -63,9 +67,23 @@ public class FormCombattimento extends javax.swing.JFrame {
         panelParty.setLayout(new GridLayout(1, gestoreCombattimento.getParty().size()));
         
         for(Giocabile g : gestoreCombattimento.getParty()){
+            JPanel panelPersonaggio = new JPanel();
+            panelPersonaggio.setLayout(new BorderLayout());
+            panelPersonaggio.setOpaque(false);
+            
             JLabel immagine = new JLabel(g.getNome());
             immagine.setHorizontalAlignment(JLabel.CENTER);
-            panelParty.add(immagine);
+            panelPersonaggio.add(immagine, BorderLayout.CENTER);
+            
+            JProgressBar barraVita = new JProgressBar(0, g.getVitaMax());
+            barraVita.setValue(g.getVita());
+            barraVita.setStringPainted(true);
+            barraVita.setPreferredSize(new Dimension(0, 75));
+            panelPersonaggio.add(barraVita, BorderLayout.NORTH);
+            
+            progressBars.add(barraVita);
+            
+            panelParty.add(panelPersonaggio);
         }
         
         panelCombattimento.add(panelParty);
@@ -78,9 +96,25 @@ public class FormCombattimento extends javax.swing.JFrame {
         
         JLabel immagine = new JLabel(gestoreCombattimento.getNemico().getNome());
         immagine.setHorizontalAlignment(JLabel.CENTER);
-        panelCreabile.add(immagine);
+        panelCreabile.add(immagine, BorderLayout.CENTER);
+        
+        JProgressBar barraVita = new JProgressBar(0, gestoreCombattimento.getNemico().getVitaMax());
+        barraVita.setValue(gestoreCombattimento.getNemico().getVita());
+        barraVita.setStringPainted(true);
+        barraVita.setPreferredSize(new Dimension(0, 75));
+        panelCreabile.add(barraVita, BorderLayout.NORTH);
+        
+        progressBars.add(barraVita);
         
         panelCombattimento.add(panelCreabile);
+    }
+    
+    public void aggiornaProgressBars(){
+        int counter = 0;
+        for(Giocabile g : gestoreCombattimento.getParty()){
+            progressBars.get(counter++).setValue(g.getVita());
+        }
+        progressBars.getLast().setValue(gestoreCombattimento.getNemico().getVita());
     }
     
     public void creaPanelBottoni(){
@@ -91,18 +125,19 @@ public class FormCombattimento extends javax.swing.JFrame {
         
         panelBottoni.add(Box.createHorizontalGlue());
         
-        JButton bottoneAttacca = new JButton("Attacca");
-        bottoneAttacca.setFont(font);
-        bottoneAttacca.setAlignmentY(CENTER_ALIGNMENT);
-        bottoneAttacca.addActionListener(new ActionListener(){
+        JButton bottoneAttacco = new JButton("Attacca");
+        bottoneAttacco.setFont(font);
+        bottoneAttacco.setAlignmentY(CENTER_ALIGNMENT);
+        bottoneAttacco.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
                     gestoreCombattimento.getGiocabileCorrente().attacca();
+                    GestoreForm.aggiornaProgressBars();
                     if(!gestoreCombattimento.controllaFineCombattimento())
                         gestoreCombattimento.cambiaTurno();
                 }
             });
-        panelBottoni.add(bottoneAttacca);
+        panelBottoni.add(bottoneAttacco);
         
         panelBottoni.add(Box.createRigidArea(new Dimension(50, 0)));
         
@@ -113,6 +148,7 @@ public class FormCombattimento extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     ((Giocatore) gestoreCombattimento.getGiocabileCorrente()).utilizzaAbilita();
+                    GestoreForm.aggiornaProgressBars();
                     if(!gestoreCombattimento.controllaFineCombattimento())
                         gestoreCombattimento.cambiaTurno();
                 }
@@ -136,6 +172,22 @@ public class FormCombattimento extends javax.swing.JFrame {
         panelBottoni.add(Box.createHorizontalGlue());
         
         this.add(panelBottoni, BorderLayout.SOUTH);
+        
+        bottoni[0] = bottoneAttacco;
+        bottoni[1] = bottoneAbilita;
+        bottoni[2] = bottoneGuardia;
+    }
+    
+    public void disabilitaBottoni(){
+        for(JButton b : bottoni){
+            b.setEnabled(false);
+        }
+    }
+    
+    public void abilitaBottoni(){
+        for(JButton b : bottoni){
+            b.setEnabled(true);
+        }
     }
 
     /**

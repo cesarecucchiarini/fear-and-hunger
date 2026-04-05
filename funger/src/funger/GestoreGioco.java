@@ -143,5 +143,7 @@ public class GestoreGioco {
         return creabileStanza;
     }
     
-    
+    public void attacca(int dannoInput, Giocabile obbiettivo){
+        obbiettivo.perdiVita(dannoInput);
+    }
 }

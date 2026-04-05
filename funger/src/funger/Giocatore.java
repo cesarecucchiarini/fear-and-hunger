@@ -22,6 +22,8 @@ public abstract class Giocatore extends Giocabile implements Creabile{
 
     @Override
     public void attacca(){
+        int dannoInput = super.getDanno() + (oggettoOffensivo != null ? oggettoOffensivo.getStatPrincipale() : 0);
+        super.getGestoreGioco().attacca(dannoInput, (Giocabile) super.getGestoreGioco().getCreabileStanza());
     }
     
     public void guardia(){

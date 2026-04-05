@@ -15,6 +15,7 @@ public abstract class Giocabile implements Cloneable{
      * vita del Giocabile
      */
     private int vita;
+    private int vitaMax;
     
     /**
      * danno del Giocabile
@@ -27,16 +28,21 @@ public abstract class Giocabile implements Cloneable{
      * 
      * @param nome nome del Giocabile
      * @param path percorso dell'immagine
-     * @param vita vita del Gioacbile
+     * @param vita vita massima del Gioacbile
      * @param danno danno dell'attacco del Giocabile
      * @param gestoreGioco gestore del gioco, serve per effettuare gli attacchi
      */
     public Giocabile(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco){
         this.nome = nome;
         this.vita = vita;
+        this.vitaMax = vita;
         this.danno = danno;
         this.sprite = new ImageIcon(path);
         this.gestoreGioco = gestoreGioco;
+    }
+    
+    public GestoreGioco getGestoreGioco(){
+        return gestoreGioco;
     }
     
     /**
@@ -60,6 +66,10 @@ public abstract class Giocabile implements Cloneable{
     public int getVita() {
         return vita;
     }
+    
+    public int getVitaMax(){
+        return vitaMax;
+    }
 
     /**
      * 
@@ -82,7 +92,7 @@ public abstract class Giocabile implements Cloneable{
      * @param guadagno vita guadagnata
      */
     public void guadagnaVita(int guadagno){
-        vita = Math.min(100, guadagno+vita);
+        vita = Math.min(vitaMax, guadagno+vita);
     }
     
     /**

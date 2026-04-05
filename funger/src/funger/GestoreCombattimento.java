@@ -52,6 +52,7 @@ public class GestoreCombattimento {
     public void controllaAttacco(){
         if(!(giocabileCorrente instanceof Giocatore)){
             giocabileCorrente.attacca();
+            GestoreForm.aggiornaProgressBars();
             if(!controllaFineCombattimento())
                 cambiaTurno();
         }

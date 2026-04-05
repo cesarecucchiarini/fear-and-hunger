@@ -59,4 +59,19 @@ public class GestoreForm {
         form.dispose();
         form = new FormGioco(gestoreGioco);
     }
+    
+    /*
+    DEVO MODIFICARE PERCHE LA BARRA SCENDE TARDI
+    */
+    public static void aggiornaProgressBars(){
+        ((FormCombattimento) form).disabilitaBottoni();
+        ((FormCombattimento) form).aggiornaProgressBars();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException ex) {
+            System.getLogger(GestoreForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+        ((FormCombattimento) form).abilitaBottoni();
+
+    }
 }
