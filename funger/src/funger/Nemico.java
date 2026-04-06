@@ -4,6 +4,8 @@
  */
 package funger;
 
+import java.util.Random;
+
 /**
  *
  * @author cucchiarini.cesare
@@ -14,4 +16,10 @@ public abstract class Nemico extends Giocabile implements Creabile{
         super(nome, path, vita, danno, gestoreGioco);
     }
     
+    public Giocabile getObbiettivo(){
+        if(super.getGestoreGioco().getCreabileStanza() == this)
+            return super.getGestoreGioco().getParty().get(new Random().nextInt(super.getGestoreGioco().getGrandezzaParty()));
+        else
+            return (Giocabile)super.getGestoreGioco().getCreabileStanza();
+    }
 }

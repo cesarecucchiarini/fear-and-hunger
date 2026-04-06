@@ -21,6 +21,7 @@ public class GestoreGioco {
     private GestoreCombattimento gestoreCombattimento;
     
     public GestoreGioco(){
+        GestoreFile.setGestoreGioco(this);
         GestoreFile.leggiCreabili();
         GestoreInput.setGestoreGioco(this);
         gestoreCombattimento = new GestoreCombattimento(this);

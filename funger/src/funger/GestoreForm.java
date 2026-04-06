@@ -64,14 +64,15 @@ public class GestoreForm {
     DEVO MODIFICARE PERCHE LA BARRA SCENDE TARDI
     */
     public static void aggiornaProgressBars(){
-        ((FormCombattimento) form).disabilitaBottoni();
-        ((FormCombattimento) form).aggiornaProgressBars();
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException ex) {
-            System.getLogger(GestoreForm.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-        }
-        ((FormCombattimento) form).abilitaBottoni();
+        FormCombattimento f = (FormCombattimento) form;
+        f.disabilitaBottoni();
+        f.aggiornaProgressBars();
 
+        javax.swing.Timer timer = new javax.swing.Timer(500, e -> {
+            f.abilitaBottoni();
+        });
+
+        timer.setRepeats(false);
+        timer.start();
     }
 }

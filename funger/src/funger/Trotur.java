@@ -17,6 +17,7 @@ public class Trotur extends Nemico{
     
     @Override
     public void attacca(){
+        super.getGestoreGioco().attacca(super.getDanno(), super.getObbiettivo());
     }
 
 

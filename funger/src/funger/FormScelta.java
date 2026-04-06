@@ -29,7 +29,6 @@ public class FormScelta extends javax.swing.JFrame {
     public FormScelta(GestoreGioco gestoreGioco) {
         initComponents();
         this.gestoreGioco = gestoreGioco;
-        GestoreFile.setGestoreGioco(gestoreGioco);
         this.setLayout(new BorderLayout());
         
         generaScelta();
