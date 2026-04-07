@@ -37,6 +37,8 @@ public abstract class Giocatore extends Giocabile implements Creabile{
         guardiaAttiva = false;
     }
     
+    public abstract void togliAbilita();
+    
     /**
      * 
      * il danno viene diminuito dalla stat dell'oggetto difensivo

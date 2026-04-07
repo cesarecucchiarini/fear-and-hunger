@@ -62,11 +62,19 @@ public class FormGioco extends javax.swing.JFrame {
         ActionMap am = this.getRootPane().getActionMap();
 
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "confermaAzione");
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, 0), "abilita");
 
         am.put("confermaAzione", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gestoreGioco.interagisci();
+            }
+        });
+        
+        am.put("abilita", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DialogAbilita(gestoreGioco);
             }
         });
     }
@@ -136,9 +144,8 @@ public class FormGioco extends javax.swing.JFrame {
      * crea la textArea che funziona da logger e la passa alla classe Logger
      */
     public void creaTextArea(){
-        JScrollPane sp = new JScrollPane();
-        sp.add(Logger.getTextArea());
-        panelLaterale.add(sp, BorderLayout.CENTER);
+        JScrollPane sp = new JScrollPane(Logger.getTextArea());
+        panelLaterale.add(sp);
     }
     
     /**

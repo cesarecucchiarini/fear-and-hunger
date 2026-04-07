@@ -16,6 +16,7 @@ public class GestoreCombattimento {
     private Nemico nemico;
     private Giocabile giocabileCorrente;
     private int indiceCorrente;
+    private boolean combattimento;
 
     public GestoreCombattimento(GestoreGioco gestoreGioco) {
         this.gestoreGioco = gestoreGioco;
@@ -24,6 +25,7 @@ public class GestoreCombattimento {
     public void iniziaCombattimento(ArrayList<Giocabile> party, Nemico nemico){
         this.party = party;
         this.nemico = nemico;
+        combattimento = true;
         indiceCorrente = 0;
         this.giocabileCorrente = party.get(indiceCorrente);
         
@@ -31,13 +33,27 @@ public class GestoreCombattimento {
         GestoreForm.apriCombattimento();   
     }
     
+    public void finisciCombattimento(){
+        combattimento = false;
+    }
+    
     public boolean controllaFineCombattimento(){
+        if(!combattimento){
+            nemico = null;
+            gestoreGioco.finisciAbilita();
+            GestoreForm.chiudiCombattimento();
+            return true;
+        }
         if(nemico.controllaMorte()){
+            nemico = null;
+            gestoreGioco.finisciAbilita();
             GestoreForm.chiudiCombattimento();
             return true;
         }
         
         if(party.get(0).controllaMorte()){
+            nemico = null;
+            gestoreGioco.finisciAbilita();
             GestoreForm.chiudiGioco();
             return true;
         }
@@ -65,7 +81,16 @@ public class GestoreCombattimento {
                 cambiaTurno();
         }
         else{
-            ((Giocatore)giocabileCorrente).togliGuardia();
+            if(giocabileCorrente instanceof Vichingo vichingo){
+                if(vichingo.furia()){
+                    vichingo.attaccoSpeciale();
+                    cambiaTurno();
+                }
+                else
+                    vichingo.togliGuardia();
+            }
+            else
+                ((Giocatore)giocabileCorrente).togliGuardia();
         }
     }
     
@@ -79,5 +104,9 @@ public class GestoreCombattimento {
     
     public Giocabile getGiocabileCorrente(){
         return giocabileCorrente;
+    }
+
+    public boolean inBattaglia() {
+        return nemico != null;
     }
 }

@@ -4,6 +4,7 @@
  */
 package funger;
 
+import java.awt.Color;
 import javax.swing.JTextArea;
 
 /**

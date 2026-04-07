@@ -14,13 +14,15 @@ public class Demonchild extends Giocatore{
         super(nome, path, vita, danno, gestoreGioco);
     }
 
-    
-
-    
-
     @Override
     public void utilizzaAbilita() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.guadagnaFame(10);
+        this.guadagnaMente(10);
+        this.guadagnaVita(10);
+    }
+    
+    @Override public void togliAbilita(){
+        
     }
     
 }

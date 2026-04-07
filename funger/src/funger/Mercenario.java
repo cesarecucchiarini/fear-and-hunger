@@ -4,6 +4,8 @@
  */
 package funger;
 
+import java.util.Random;
+
 /**
  *
  * @author cucchiarini.cesare
@@ -14,11 +16,21 @@ public class Mercenario extends Giocatore{
         super(nome, path, vita, danno, gestoreGioco);
     }
 
-    
-
     @Override
     public void utilizzaAbilita() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(super.getGestoreGioco().inBattaglia()){
+            if(new Random().nextInt(2) == 1){
+                Logger.scriviLog("il party riesce a scappare");
+                super.getGestoreGioco().finisciCombattimento();
+            }
+        }
+        else
+            Logger.scriviLog("non succede niente");
+    }
+    
+    @Override
+    public void togliAbilita(){
+        
     }
     
 }

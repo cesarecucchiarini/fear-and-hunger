@@ -79,6 +79,8 @@ public class GestoreGioco {
                 movimentoPossibile = false;
         }
         GestoreForm.aggiornaPanelGioco();
+        if(mappa.getTipoCella(posizione[0], posizione[1]).equals(TipoCella.FINE))
+            GestoreForm.chiudiGioco();
     }
     
     /**
@@ -203,5 +205,25 @@ public class GestoreGioco {
     
     public Giocabile getNemico(){
         return gestoreCombattimento.getNemico();
+    }
+    
+    public boolean inBattaglia(){
+        return gestoreCombattimento.inBattaglia();
+    }
+
+    public void finisciCombattimento() {
+        gestoreCombattimento.finisciCombattimento();
+    }
+    
+    public void finisciAbilita(){
+        for(Giocatore g : party.getGiocatori()){
+            g.togliAbilita();
+        }
+    }
+    
+    public void finisciGuardia(){
+        for(Giocatore g : party.getGiocatori()){
+            g.togliGuardia();
+        }
     }
 }

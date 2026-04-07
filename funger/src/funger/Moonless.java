@@ -13,14 +13,27 @@ public class Moonless extends Giocatore{
     public Moonless(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
         super(nome, path, vita, danno, gestoreGioco);
     }
-
     
-
-    
-
     @Override
     public void utilizzaAbilita() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(super.getGestoreGioco().inBattaglia()){
+            Logger.scriviLog(this.getNome() + " fa un attacco potente");
+            attaccoPotente();
+        }
+        else{
+            Logger.scriviLog("non succede niente");
+        }
+    }
+    
+    public void attaccoPotente(){
+        int dannoInput = super.getDanno() + (super.getOggettoOffensivo() != null ? super.getOggettoOffensivo().getStatPrincipale() : 0);
+        dannoInput *= 1.5;
+        super.getGestoreGioco().attacca(dannoInput, super.getGestoreGioco().getNemico());
+    }
+    
+    @Override
+    public void togliAbilita(){
+        
     }
     
 }
