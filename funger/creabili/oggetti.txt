@@ -1,6 +1,6 @@
 0
-oggettoConsumabile,blueVial,pozione blu,20,curativo
-oggettoConsumabile,wineVial,boccia di vino,40,mentale
-oggettoConsumabile,moldyBread,pane con muffa,30,commestibile
-oggettoEquipaggiabile,shortSword,spada corta,20,0,offensivo
-oggettoEquipaggiabile,leatherVest,veste di pelle,10,5,difensivo
+oggettoConsumabile,pozione blu,blueVial.png,20,curativo
+oggettoConsumabile,boccia di vino,wineVial.png,40,mentale
+oggettoConsumabile,pane con muffa,moldyBread.png,30,commestibile
+oggettoEquipaggiabile,spada corta,shortSword.png,20,0,offensivo
+oggettoEquipaggiabile,veste di pelle,leatherVest.png,10,5,difensivo

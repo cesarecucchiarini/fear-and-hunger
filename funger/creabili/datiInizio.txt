@@ -1,8 +1,8 @@
-necromante,Enki,100,15
+necromante,necromante.png,Enki,100,15
 necromante
-vichingo,Ragnvalrd,100,15
+vichingo,vichingo.png,Ragnvalrd,100,15
 vichingo
-mercenario,cahara,100,15
+mercenario,mercenario.png,cahara,100,15
 mercenario
-cavaliere,D'Arc,100,15
+cavaliere,cavaliere.png,D'Arc,100,15
 cavaliere

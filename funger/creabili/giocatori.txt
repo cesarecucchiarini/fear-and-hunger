@@ -1,8 +1,8 @@
 0
-necromante,Enki,100,15
-vichingo,Ragnvalrd,100,15
-mercenario,cahara,100,15
-cavaliere,D'Arc,100,15
-ragazza,Girl,100,15
-moonless,Moonless,100,15
-demonchild,Demonchild,100,15
+necromante,necromante.png,Enki,100,15
+vichingo,vichingo.png,Ragnvalrd,100,15
+mercenario,mercenario.png,cahara,100,15
+cavaliere,cavaliere.png,D'Arc,100,15
+ragazza,ragazza.png,Girl,100,15
+moonless,moonless.png,Moonless,100,15
+demonchild,demonchild.png,Demonchild,100,15

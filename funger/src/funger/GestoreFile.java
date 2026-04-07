@@ -56,7 +56,7 @@ public class GestoreFile {
 
                 CharacterFactory factory = CHARACTER_FACTORIES.get(type);
                 if (factory != null) {
-                    Creabile c = factory.createGiocatore(split[1], type + ".png", Integer.parseInt(split[2]), Integer.parseInt(split[3]), gestoreGioco);
+                    Creabile c = factory.createGiocatore(split[2], split[1], Integer.parseInt(split[3]), Integer.parseInt(split[4]), gestoreGioco);
                     GestoreCreabili.aggiungiCreabile(c);
                 }
             }
@@ -80,11 +80,11 @@ public class GestoreFile {
                 split = line.split(",");
                 if(split[0].equals("oggettoConsumabile")){
                     tipoConsumabile = TipoOggettoConsumabile.valueOf(split[4].toUpperCase());
-                    c = (Creabile)new OggettoConsumabile(split[2], split[1]+".png", Integer.parseInt(split[3]), tipoConsumabile);
+                    c = (Creabile)new OggettoConsumabile(split[1], split[2], Integer.parseInt(split[3]), tipoConsumabile);
                 }
                 else{
                     tipoEquipaggiabile = TipoOggettoEquipaggiabile.valueOf(split[5].toUpperCase());
-                    c = (Creabile)new OggettoEquipaggiabile(split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile, split[1]+".png");
+                    c = (Creabile)new OggettoEquipaggiabile(split[1], split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile);
                 }
                 GestoreCreabili.aggiungiCreabile(c);
             }

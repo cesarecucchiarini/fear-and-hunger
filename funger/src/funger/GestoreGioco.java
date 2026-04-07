@@ -42,7 +42,7 @@ public class GestoreGioco {
      * metodo da chiamare in caso di morte del leader
      */
     public void fineGioco(){
-        System.out.println("Gioco finito, ma lo devo ancora implementare");
+        GestoreForm.chiudiGioco();
     }
     
     /**
@@ -53,7 +53,8 @@ public class GestoreGioco {
     public void muovi(int movX, int movY){
         if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO) && movimentoPossibile){
             for(Giocatore g : party.getGiocatori()){
-                g.muovi();
+                g.perdiFame(0);
+                g.perdiMente(0);
                 if(g.controllaMorte()){
                     party.rimuoviMembro(g);
                 }

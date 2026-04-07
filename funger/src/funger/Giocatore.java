@@ -13,6 +13,7 @@ public abstract class Giocatore extends Giocabile implements Creabile{
     private int mente;
     private OggettoEquipaggiabile oggettoOffensivo = null;
     private OggettoEquipaggiabile oggettoDifensivo = null;
+    private boolean guardiaAttiva = false;
 
     public Giocatore(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
         super(nome, path, vita, danno, gestoreGioco);
@@ -27,7 +28,11 @@ public abstract class Giocatore extends Giocabile implements Creabile{
     }
     
     public void guardia(){
-        
+        guardiaAttiva = true;
+    }
+    
+    public void togliGuardia(){
+        guardiaAttiva = false;
     }
     
     /**
@@ -36,21 +41,16 @@ public abstract class Giocatore extends Giocabile implements Creabile{
      */
     @Override
     public void perdiVita(int perdita){
-        super.perdiVita(Math.max(0, perdita - (oggettoDifensivo != null ? oggettoDifensivo.getStatPrincipale() : 0)));
+        perdita = Math.max(0, perdita - (oggettoDifensivo != null ? oggettoDifensivo.getStatPrincipale() : 0));
+        if(guardiaAttiva)
+            perdita /= 2;
+        super.perdiVita(perdita);
     }
     
     /**
      * abilita del Giocatore
      */
     public abstract void utilizzaAbilita();
-    
-    /**
-     * perdita di fame e mente durante lo spostamento
-     */
-    public void muovi(){
-        perdiFame(10);
-        perdiMente(10);
-    }
     
     /**
      * 

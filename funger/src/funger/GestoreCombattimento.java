@@ -24,16 +24,24 @@ public class GestoreCombattimento {
     public void iniziaCombattimento(ArrayList<Giocabile> party, Nemico nemico){
         this.party = party;
         this.nemico = nemico;
-        this.giocabileCorrente = party.get(0);
+        indiceCorrente = 0;
+        this.giocabileCorrente = party.get(indiceCorrente);
+        
         
         GestoreForm.apriCombattimento();   
     }
     
     public boolean controllaFineCombattimento(){
-        if(nemico.controllaMorte() || party.get(0).controllaMorte()){
+        if(nemico.controllaMorte()){
             GestoreForm.chiudiCombattimento();
             return true;
         }
+        
+        if(party.get(0).controllaMorte()){
+            GestoreForm.chiudiGioco();
+            return true;
+        }
+        
         return false;
     }
     
@@ -55,6 +63,9 @@ public class GestoreCombattimento {
             GestoreForm.aggiornaProgressBars();
             if(!controllaFineCombattimento())
                 cambiaTurno();
+        }
+        else{
+            ((Giocatore)giocabileCorrente).togliGuardia();
         }
     }
     

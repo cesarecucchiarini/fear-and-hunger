@@ -60,6 +60,10 @@ public class GestoreForm {
         form = new FormGioco(gestoreGioco);
     }
     
+    public static void chiudiGioco(){
+        form.dispose();
+    }
+    
     /*
     DEVO MODIFICARE PERCHE LA BARRA SCENDE TARDI
     */

@@ -1,4 +1,4 @@
 10
-maneba,maneba,100,20
-trotur,trotur,40,10
-guardia,guardia,150,25
+maneba,maneba.png,maneba,100,20
+trotur,trotur.png,trotur,40,10
+guardia,guardia.png,guardia,150,25
