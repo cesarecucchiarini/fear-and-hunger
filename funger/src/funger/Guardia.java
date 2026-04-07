@@ -17,7 +17,14 @@ public class Guardia extends Nemico{
     
     @Override
     public void attacca(){
-        super.getGestoreGioco().attacca(super.getDanno(), super.getObbiettivo());
-        super.getGestoreGioco().attacca(super.getDanno() / 2, super.getObbiettivo());
+        Giocabile obbiettivo = super.getObbiettivo();
+        super.getGestoreGioco().attacca(super.getDanno(), obbiettivo);
+        
+        if(!super.getGestoreGioco().getGestoreCombattimento().controllaFineCombattimento()){
+            if(!obbiettivo.controllaMorte())
+                super.getGestoreGioco().attacca(super.getDanno() / 2, obbiettivo);
+            else
+                super.getGestoreGioco().attacca(super.getDanno() / 2, super.getObbiettivo());
+        }
     }    
 }

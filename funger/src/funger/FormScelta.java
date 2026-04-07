@@ -51,7 +51,8 @@ public class FormScelta extends javax.swing.JFrame {
             p.setBorder(BorderFactory.createLineBorder(Color.black));
             p.setLayout(new BorderLayout());
             
-            p.add(new JLabel(entry.getKey().getSprite()), BorderLayout.CENTER);
+            JLabel immagine = new JLabel(entry.getKey().getSprite());
+            p.add(immagine, BorderLayout.CENTER);
             
             JButton bottoneScelta = new JButton("Scegli");         
             bottoneScelta.setAlignmentX(CENTER_ALIGNMENT);

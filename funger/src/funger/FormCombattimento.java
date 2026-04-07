@@ -71,7 +71,7 @@ public class FormCombattimento extends javax.swing.JFrame {
             panelPersonaggio.setLayout(new BorderLayout());
             panelPersonaggio.setOpaque(false);
             
-            JLabel immagine = new JLabel(g.getNome());
+            JLabel immagine = new JLabel(g.getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelPersonaggio.add(immagine, BorderLayout.CENTER);
             
@@ -94,7 +94,7 @@ public class FormCombattimento extends javax.swing.JFrame {
         panelCreabile.setOpaque(false);
         panelCreabile.setLayout(new BorderLayout());       
         
-        JLabel immagine = new JLabel(gestoreCombattimento.getNemico().getNome());
+        JLabel immagine = new JLabel(gestoreCombattimento.getNemico().getSprite());
         immagine.setHorizontalAlignment(JLabel.CENTER);
         panelCreabile.add(immagine, BorderLayout.CENTER);
         

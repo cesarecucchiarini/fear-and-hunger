@@ -1,7 +1,7 @@
 0
 necromante,necromante.png,Enki,100,15
 vichingo,vichingo.png,Ragnvalrd,100,15
-mercenario,mercenario.png,cahara,100,15
+mercenario,mercenario.webp,cahara,100,15
 cavaliere,cavaliere.png,D'Arc,100,15
 ragazza,ragazza.png,Girl,100,15
 moonless,moonless.png,Moonless,100,15

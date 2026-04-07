@@ -89,7 +89,7 @@ public class FormGioco extends javax.swing.JFrame {
         panelParty.setLayout(new GridLayout(1, gestoreGioco.getGrandezzaParty()));
         
         for(Giocabile g : gestoreGioco.getParty()){
-            JLabel immagine = new JLabel(g.getNome());
+            JLabel immagine = new JLabel(g.getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelParty.add(immagine);
         }
@@ -106,7 +106,7 @@ public class FormGioco extends javax.swing.JFrame {
         panelCreabile.setLayout(new BorderLayout());       
         
         if(gestoreGioco.getCreabileStanza() != null){
-            JLabel immagine = new JLabel(gestoreGioco.getCreabileStanza().getNome());
+            JLabel immagine = new JLabel(gestoreGioco.getCreabileStanza().getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelCreabile.add(immagine);
         }
