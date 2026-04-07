@@ -31,4 +31,8 @@ public class Ragazza extends Giocatore{
         abilita = false;
     }
     
+    public boolean abilitaAttiva(){
+        return abilita;
+    }
+    
 }

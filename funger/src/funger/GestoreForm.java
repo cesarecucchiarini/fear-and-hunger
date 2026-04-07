@@ -63,9 +63,14 @@ public class GestoreForm {
         form = new FormGioco(gestoreGioco);
     }
     
-    public static void chiudiGioco(){
+    public static void morte(){
         form.dispose();
         form = new FormMorte();
+    }
+    
+    public static void vittoria(){
+        form.dispose();
+        form = new FormVittoria();
     }
     
     /*

@@ -12,19 +12,19 @@ import javax.swing.SwingConstants;
  *
  * @author sergi
  */
-public class FormMorte extends javax.swing.JFrame {
+public class FormVittoria extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormMorte.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormVittoria.class.getName());
 
     /**
-     * Creates new form FormMorte
+     * Creates new form FormVittoria
      */
-    public FormMorte() {
+    public FormVittoria() {
         initComponents();
         this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-        this.setContentPane(new PanelSfondo("img/backgroundMorte.png"));
+        this.setContentPane(new PanelSfondo("img/backgroundVittoria.png"));
         this.setLayout(new BorderLayout());
-        JLabel label = new JLabel("Hai perso");
+        JLabel label = new JLabel("Hai vinto");
         label.setHorizontalAlignment(SwingConstants.CENTER);
         this.add(label);
         this.setVisible(true);
@@ -54,7 +54,6 @@ public class FormMorte extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

@@ -54,7 +54,7 @@ public class GestoreCombattimento {
         if(party.get(0).controllaMorte()){
             nemico = null;
             gestoreGioco.finisciAbilita();
-            GestoreForm.chiudiGioco();
+            GestoreForm.morte();
             return true;
         }
         

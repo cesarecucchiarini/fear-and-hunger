@@ -5,6 +5,7 @@
 package funger;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 /**
@@ -42,7 +43,7 @@ public class GestoreGioco {
      * metodo da chiamare in caso di morte del leader
      */
     public void fineGioco(){
-        GestoreForm.chiudiGioco();
+        GestoreForm.morte();
     }
     
     /**
@@ -80,7 +81,7 @@ public class GestoreGioco {
         }
         GestoreForm.aggiornaPanelGioco();
         if(mappa.getTipoCella(posizione[0], posizione[1]).equals(TipoCella.FINE))
-            GestoreForm.chiudiGioco();
+            GestoreForm.vittoria();
     }
     
     /**
@@ -225,5 +226,16 @@ public class GestoreGioco {
         for(Giocatore g : party.getGiocatori()){
             g.togliGuardia();
         }
+    }
+    
+    public Giocabile getObbiettivoRandom(){
+        for(Giocatore g : party.getGiocatori()){
+            if(g instanceof Ragazza r){
+                if(r.abilitaAttiva())
+                    return r;
+            }
+        }
+        
+        return party.getPersonaggi().get(new Random().nextInt(getGrandezzaParty()));
     }
 }

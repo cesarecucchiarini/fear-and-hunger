@@ -33,7 +33,7 @@ public class Cavaliere extends Giocatore{
     @Override
     public void togliGuardia(){
         superGuardia = false;
-        togliGuardia();
+        super.togliGuardia();
     }
     
     @Override

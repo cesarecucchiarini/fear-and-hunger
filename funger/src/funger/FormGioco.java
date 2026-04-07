@@ -188,6 +188,18 @@ public class FormGioco extends javax.swing.JFrame {
         JButton bottoneInfo = new JButton("?");
         bottoneInfo.setFont(font);
         bottoneInfo.setAlignmentX(CENTER_ALIGNMENT);
+        bottoneInfo.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    JOptionPane.showMessageDialog(null, """
+                                                        PER MUOVERTI SULLA MAPPA DEVI APRIRLA E UTILIZZARE LE FRECCE DIREZIONALI.
+                                                        PER INTERAGIRE CON UN OGGETTO O PERSONAGGIO NELLA STANZA DEVI PREMERE INVIO.
+                                                        PER UTILIZZARE UN'ABILITA FUORI DAL COMBATTIMENTO DEVI PREMERE BACKSPACE.
+                                                        DEVI RAGGIUNGERE LA FINE DEL LABIRINTO, BUONA FORTUNA.
+                                                        RICORDA DI CONTROLLARE LA FAME E LA MENTE, NON SOLO LA SALUTE.
+                                                        """);
+                }
+            });
         panelBottoni.add(bottoneInfo);
         
         panelBottoni.add(Box.createVerticalGlue());

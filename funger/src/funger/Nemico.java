@@ -18,7 +18,7 @@ public abstract class Nemico extends Giocabile implements Creabile{
     
     public Giocabile getObbiettivo(){
         if(super.getGestoreGioco().getNemico() == this)
-            return super.getGestoreGioco().getParty().get(new Random().nextInt(super.getGestoreGioco().getGrandezzaParty()));
+            return super.getGestoreGioco().getObbiettivoRandom();
         else
             return super.getGestoreGioco().getNemico();
     }
