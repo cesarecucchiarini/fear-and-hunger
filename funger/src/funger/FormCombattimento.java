@@ -23,6 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 
 /**
  *
@@ -173,6 +174,25 @@ public class FormCombattimento extends javax.swing.JFrame {
                 }
             });
         panelBottoni.add(bottoneGuardia);
+        
+        panelBottoni.add(Box.createRigidArea(new Dimension(50, 0)));   
+        
+        JButton bottoneLog = new JButton("Log");
+        bottoneLog.setFont(font);
+        bottoneLog.setAlignmentY(CENTER_ALIGNMENT);
+        bottoneLog.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(Logger.getTextArea());
+                    javax.swing.JOptionPane.showMessageDialog(
+                        null,              // The parent JFrame (FormCombattimento)
+                        scrollPane,        // The component to show
+                        "Registro Combattimento", // Title
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE
+                    );
+                }
+            });
+        panelBottoni.add(bottoneLog);
         
         panelBottoni.add(Box.createHorizontalGlue());
         

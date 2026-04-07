@@ -100,7 +100,9 @@ public abstract class Giocabile implements Cloneable{
      * @param perdita vita persa
      */
     public void perdiVita(int perdita){
-        vita = Math.max(0, vita-perdita);
+        vita -= perdita;
+        vita = Math.max(0, vita);
+        Logger.scriviLog(this.getNome() + " ha perso " + perdita + " punti vita");
     }
     
     /**
@@ -108,7 +110,11 @@ public abstract class Giocabile implements Cloneable{
      * @return true se il Giocabile è morto
      */
     public boolean controllaMorte(){
-        return vita == 0;
+        if(vita == 0){
+            Logger.scriviLog(nome + " è morto");
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -116,8 +122,10 @@ public abstract class Giocabile implements Cloneable{
      * @param oggetto oggetto da consumare
      */
     public void consumaOggetto(OggettoConsumabile oggetto){
-        if(oggetto.getTipo().equals(TipoOggettoConsumabile.CURATIVO))
+        if(oggetto.getTipo().equals(TipoOggettoConsumabile.CURATIVO)){
             guadagnaVita(oggetto.getStatPrincipale());
+            Logger.scriviLog(this.getNome() + " ha consumato " + oggetto.getNome());
+        }
     }
     
     @Override

@@ -18,7 +18,10 @@ public class Inventario {
      * @param oggetto oggetto da aggiungere
      */
     public void aggiungiOggetto(Oggetto oggetto){
-        if(oggetto != null)oggetti.add(oggetto);
+        if(oggetto != null){
+            oggetti.add(oggetto);
+            Logger.scriviLog("hai raccolto " + oggetto.getNome());
+        }
     }
     
     /**
@@ -26,7 +29,8 @@ public class Inventario {
      * @param oggetto oggetto da rimuovere
      */
     public void rimuoviOggetto(Oggetto oggetto){
-        oggetti.remove(oggetto);     
+        oggetti.remove(oggetto);
+        Logger.scriviLog("hai rimosso " + oggetto.getNome());
     }
     
     /**

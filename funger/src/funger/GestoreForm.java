@@ -48,7 +48,8 @@ public class GestoreForm {
     }
     
     public static void aggiornaPanelGioco(){
-        ((FormGioco)form).aggiornaPanelGioco();
+        if(form instanceof FormGioco f)
+            f.aggiornaPanelGioco();
     }
     
     public static void apriCombattimento(){
@@ -64,6 +65,7 @@ public class GestoreForm {
     
     public static void chiudiGioco(){
         form.dispose();
+        form = new FormMorte();
     }
     
     /*
@@ -83,7 +85,7 @@ public class GestoreForm {
     }
     
     public static void apriInventario(){
-        formInventario.aggiornaOggetti();
+        aggiornaInventario();
         formInventario.setVisible(true);
         formInventario.requestFocus();
     }

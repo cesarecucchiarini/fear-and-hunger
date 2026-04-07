@@ -31,7 +31,13 @@ public class Party {
      * @param giocabile membro da aggiungere
      */
     public void aggiungiMembro(Giocabile giocabile){
-        if(personaggi.size() < 4) personaggi.add(giocabile);
+        if(personaggi.size() < 4){
+            personaggi.add(giocabile);
+            Logger.scriviLog(giocabile.getNome() + " si unisce al party");
+        }
+        else{
+            Logger.scriviLog(giocabile.getNome() + " non può unirsi al party");
+        }
     }
     
     /**

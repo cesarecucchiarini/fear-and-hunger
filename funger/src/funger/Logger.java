@@ -17,8 +17,9 @@ public class Logger {
      * 
      * @param textArea textArea da assegnare al logger per scrivere le informazioni
      */
-    public static void assegnaTextArea(JTextArea textArea) {
-        Logger.textArea = textArea;
+    public static void creaTextArea() {
+        Logger.textArea = new JTextArea("Log\n");
+        textArea.setEditable(false);
     }
     
     /**
@@ -26,6 +27,12 @@ public class Logger {
      * @param msg messaggio da scrivere sul log
      */
     public static void scriviLog(String msg){
-        textArea.append(msg);
+        textArea.append(msg+"\n");
     }
+
+    public static JTextArea getTextArea() {
+        return textArea;
+    }
+    
+    
 }

@@ -136,10 +136,9 @@ public class FormGioco extends javax.swing.JFrame {
      * crea la textArea che funziona da logger e la passa alla classe Logger
      */
     public void creaTextArea(){
-        JTextArea textArea = new JTextArea();
-        textArea.append("Log");
-        panelLaterale.add(textArea, BorderLayout.CENTER);
-        Logger.assegnaTextArea(textArea);
+        JScrollPane sp = new JScrollPane();
+        sp.add(Logger.getTextArea());
+        panelLaterale.add(sp, BorderLayout.CENTER);
     }
     
     /**

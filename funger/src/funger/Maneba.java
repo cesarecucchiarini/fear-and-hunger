@@ -23,7 +23,9 @@ public class Maneba extends Nemico{
         for(int i = 0; i < 3; i++){
             if(!super.getGestoreGioco().getGestoreCombattimento().controllaFineCombattimento()){
                 if(rnd.nextInt(2) == 1){
-                    super.getGestoreGioco().attacca(super.getDanno(), getObbiettivo());
+                    Giocabile obbiettivo = getObbiettivo();
+                    Logger.scriviLog(this.getNome() + " ha attaccato " + obbiettivo.getNome());
+                    super.getGestoreGioco().attacca(super.getDanno(), obbiettivo);                  
                 }
             }
             else

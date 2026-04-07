@@ -23,12 +23,14 @@ public abstract class Giocatore extends Giocabile implements Creabile{
 
     @Override
     public void attacca(){
+        Logger.scriviLog(this.getNome() + " ha attaccato " + super.getGestoreGioco().getNemico().getNome());
         int dannoInput = super.getDanno() + (oggettoOffensivo != null ? oggettoOffensivo.getStatPrincipale() : 0);
-        super.getGestoreGioco().attacca(dannoInput, (Giocabile) super.getGestoreGioco().getCreabileStanza());
+        super.getGestoreGioco().attacca(dannoInput, super.getGestoreGioco().getNemico());
     }
     
     public void guardia(){
         guardiaAttiva = true;
+        Logger.scriviLog(this.getNome() + " si mette in guardia");
     }
     
     public void togliGuardia(){
@@ -134,6 +136,7 @@ public abstract class Giocatore extends Giocabile implements Creabile{
             case TipoOggettoConsumabile.COMMESTIBILE -> {guadagnaFame(oggetto.getStatPrincipale());}
             case TipoOggettoConsumabile.MENTALE -> {guadagnaMente(oggetto.getStatPrincipale());}
         }
+        Logger.scriviLog(this.getNome() + " ha consumato " + oggetto.getNome());
     }
 
     public int getFame() {

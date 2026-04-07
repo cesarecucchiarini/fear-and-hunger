@@ -24,6 +24,7 @@ public class GestoreGioco {
         GestoreFile.leggiCreabili();
         GestoreInput.setGestoreGioco(this);
         gestoreCombattimento = new GestoreCombattimento(this);
+        Logger.creaTextArea();
     }
     
     /**
@@ -53,8 +54,8 @@ public class GestoreGioco {
         creabileStanza = null;
         if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO) && movimentoPossibile){
             for(Giocatore g : party.getGiocatori()){
-                g.perdiFame(0);
-                g.perdiMente(0);
+                g.perdiFame(3);
+                g.perdiMente(3);
                 if(g.controllaMorte()){
                     party.rimuoviMembro(g);
                 }
@@ -132,8 +133,12 @@ public class GestoreGioco {
         if(mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
             if(creabileStanza instanceof Nemico)
                 gestoreCombattimento.iniziaCombattimento(party.getPersonaggi(), (Nemico) creabileStanza);
-            else if(creabileStanza instanceof Oggetto)
+            else if(creabileStanza instanceof Oggetto){
                 aggiungiOggetto((Oggetto)creabileStanza);
+            }
+            else if(creabileStanza instanceof Giocabile){
+                aggiungiMembro((Giocabile) creabileStanza);
+            }
             
             mappa.setStatoCella(posizione[0], posizione[1], Cella.COMPLETATA);
             movimentoPossibile = true;
@@ -173,26 +178,30 @@ public class GestoreGioco {
     }
 
     public void consumaOggetto(OggettoConsumabile oggetto, Giocabile g){
-        g.perdiVita(oggetto.getStatPrincipale());
+        g.consumaOggetto(oggetto);
         rimuoviOggetto(oggetto);
         GestoreForm.aggiornaInventario();
     }
+    
     public void consumaOggetto(OggettoConsumabile oggetto, Giocatore g) {
-        switch(oggetto.getTipo()){
-            case TipoOggettoConsumabile.CURATIVO -> {g.guadagnaVita(oggetto.getStatPrincipale());}
-            case TipoOggettoConsumabile.MENTALE -> {g.guadagnaMente(oggetto.getStatPrincipale());}
-            case TipoOggettoConsumabile.COMMESTIBILE -> {g.guadagnaFame(oggetto.getStatPrincipale());}
-        }
+        g.consumaOggetto(oggetto);
         rimuoviOggetto(oggetto);
         GestoreForm.aggiornaInventario();
     }
 
     public void equipaggiaOggetto(OggettoEquipaggiabile oggetto, Giocatore g) {
         party.cambiaOggetto(g, oggetto);
+        Logger.scriviLog(g.getNome() + " ha equipaggiato " + oggetto.getNome());
         GestoreForm.aggiornaInventario();
     }
     
     public Giocatore getLeader(){
+        if(party.getPersonaggi().isEmpty()) 
+            return null;
         return (Giocatore) party.getPersonaggi().getFirst();
+    }
+    
+    public Giocabile getNemico(){
+        return gestoreCombattimento.getNemico();
     }
 }
