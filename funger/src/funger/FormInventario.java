@@ -29,7 +29,7 @@ public class FormInventario extends javax.swing.JFrame {
         PanelSfondo sfondo = new PanelSfondo("img/background.png");
         
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(new Dimension(500, 500));
+        this.setSize(new Dimension(900, 500));
         this.setContentPane(sfondo);
         this.setLayout(new GridLayout(1, 2));
         
@@ -78,18 +78,18 @@ public class FormInventario extends javax.swing.JFrame {
             else
                 panelPersonaggio.setLayout(new GridLayout(1, 2));
             
-            panelPersonaggio.add(new JLabel(g.getSprite()));
+            panelPersonaggio.add(new JLabelPersonalizzato(g.getSprite()));
             
             if(g instanceof Giocatore){
                 if(((Giocatore) g).getOggettoOffensivo() != null)
-                    panelPersonaggio.add(new JLabel(((Giocatore) g).getOggettoOffensivo().getSprite()));
+                    panelPersonaggio.add(new JLabelPersonalizzato(((Giocatore) g).getOggettoOffensivo().getSprite()));
                 else
-                    panelPersonaggio.add(new JLabel("Niente"));
+                    panelPersonaggio.add(new JLabelPersonalizzato("Niente"));
                 
                 if(((Giocatore) g).getOggettoDifensivo() != null)
-                    panelPersonaggio.add(new JLabel(((Giocatore) g).getOggettoDifensivo().getSprite()));
+                    panelPersonaggio.add(new JLabelPersonalizzato(((Giocatore) g).getOggettoDifensivo().getSprite()));
                 else
-                    panelPersonaggio.add(new JLabel("Niente"));
+                    panelPersonaggio.add(new JLabelPersonalizzato("Niente"));
             }
             
             JPanel panelBarre = new JPanel();

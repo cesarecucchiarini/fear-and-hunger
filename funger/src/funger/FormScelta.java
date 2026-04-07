@@ -55,7 +55,7 @@ public class FormScelta extends javax.swing.JFrame {
             p.setLayout(new BorderLayout());
             p.setOpaque(false);
             
-            JLabel immagine = new JLabel(entry.getKey().getSprite());
+            JLabelPersonalizzato immagine = new JLabelPersonalizzato(entry.getKey().getSprite());
             p.add(immagine, BorderLayout.CENTER);
             
             JButton bottoneScelta = new JButton("Scegli");         

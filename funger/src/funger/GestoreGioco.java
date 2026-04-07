@@ -50,6 +50,7 @@ public class GestoreGioco {
      * @param movY spostamento verticale
      */
     public void muovi(int movX, int movY){
+        creabileStanza = null;
         if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO) && movimentoPossibile){
             for(Giocatore g : party.getGiocatori()){
                 g.perdiFame(0);
@@ -131,8 +132,13 @@ public class GestoreGioco {
         if(mappa.getStatoCella(posizione[0], posizione[1]) != Cella.COMPLETATA){
             if(creabileStanza instanceof Nemico)
                 gestoreCombattimento.iniziaCombattimento(party.getPersonaggi(), (Nemico) creabileStanza);
+            else if(creabileStanza instanceof Oggetto)
+                aggiungiOggetto((Oggetto)creabileStanza);
+            
             mappa.setStatoCella(posizione[0], posizione[1], Cella.COMPLETATA);
             movimentoPossibile = true;
+            creabileStanza = null;
+            GestoreForm.aggiornaPanelGioco();
         }
     }
 
@@ -158,10 +164,12 @@ public class GestoreGioco {
 
     public void rimuoviOggetto(Oggetto oggetto) {
         party.rimuoviOggetto(oggetto);
+        GestoreForm.aggiornaInventario();
     }
     
     public void aggiungiOggetto(Oggetto oggetto){
         party.aggiungiOggetto(oggetto);
+        GestoreForm.aggiornaInventario();
     }
 
     public void consumaOggetto(OggettoConsumabile oggetto, Giocabile g){
@@ -182,5 +190,9 @@ public class GestoreGioco {
     public void equipaggiaOggetto(OggettoEquipaggiabile oggetto, Giocatore g) {
         party.cambiaOggetto(g, oggetto);
         GestoreForm.aggiornaInventario();
+    }
+    
+    public Giocatore getLeader(){
+        return (Giocatore) party.getPersonaggi().getFirst();
     }
 }

@@ -29,6 +29,7 @@ public class FormMappa extends javax.swing.JFrame {
             TipoCella.PIENO, Color.YELLOW,
             TipoCella.VUOTO, Color.LIGHT_GRAY
         );
+    private int[] ultimaPosizione;
     /**
      * Creates new form FormMappa
      */
@@ -84,6 +85,7 @@ public class FormMappa extends javax.swing.JFrame {
                 cella.setBorder(BorderFactory.createLineBorder(Color.black));
                 cella.setBackground(Color.DARK_GRAY);
                 grigliaPanel[i][j] = cella;
+                cella.setLayout(new java.awt.BorderLayout());
                 this.add(cella);
             }
         }
@@ -105,8 +107,13 @@ public class FormMappa extends javax.swing.JFrame {
                 }
             }
         }
+
+        if(ultimaPosizione != null)
+            grigliaPanel[ultimaPosizione[0]][ultimaPosizione[1]].removeAll();
         
-        grigliaPanel[gestoreGioco.getX()+1][gestoreGioco.getY()+1].setBackground(Color.red);
+        ultimaPosizione = new int[]{gestoreGioco.getX()+1, gestoreGioco.getY()+1};
+        
+        grigliaPanel[ultimaPosizione[0]][ultimaPosizione[1]].add(new JLabelPersonalizzato(gestoreGioco.getLeader().getSprite()));
         
         this.revalidate();
         this.repaint();

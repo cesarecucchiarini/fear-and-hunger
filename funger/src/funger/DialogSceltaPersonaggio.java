@@ -31,7 +31,7 @@ public class DialogSceltaPersonaggio extends JDialog{
                 JPanel panelPersonaggio = new JPanel();
                 panelPersonaggio.setLayout(new BoxLayout(panelPersonaggio, BoxLayout.Y_AXIS));
 
-                panelPersonaggio.add(new JLabel(g.getSprite()));
+                panelPersonaggio.add(new JLabelPersonalizzato(g.getSprite()));
 
                 JButton bottoneScelta = new JButton("scegli");
                 bottoneScelta.addActionListener(new ActionListener(){
@@ -80,7 +80,7 @@ public class DialogSceltaPersonaggio extends JDialog{
         this.setLayout(new BorderLayout());
         this.add(panelGiocabili);
             
-        this.setSize(new Dimension(300, 300));
+        this.setSize(new Dimension(400, 400));
         this.setVisible(true);
     }
 }

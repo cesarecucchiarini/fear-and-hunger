@@ -9,7 +9,10 @@ import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -68,17 +71,17 @@ public class FormCombattimento extends javax.swing.JFrame {
         panelParty.setOpaque(false);
         panelParty.setLayout(new GridLayout(1, gestoreCombattimento.getParty().size()));
         
-        for(Giocabile g : gestoreCombattimento.getParty()){
+        for(Giocabile giocatore : gestoreCombattimento.getParty()){
             JPanel panelPersonaggio = new JPanel();
             panelPersonaggio.setLayout(new BorderLayout());
             panelPersonaggio.setOpaque(false);
             
-            JLabel immagine = new JLabel(g.getSprite());
+            JLabelPersonalizzato immagine = new JLabelPersonalizzato(giocatore.getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelPersonaggio.add(immagine, BorderLayout.CENTER);
             
-            JProgressBar barraVita = new JProgressBar(0, g.getVitaMax());
-            barraVita.setValue(g.getVita());
+            JProgressBar barraVita = new JProgressBar(0, giocatore.getVitaMax());
+            barraVita.setValue(giocatore.getVita());
             barraVita.setStringPainted(true);
             barraVita.setPreferredSize(new Dimension(0, 75));
             panelPersonaggio.add(barraVita, BorderLayout.NORTH);
@@ -96,7 +99,7 @@ public class FormCombattimento extends javax.swing.JFrame {
         panelCreabile.setOpaque(false);
         panelCreabile.setLayout(new BorderLayout());       
         
-        JLabel immagine = new JLabel(gestoreCombattimento.getNemico().getSprite());
+        JLabelPersonalizzato immagine = new JLabelPersonalizzato(gestoreCombattimento.getNemico().getSprite());
         immagine.setHorizontalAlignment(JLabel.CENTER);
         panelCreabile.add(immagine, BorderLayout.CENTER);
         

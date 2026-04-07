@@ -91,8 +91,8 @@ public class FormGioco extends javax.swing.JFrame {
         panelParty.setOpaque(false);
         panelParty.setLayout(new GridLayout(1, gestoreGioco.getGrandezzaParty()));
         
-        for(Giocabile g : gestoreGioco.getParty()){
-            JLabel immagine = new JLabel(g.getSprite());
+        for(Giocabile giocatore : gestoreGioco.getParty()){
+            JLabelPersonalizzato immagine = new JLabelPersonalizzato(giocatore.getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelParty.add(immagine);
         }
@@ -109,7 +109,7 @@ public class FormGioco extends javax.swing.JFrame {
         panelCreabile.setLayout(new BorderLayout());       
         
         if(gestoreGioco.getCreabileStanza() != null && gestoreGioco.getStatoCella() != Cella.COMPLETATA){
-            JLabel immagine = new JLabel(gestoreGioco.getCreabileStanza().getSprite());
+            JLabelPersonalizzato immagine = new JLabelPersonalizzato(gestoreGioco.getCreabileStanza().getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelCreabile.add(immagine);
         }

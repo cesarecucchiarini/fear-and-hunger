@@ -25,13 +25,13 @@ public class DialogUtilizzoOggetto extends JDialog{
         this.gestoreGioco = gestoreGioco;
         JDialog dialog = this;
         
-        this.setSize(new Dimension(300, 300));
+        this.setSize(new Dimension(400, 400));
         this.setLayout(new BorderLayout());
         
         JPanel panelOggetto = new JPanel();
         panelOggetto.setLayout(new GridLayout(1, 2));
         
-        panelOggetto.add(new JLabel(oggetto.getSprite()));
+        panelOggetto.add(new JLabelPersonalizzato(oggetto.getSprite()));
         
         JPanel panelDescrizione = new JPanel();
         panelDescrizione.setLayout(new BoxLayout(panelDescrizione, BoxLayout.Y_AXIS));

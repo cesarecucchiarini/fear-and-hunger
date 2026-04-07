@@ -84,7 +84,7 @@ public class GestoreFile {
                 }
                 else{
                     tipoEquipaggiabile = TipoOggettoEquipaggiabile.valueOf(split[5].toUpperCase());
-                    c = (Creabile)new OggettoEquipaggiabile(split[1], "img"+split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile);
+                    c = (Creabile)new OggettoEquipaggiabile(split[1], "img/"+split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile);
                 }
                 GestoreCreabili.aggiungiCreabile(c);
             }
