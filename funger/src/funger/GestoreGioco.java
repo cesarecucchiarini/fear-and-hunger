@@ -148,4 +148,8 @@ public class GestoreGioco {
     public void attacca(int dannoInput, Giocabile obbiettivo){
         obbiettivo.perdiVita(dannoInput);
     }
+
+    public int getStatoCella() {
+        return mappa.getStatoCella(posizione[0], posizione[1]);
+    }
 }

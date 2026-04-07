@@ -38,13 +38,15 @@ public class FormCombattimento extends javax.swing.JFrame {
      */
     public FormCombattimento(GestoreCombattimento gestoreCombattimento) {
         initComponents();
+        PanelSfondo sfondo = new PanelSfondo("img/background.png");       
+        this.setContentPane(sfondo);
+        
         this.gestoreCombattimento = gestoreCombattimento;
         this.setLayout(new BorderLayout());
         
         creaPanelCombattimento();
         creaPanelBottoni();
-        
-        this.getContentPane().setBackground(Color.red);
+               
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setVisible(true);
     }

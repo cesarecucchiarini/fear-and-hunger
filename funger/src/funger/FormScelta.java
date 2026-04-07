@@ -28,6 +28,9 @@ public class FormScelta extends javax.swing.JFrame {
      */
     public FormScelta(GestoreGioco gestoreGioco) {
         initComponents();
+        PanelSfondo sfondo = new PanelSfondo("img/backgroundScelta.png");       
+        this.setContentPane(sfondo);
+        
         this.gestoreGioco = gestoreGioco;
         this.setLayout(new BorderLayout());
         
@@ -45,11 +48,12 @@ public class FormScelta extends javax.swing.JFrame {
         JPanel panelScelta = new JPanel();
         panelScelta.setBorder(BorderFactory.createEmptyBorder(10,30,10,30));
         panelScelta.setLayout(new GridLayout(1, 4, 10, 0));
+        panelScelta.setOpaque(false);
         
         for(Map.Entry<Giocatore, String> entry : mappaPersonaggi.entrySet()){
             JPanel p = new JPanel();
-            p.setBorder(BorderFactory.createLineBorder(Color.black));
             p.setLayout(new BorderLayout());
+            p.setOpaque(false);
             
             JLabel immagine = new JLabel(entry.getKey().getSprite());
             p.add(immagine, BorderLayout.CENTER);
@@ -82,11 +86,11 @@ public class FormScelta extends javax.swing.JFrame {
             panelBottoni.add(bottoneScelta);
             panelBottoni.add(bottoneInfo);
             panelBottoni.setBorder(BorderFactory.createEmptyBorder(0, 0, 20, 0));
+            panelBottoni.setOpaque(false);
             
             p.add(panelBottoni, BorderLayout.SOUTH);         
             panelScelta.add(p);
         }
-        panelScelta.setBackground(Color.red);
         
         this.add(panelScelta, BorderLayout.CENTER);
     }

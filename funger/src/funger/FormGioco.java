@@ -27,6 +27,9 @@ public class FormGioco extends javax.swing.JFrame {
      */
     public FormGioco(GestoreGioco gestoreGioco) {
         initComponents();
+        PanelSfondo sfondo = new PanelSfondo("img/background.png");       
+        this.setContentPane(sfondo);
+        
         this.gestoreGioco = gestoreGioco;
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLayout(new BorderLayout());
@@ -105,7 +108,7 @@ public class FormGioco extends javax.swing.JFrame {
         panelCreabile.setOpaque(false);
         panelCreabile.setLayout(new BorderLayout());       
         
-        if(gestoreGioco.getCreabileStanza() != null){
+        if(gestoreGioco.getCreabileStanza() != null && gestoreGioco.getStatoCella() != Cella.COMPLETATA){
             JLabel immagine = new JLabel(gestoreGioco.getCreabileStanza().getSprite());
             immagine.setHorizontalAlignment(JLabel.CENTER);
             panelCreabile.add(immagine);

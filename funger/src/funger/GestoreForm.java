@@ -52,6 +52,7 @@ public class GestoreForm {
     
     public static void apriCombattimento(){
         form.dispose();
+        formMappa.dispose();
         form = new FormCombattimento(gestoreGioco.getGestoreCombattimento());
     }
     
