@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 public class GestoreForm {
     private static JFrame form;
     private static FormMappa formMappa;
+    private static FormInventario formInventario;
     private static GestoreGioco gestoreGioco = new GestoreGioco();
     
     /**
@@ -28,9 +29,8 @@ public class GestoreForm {
     public static void iniziaGioco(){
         form.dispose();
         formMappa = new FormMappa(gestoreGioco);
-        gestoreGioco.setFormMappa(formMappa);
+        formInventario = new FormInventario(gestoreGioco);
         form = new FormGioco(gestoreGioco);
-        formMappa.aggiornaGrigliaMappa();
     }
     
     public static void apriMappa(){
@@ -43,7 +43,8 @@ public class GestoreForm {
     }
     
     public static void aggiornaGrigliaMappa(){
-        formMappa.aggiornaGrigliaMappa();
+        if(formMappa != null)
+            formMappa.aggiornaGrigliaMappa();
     }
     
     public static void aggiornaPanelGioco(){
@@ -69,15 +70,28 @@ public class GestoreForm {
     DEVO MODIFICARE PERCHE LA BARRA SCENDE TARDI
     */
     public static void aggiornaProgressBars(){
-        FormCombattimento f = (FormCombattimento) form;
-        f.disabilitaBottoni();
-        f.aggiornaProgressBars();
+            FormCombattimento f = (FormCombattimento) form;
+            f.disabilitaBottoni();
+            f.aggiornaProgressBars();
 
-        javax.swing.Timer timer = new javax.swing.Timer(500, e -> {
-            f.abilitaBottoni();
-        });
+            javax.swing.Timer timer = new javax.swing.Timer(500, e -> {
+                f.abilitaBottoni();
+            });
 
-        timer.setRepeats(false);
-        timer.start();
+            timer.setRepeats(false);
+            timer.start();
+    }
+    
+    public static void apriInventario(){
+        formInventario.aggiornaOggetti();
+        formInventario.setVisible(true);
+        formInventario.requestFocus();
+    }
+    
+    public static void aggiornaInventario(){
+        if(formInventario != null){
+            formInventario.aggiornaOggetti();
+            formInventario.creaPanelParty();
+        }
     }
 }

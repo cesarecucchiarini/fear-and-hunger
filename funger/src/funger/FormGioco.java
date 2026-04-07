@@ -169,6 +169,12 @@ public class FormGioco extends javax.swing.JFrame {
         JButton bottoneInventario = new JButton("Inventario");
         bottoneInventario.setFont(font);
         bottoneInventario.setAlignmentX(CENTER_ALIGNMENT);
+        bottoneInventario.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    GestoreForm.apriInventario();
+                }
+            });
         panelBottoni.add(bottoneInventario);
         
         panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));

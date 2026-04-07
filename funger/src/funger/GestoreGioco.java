@@ -15,7 +15,6 @@ public class GestoreGioco {
     private Party party;
     private Mappa mappa;
     private int[] posizione = new int[2];
-    private FormMappa formMappa;
     private boolean movimentoPossibile = true;
     private Creabile creabileStanza;
     private GestoreCombattimento gestoreCombattimento;
@@ -88,6 +87,10 @@ public class GestoreGioco {
         return party.getPersonaggi();
     }
     
+    public ArrayList<Giocatore> getGiocatori(){
+        return party.getGiocatori();
+    }
+    
     /**
      * 
      * @return numero di membri del party
@@ -111,11 +114,7 @@ public class GestoreGioco {
     public int[] getPosizione(){
         return posizione;
     }
-    
-    public void setFormMappa(FormMappa formMappa){
-        this.formMappa = formMappa;
-    }
-    
+
     public int getX(){
         return posizione[0];
     }
@@ -151,5 +150,37 @@ public class GestoreGioco {
 
     public int getStatoCella() {
         return mappa.getStatoCella(posizione[0], posizione[1]);
+    }
+    
+    public ArrayList<Oggetto> getOggetti(){
+        return party.getOggetti();
+    }
+
+    public void rimuoviOggetto(Oggetto oggetto) {
+        party.rimuoviOggetto(oggetto);
+    }
+    
+    public void aggiungiOggetto(Oggetto oggetto){
+        party.aggiungiOggetto(oggetto);
+    }
+
+    public void consumaOggetto(OggettoConsumabile oggetto, Giocabile g){
+        g.perdiVita(oggetto.getStatPrincipale());
+        rimuoviOggetto(oggetto);
+        GestoreForm.aggiornaInventario();
+    }
+    public void consumaOggetto(OggettoConsumabile oggetto, Giocatore g) {
+        switch(oggetto.getTipo()){
+            case TipoOggettoConsumabile.CURATIVO -> {g.guadagnaVita(oggetto.getStatPrincipale());}
+            case TipoOggettoConsumabile.MENTALE -> {g.guadagnaMente(oggetto.getStatPrincipale());}
+            case TipoOggettoConsumabile.COMMESTIBILE -> {g.guadagnaFame(oggetto.getStatPrincipale());}
+        }
+        rimuoviOggetto(oggetto);
+        GestoreForm.aggiornaInventario();
+    }
+
+    public void equipaggiaOggetto(OggettoEquipaggiabile oggetto, Giocatore g) {
+        party.cambiaOggetto(g, oggetto);
+        GestoreForm.aggiornaInventario();
     }
 }

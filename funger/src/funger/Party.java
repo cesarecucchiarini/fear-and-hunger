@@ -109,4 +109,12 @@ public class Party {
     public void usaOggetto(Giocabile giocabile, OggettoConsumabile oggetto){
         giocabile.consumaOggetto(oggetto);
     }
+    
+    public ArrayList<Oggetto> getOggetti(){
+        return inventario.getOggetti();
+    }
+
+    public void rimuoviOggetto(Oggetto oggetto) {
+        inventario.rimuoviOggetto(oggetto);
+    }
 }

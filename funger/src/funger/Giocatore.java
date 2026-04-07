@@ -135,4 +135,14 @@ public abstract class Giocatore extends Giocabile implements Creabile{
             case TipoOggettoConsumabile.MENTALE -> {guadagnaMente(oggetto.getStatPrincipale());}
         }
     }
+
+    public int getFame() {
+        return fame;
+    }
+
+    public int getMente() {
+        return mente;
+    }
+    
+    
 }
