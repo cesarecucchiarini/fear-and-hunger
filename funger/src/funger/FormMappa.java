@@ -113,7 +113,7 @@ public class FormMappa extends javax.swing.JFrame {
         
         ultimaPosizione = new int[]{gestoreGioco.getX()+1, gestoreGioco.getY()+1};
         
-        if(gestoreGioco.getGrandezzaParty() > 0)
+        if(gestoreGioco.getGioco())
             grigliaPanel[ultimaPosizione[0]][ultimaPosizione[1]].add(new JLabelPersonalizzato(gestoreGioco.getLeader().getSprite()));
         
         this.revalidate();

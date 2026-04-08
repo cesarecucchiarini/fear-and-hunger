@@ -36,10 +36,10 @@ public class DialogAbilita extends JDialog{
                     dialog.dispose();
                 }
             });
-            panelGiocatore.add(bottoneAbilita, BorderLayout.EAST);
+            panelGiocatore.add(bottoneAbilita, BorderLayout.SOUTH);
             this.add(panelGiocatore);
         }
-        this.setSize(new Dimension(500, 500));
+        this.setSize(new Dimension(500*gestoreGioco.getGrandezzaParty(), 500));
         this.setVisible(true);
     }
 }

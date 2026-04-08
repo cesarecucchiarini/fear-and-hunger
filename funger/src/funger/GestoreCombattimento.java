@@ -46,13 +46,12 @@ public class GestoreCombattimento implements Serializable{
             GestoreForm.chiudiCombattimento();
             return true;
         }
-        else if(nemico != null && nemico.controllaMorte()){
+        else if(nemico.controllaMorte()){
             nemico = null;
             gestoreGioco.finisciAbilita();
             GestoreForm.chiudiCombattimento();
             return true;
         }
-        
         else if(party.get(0).controllaMorte()){
             nemico = null;
             gestoreGioco.finisciAbilita();
@@ -64,6 +63,8 @@ public class GestoreCombattimento implements Serializable{
     }
     
     public void cambiaTurno(){
+        if(controllaFineCombattimento())
+            return;
         indiceCorrente++;
         if(indiceCorrente % (party.size()+1) == party.size()){
             giocabileCorrente = nemico;
@@ -76,11 +77,12 @@ public class GestoreCombattimento implements Serializable{
     }
 
     public void controllaAttacco(){
+        if(controllaFineCombattimento())
+            return;
         if(!(giocabileCorrente instanceof Giocatore)){
             giocabileCorrente.attacca();
             GestoreForm.aggiornaProgressBars();
-            if(!controllaFineCombattimento())
-                cambiaTurno();
+            cambiaTurno();
         }
         else{
             if(giocabileCorrente instanceof Vichingo vichingo){
@@ -98,6 +100,10 @@ public class GestoreCombattimento implements Serializable{
     
     public ArrayList<Giocabile> getParty() {
         return party;
+    }
+    
+    public void rimuoviMembro(Giocabile giocabile){
+        party.remove(giocabile);
     }
 
     public Nemico getNemico() {

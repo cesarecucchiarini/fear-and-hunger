@@ -21,6 +21,7 @@ public class GestoreGioco implements Serializable{
     private boolean movimentoPossibile = true;
     private Creabile creabileStanza;
     private GestoreCombattimento gestoreCombattimento;
+    private boolean gioco = true;
     
     public GestoreGioco(){
         GestoreFile.setGestoreGioco(this);
@@ -45,6 +46,7 @@ public class GestoreGioco implements Serializable{
      * metodo da chiamare in caso di morte del leader
      */
     public void fineGioco(){
+        gioco = false;
         GestoreForm.morte();
     }
     
@@ -54,8 +56,8 @@ public class GestoreGioco implements Serializable{
      * @param movY spostamento verticale
      */
     public void muovi(int movX, int movY){
-        creabileStanza = null;
         if(!mappa.getTipoCella(posizione[0] + movX, posizione[1] + movY).equals(TipoCella.MURO) && movimentoPossibile){
+            creabileStanza = null;
             for(Giocatore g : party.getGiocatori()){
                 g.perdiFame(3);
                 g.perdiMente(3);
@@ -163,6 +165,11 @@ public class GestoreGioco implements Serializable{
     
     public void attacca(int dannoInput, Giocabile obbiettivo){
         obbiettivo.perdiVita(dannoInput);
+        if(obbiettivo.controllaMorte()){
+            party.rimuoviMembro(obbiettivo);
+            if(inBattaglia())
+                gestoreCombattimento.rimuoviMembro(obbiettivo);
+        }
     }
 
     public int getStatoCella() {
@@ -202,8 +209,6 @@ public class GestoreGioco implements Serializable{
     }
     
     public Giocatore getLeader(){
-        if(party.getPersonaggi().isEmpty()) 
-            return null;
         return (Giocatore) party.getPersonaggi().getFirst();
     }
     
@@ -244,5 +249,9 @@ public class GestoreGioco implements Serializable{
 
     public String getIdCreabileCella() {
         return mappa.getIdCreabileCella(posizione[0], posizione[1]);
+    }
+    
+    public boolean getGioco(){
+        return gioco;
     }
 }

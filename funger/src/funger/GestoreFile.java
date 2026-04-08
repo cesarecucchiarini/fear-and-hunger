@@ -153,6 +153,7 @@ public class GestoreFile {
     public static GestoreGioco caricaPartita(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("salvataggio.ser"))){
             gestoreGioco = (GestoreGioco)ois.readObject();
+            GestoreCreabili.cambiaGestoreGioco(gestoreGioco);
             Logger.setTextArea((javax.swing.JTextArea) ois.readObject());
         }
         catch(Exception e){

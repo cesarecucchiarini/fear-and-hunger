@@ -113,7 +113,6 @@ public abstract class Giocabile implements Cloneable, Serializable{
      */
     public boolean controllaMorte(){
         if(vita == 0){
-            Logger.scriviLog(nome + " è morto");
             return true;
         }
         return false;
@@ -137,5 +136,9 @@ public abstract class Giocabile implements Cloneable, Serializable{
         }
         catch(Exception e){}
         return null;
+    }
+
+    void setGestoreGioco(GestoreGioco gestoreGioco) {
+        this.gestoreGioco = gestoreGioco;
     }
 }

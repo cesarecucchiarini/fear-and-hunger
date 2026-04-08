@@ -5,7 +5,9 @@
 package funger;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -25,62 +27,40 @@ public class DialogSceltaPersonaggio extends JDialog{
         JDialog dialog = this;
         
         JPanel panelGiocabili = new JPanel();
+        panelGiocabili.setLayout(new GridLayout(1, gestoreGioco.getGrandezzaParty()));
         
-        if(oggetto instanceof OggettoConsumabile && ((OggettoConsumabile) oggetto).getTipo().equals(TipoOggettoConsumabile.CURATIVO)){
-            for(Giocabile g : gestoreGioco.getParty()){
-                JPanel panelPersonaggio = new JPanel();
-                panelPersonaggio.setLayout(new BoxLayout(panelPersonaggio, BoxLayout.Y_AXIS));
+        
+        
+        for(Giocabile g : gestoreGioco.getParty()){
+            JPanel panelPersonaggio = new JPanel();
+            panelPersonaggio.setLayout(new BorderLayout());
 
-                panelPersonaggio.add(new JLabelPersonalizzato(g.getSprite()));
+            panelPersonaggio.add(new JLabelPersonalizzato(g.getSprite()), BorderLayout.CENTER);
 
-                JButton bottoneScelta = new JButton("scegli");
-                bottoneScelta.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e){
+            JButton bottoneScelta = new JButton("scegli");
+            bottoneScelta.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    if(oggetto instanceof OggettoConsumabile)
                         gestoreGioco.consumaOggetto((OggettoConsumabile) oggetto, g);
-                        dialog.dispose();
-                    }
-                });
-
-                panelPersonaggio.add(bottoneScelta);
-                panelGiocabili.add(panelPersonaggio);
-            }
-        }
-        else{
-            for(Giocatore g : gestoreGioco.getGiocatori()){
-                JPanel panelPersonaggio = new JPanel();
-                panelPersonaggio.setLayout(new BoxLayout(panelPersonaggio, BoxLayout.Y_AXIS));
-
-                panelPersonaggio.add(new JLabel(g.getSprite()));
-
-                JButton bottoneScelta = new JButton("scegli");
-                if(oggetto instanceof OggettoConsumabile){
-                    bottoneScelta.addActionListener(new ActionListener(){
-                        @Override
-                        public void actionPerformed(ActionEvent e){
-                            gestoreGioco.consumaOggetto((OggettoConsumabile) oggetto, (Giocatore) g);
-                            dialog.dispose();
-                        }
-                    });
+                    else
+                        gestoreGioco.equipaggiaOggetto((OggettoEquipaggiabile) oggetto, (Giocatore)g);
+                    dialog.dispose();
                 }
-                else{
-                    bottoneScelta.addActionListener(new ActionListener(){
-                        @Override
-                        public void actionPerformed(ActionEvent e){
-                            gestoreGioco.equipaggiaOggetto((OggettoEquipaggiabile) oggetto, (Giocatore)g);
-                            dialog.dispose();
-                        }
-                    });
-                }
-                panelPersonaggio.add(bottoneScelta);
+            });
+
+            panelPersonaggio.add(bottoneScelta, BorderLayout.SOUTH);
+            
+            if((oggetto instanceof OggettoConsumabile && ((OggettoConsumabile) oggetto).getTipo().equals(TipoOggettoConsumabile.CURATIVO)))
                 panelGiocabili.add(panelPersonaggio);
-            }
+            else if(g instanceof Giocatore)
+                panelGiocabili.add(panelPersonaggio);
         }
         
         this.setLayout(new BorderLayout());
         this.add(panelGiocabili);
-            
-        this.setSize(new Dimension(400, 400));
+
+        this.setSize(new Dimension(400*gestoreGioco.getGrandezzaParty(), 400));
         this.setVisible(true);
     }
 }

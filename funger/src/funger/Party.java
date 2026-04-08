@@ -47,6 +47,7 @@ public class Party implements Serializable{
      * @param giocabile membro morto da rimuovere
      */
     public void rimuoviMembro(Giocabile giocabile){
+        Logger.scriviLog(giocabile.getNome() + " è morto");
         if(giocabile.equals(personaggi.get(0))){
             gestoreGioco.fineGioco();
         }

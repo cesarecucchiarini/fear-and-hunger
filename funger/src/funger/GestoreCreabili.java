@@ -114,4 +114,13 @@ public class GestoreCreabili {
         
         return id;
     }    
+
+    static void cambiaGestoreGioco(GestoreGioco gestoreGioco) {
+        for(Giocabile g : mappaCreabili.get("Giocatore").toArray(Giocabile[]::new)){
+            g.setGestoreGioco(gestoreGioco);
+        }
+        for(Giocabile g : mappaCreabili.get("Nemico").toArray(Giocabile[]::new)){
+            g.setGestoreGioco(gestoreGioco);
+        }
+    }
 }
