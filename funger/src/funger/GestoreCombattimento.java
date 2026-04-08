@@ -4,13 +4,15 @@
  */
 package funger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author sergi
  */
-public class GestoreCombattimento {
+public class GestoreCombattimento implements Serializable{
+    private static final long serialVersionUID = 1L; 
     private GestoreGioco gestoreGioco;
     private ArrayList<Giocabile> party;
     private Nemico nemico;
@@ -44,14 +46,14 @@ public class GestoreCombattimento {
             GestoreForm.chiudiCombattimento();
             return true;
         }
-        if(nemico.controllaMorte()){
+        else if(nemico != null && nemico.controllaMorte()){
             nemico = null;
             gestoreGioco.finisciAbilita();
             GestoreForm.chiudiCombattimento();
             return true;
         }
         
-        if(party.get(0).controllaMorte()){
+        else if(party.get(0).controllaMorte()){
             nemico = null;
             gestoreGioco.finisciAbilita();
             GestoreForm.morte();

@@ -202,6 +202,33 @@ public class FormGioco extends javax.swing.JFrame {
             });
         panelBottoni.add(bottoneInfo);
         
+        panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));
+        
+        JButton bottoneSalvataggio = new JButton("Salva");
+        bottoneSalvataggio.setFont(font);
+        bottoneSalvataggio.setAlignmentX(CENTER_ALIGNMENT);
+        bottoneSalvataggio.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    GestoreFile.salvaPartita();
+                }
+            });
+        panelBottoni.add(bottoneSalvataggio);
+        
+        panelBottoni.add(Box.createRigidArea(new Dimension(0, 20)));
+        
+        JButton bottoneCaricamento = new JButton("Carica");
+        bottoneCaricamento.setFont(font);
+        bottoneCaricamento.setAlignmentX(CENTER_ALIGNMENT);
+        bottoneCaricamento.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent e){
+                    gestoreGioco = GestoreFile.caricaPartita();
+                    GestoreForm.setGestoreGioco(gestoreGioco);
+                }
+            });
+        panelBottoni.add(bottoneCaricamento);
+        
         panelBottoni.add(Box.createVerticalGlue());
         
         panelLaterale.add(panelBottoni, BorderLayout.SOUTH);

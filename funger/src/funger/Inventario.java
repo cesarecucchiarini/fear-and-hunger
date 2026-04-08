@@ -4,13 +4,15 @@
  */
 package funger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author sergi
  */
-public class Inventario {
+public class Inventario implements Serializable{
+    private static final long serialVersionUID = 1L; 
     private ArrayList<Oggetto> oggetti = new ArrayList<>();
     
     /**

@@ -23,6 +23,11 @@ public class GestoreForm {
         form = new FormScelta(gestoreGioco);
     }
     
+    public static void setGestoreGioco(GestoreGioco gestoreGioco){
+        GestoreForm.gestoreGioco = gestoreGioco;
+        iniziaGioco();
+    }
+    
     /**
      * cambia form dalla scelta del personaggio al gioco
      */
@@ -77,6 +82,7 @@ public class GestoreForm {
     DEVO MODIFICARE PERCHE LA BARRA SCENDE TARDI
     */
     public static void aggiornaProgressBars(){
+        if(form instanceof FormCombattimento){
             FormCombattimento f = (FormCombattimento) form;
             f.disabilitaBottoni();
             f.aggiornaProgressBars();
@@ -87,6 +93,7 @@ public class GestoreForm {
 
             timer.setRepeats(false);
             timer.start();
+        }
     }
     
     public static void apriInventario(){

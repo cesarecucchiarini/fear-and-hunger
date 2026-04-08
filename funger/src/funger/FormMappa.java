@@ -26,7 +26,7 @@ public class FormMappa extends javax.swing.JFrame {
             TipoCella.MURO, Color.BLACK,
             TipoCella.INIZIO, Color.GREEN,
             TipoCella.FINE, Color.BLUE,
-            TipoCella.PIENO, Color.YELLOW,
+            TipoCella.PIENO, Color.LIGHT_GRAY,
             TipoCella.VUOTO, Color.LIGHT_GRAY
         );
     private int[] ultimaPosizione;

@@ -4,11 +4,16 @@
  */
 package funger;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sergi
  */
-public enum TipoOggettoEquipaggiabile {
+public enum TipoOggettoEquipaggiabile implements Serializable{
     DIFENSIVO,
-    OFFENSIVO
+    OFFENSIVO;
+    
+    private static final long serialVersionUID = 1L; 
+
 }

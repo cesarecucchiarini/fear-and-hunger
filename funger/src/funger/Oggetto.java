@@ -4,13 +4,15 @@
  */
 package funger;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author sergi
  */
-public abstract class Oggetto implements Creabile, Cloneable{
+public abstract class Oggetto implements Creabile, Cloneable, Serializable{
+    private static final long serialVersionUID = 1L; 
     private String nome;
     private ImageIcon sprite;
 

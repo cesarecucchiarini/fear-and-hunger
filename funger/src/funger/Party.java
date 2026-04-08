@@ -4,13 +4,15 @@
  */
 package funger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author cucchiarini.cesare
  */
-public class Party {
+public class Party implements Serializable{
+    private static final long serialVersionUID = 1L; 
     private ArrayList<Giocabile> personaggi = new ArrayList<>();
     private GestoreGioco gestoreGioco;
     private Inventario inventario = new Inventario();

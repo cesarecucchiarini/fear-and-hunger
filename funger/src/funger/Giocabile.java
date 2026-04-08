@@ -4,13 +4,15 @@
  */
 package funger;
 
+import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author cucchiarini.cesare
  */
-public abstract class Giocabile implements Cloneable{
+public abstract class Giocabile implements Cloneable, Serializable{
+    private static final long serialVersionUID = 1L; 
     /**
      * vita del Giocabile
      */

@@ -4,11 +4,14 @@
  */
 package funger;
 
+import java.io.Serializable;
+
 /**
  *
  * @author cucchiarini.cesare
  */
-public class Mappa {
+public class Mappa implements Serializable{
+    private static final long serialVersionUID = 1L; 
     private Cella[][] griglia;
     private int righe;
     private int numCella;

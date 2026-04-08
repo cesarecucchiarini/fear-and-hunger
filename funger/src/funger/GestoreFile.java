@@ -139,4 +139,23 @@ public class GestoreFile {
     interface CharacterFactory {
         Creabile createGiocatore(String name, String path, int vita, int danno, GestoreGioco gestoreGioco);
     }
+    
+    public static void salvaPartita(){
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("salvataggio.ser"))){
+            oos.writeObject(gestoreGioco);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public static GestoreGioco caricaPartita(){
+        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("salvataggio.ser"))){
+            gestoreGioco = (GestoreGioco)ois.readObject();
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        return GestoreFile.gestoreGioco;
+    }
 }

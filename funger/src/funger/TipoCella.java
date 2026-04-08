@@ -4,14 +4,18 @@
  */
 package funger;
 
+import java.io.Serializable;
+
 /**
  *
  * @author cucchiarini.cesare
  */
-public enum TipoCella {
+public enum TipoCella implements Serializable{
     VUOTO,
     MURO,
     PIENO,
     FINE,
-    INIZIO
+    INIZIO;
+    
+    private static final long serialVersionUID = 1L; 
 }

@@ -4,12 +4,17 @@
  */
 package funger;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sergi
  */
-public enum TipoOggettoConsumabile {
+public enum TipoOggettoConsumabile implements Serializable{
     MENTALE,
     CURATIVO,
-    COMMESTIBILE
+    COMMESTIBILE;
+    
+    private static final long serialVersionUID = 1L; 
+
 }

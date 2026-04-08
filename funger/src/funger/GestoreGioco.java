@@ -4,6 +4,7 @@
  */
 package funger;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +13,8 @@ import java.util.Random;
  *
  * @author cucchiarini.cesare
  */
-public class GestoreGioco {
+public class GestoreGioco implements Serializable{
+    private static final long serialVersionUID = 1L;
     private Party party;
     private Mappa mappa;
     private int[] posizione = new int[2];
