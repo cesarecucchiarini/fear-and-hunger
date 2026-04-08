@@ -108,6 +108,7 @@ public class GestoreGioco implements Serializable{
     
     public void aggiungiMembro(Giocabile membro){
         party.aggiungiMembro(membro);
+        GestoreForm.aggiornaPanelGioco();
     }
     
     public int getGrandezzaMappa(){
@@ -239,5 +240,9 @@ public class GestoreGioco implements Serializable{
         }
         
         return party.getPersonaggi().get(new Random().nextInt(getGrandezzaParty()));
+    }
+
+    public String getIdCreabileCella() {
+        return mappa.getIdCreabileCella(posizione[0], posizione[1]);
     }
 }

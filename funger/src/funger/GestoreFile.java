@@ -143,6 +143,7 @@ public class GestoreFile {
     public static void salvaPartita(){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("salvataggio.ser"))){
             oos.writeObject(gestoreGioco);
+            oos.writeObject(Logger.getTextArea());
         }
         catch(Exception e){
             System.out.println(e.getMessage());
@@ -152,6 +153,7 @@ public class GestoreFile {
     public static GestoreGioco caricaPartita(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("salvataggio.ser"))){
             gestoreGioco = (GestoreGioco)ois.readObject();
+            Logger.setTextArea((javax.swing.JTextArea) ois.readObject());
         }
         catch(Exception e){
             System.out.println(e.getMessage());

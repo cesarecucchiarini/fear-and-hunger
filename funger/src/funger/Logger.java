@@ -34,6 +34,10 @@ public class Logger {
     public static JTextArea getTextArea() {
         return textArea;
     }
+
+    static void setTextArea(JTextArea textArea) {
+        Logger.textArea = textArea;
+    }
     
     
 }

@@ -23,6 +23,8 @@ public class Mercenario extends Giocatore{
                 Logger.scriviLog("il party riesce a scappare");
                 super.getGestoreGioco().finisciCombattimento();
             }
+            else
+                Logger.scriviLog("il party non riesce a scappare");
         }
         else
             Logger.scriviLog("non succede niente");

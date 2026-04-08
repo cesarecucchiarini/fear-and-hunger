@@ -13,7 +13,7 @@ public class Trotur extends Nemico{
     public Trotur(String nome, String path, int vita, int danno, GestoreGioco gestoreGioco) {
         super(nome, path, vita, danno, gestoreGioco);
     }
-      
+    
     
     @Override
     public void attacca(){

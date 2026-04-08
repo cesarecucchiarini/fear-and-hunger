@@ -16,11 +16,13 @@ public class Necromante extends Giocatore{
     
     @Override
     public void utilizzaAbilita(){
-        if(super.getGestoreGioco().inBattaglia())
+        if(super.getGestoreGioco().inBattaglia()){
             Logger.scriviLog("non succede niente");
-            
-        if(super.getGestoreGioco().getCreabileStanza() != null){
-            if(super.getGestoreGioco().getCreabileStanza() instanceof Nemico nemico)
+            return;
+        }
+        
+        if(super.getGestoreGioco().getStatoCella() == Cella.COMPLETATA){
+            if(GestoreCreabili.getCreabile(super.getGestoreGioco().getIdCreabileCella()) instanceof Nemico nemico)
                 super.getGestoreGioco().aggiungiMembro(nemico);
             else
                 Logger.scriviLog("non succede niente");
