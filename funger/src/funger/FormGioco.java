@@ -210,7 +210,18 @@ public class FormGioco extends javax.swing.JFrame {
         bottoneSalvataggio.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    GestoreFile.salvaPartita();
+                    int selectedOption = JOptionPane.showConfirmDialog(null, 
+                       "Vuoi salvare ser?", 
+                       null, 
+                       JOptionPane.YES_NO_OPTION); 
+
+                    if (selectedOption == JOptionPane.YES_OPTION) {
+                        GestoreFile.salvaPartitaSer();
+                    }
+                    else{
+                        GestoreFile.salvaPartitaCsv();
+                    }
+                    
                 }
             });
         panelBottoni.add(bottoneSalvataggio);
@@ -223,8 +234,18 @@ public class FormGioco extends javax.swing.JFrame {
         bottoneCaricamento.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent e){
-                    gestoreGioco = GestoreFile.caricaPartita();
+                    int selectedOption = JOptionPane.showConfirmDialog(null, 
+                       "Vuoi caricare ser?", 
+                       null, 
+                       JOptionPane.YES_NO_OPTION); 
+
+                    if (selectedOption == JOptionPane.YES_OPTION) {
+                        gestoreGioco = GestoreFile.caricaPartitaSer();
                     GestoreForm.setGestoreGioco(gestoreGioco);
+                    }
+                    else{
+                        GestoreFile.salvaPartitaCsv();
+                    } 
                 }
             });
         panelBottoni.add(bottoneCaricamento);

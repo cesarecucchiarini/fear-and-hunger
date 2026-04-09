@@ -1,4 +1,4 @@
-necromante,necromante.png,Enki,1,15
+necromante,necromante.png,Enki,100,15
 un necromante che può riportare in vita i nemici caduti
 vichingo,vichingo.png,Ragnvalrd,100,15
 un vichingo che può utilizzare la sua furia per sferrare attacchi potenti

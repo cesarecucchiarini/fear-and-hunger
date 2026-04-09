@@ -254,4 +254,8 @@ public class GestoreGioco implements Serializable{
     public boolean getGioco(){
         return gioco;
     }
+    
+    public boolean getMovimentoPossibile(){
+        return movimentoPossibile;
+    }
 }

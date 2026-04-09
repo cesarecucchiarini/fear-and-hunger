@@ -84,8 +84,8 @@ public class GestoreFile {
                     c = (Creabile)new OggettoConsumabile(split[1], "img/"+split[2], Integer.parseInt(split[3]), tipoConsumabile);
                 }
                 else{
-                    tipoEquipaggiabile = TipoOggettoEquipaggiabile.valueOf(split[5].toUpperCase());
-                    c = (Creabile)new OggettoEquipaggiabile(split[1], "img/"+split[2], Integer.parseInt(split[3]), Integer.parseInt(split[4]), tipoEquipaggiabile);
+                    tipoEquipaggiabile = TipoOggettoEquipaggiabile.valueOf(split[4].toUpperCase());
+                    c = (Creabile)new OggettoEquipaggiabile(split[1], "img/"+split[2], Integer.parseInt(split[3]), tipoEquipaggiabile);
                 }
                 GestoreCreabili.aggiungiCreabile(c);
             }
@@ -141,7 +141,7 @@ public class GestoreFile {
         Creabile createGiocatore(String name, String path, int vita, int danno, GestoreGioco gestoreGioco);
     }
     
-    public static void salvaPartita(){
+    public static void salvaPartitaSer(){
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("salvataggio.ser"))){
             oos.writeObject(gestoreGioco);
             oos.writeObject(Logger.getTextArea());
@@ -151,7 +151,7 @@ public class GestoreFile {
         }
     }
     
-    public static GestoreGioco caricaPartita(){
+    public static GestoreGioco caricaPartitaSer(){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("salvataggio.ser"))){
             gestoreGioco = (GestoreGioco)ois.readObject();
             GestoreCreabili.cambiaGestoreGioco(gestoreGioco);
@@ -161,5 +161,94 @@ public class GestoreFile {
             System.out.println(e.getMessage());
         }
         return GestoreFile.gestoreGioco;
+    }
+    
+    public static void salvaPartitaCsv(){
+        try(BufferedWriter w = new BufferedWriter(new FileWriter("salvataggio.txt"))){
+            
+            w.write(gestoreGioco.getGrandezzaParty() + "\n");
+            for(Giocabile giocabile : gestoreGioco.getParty()){
+                salvaGiocabileCsv(giocabile, w);
+            }
+            
+            w.append(gestoreGioco.getOggetti().size() + "\n");
+            for(Oggetto oggetto : gestoreGioco.getOggetti()){
+                salvaOggettoCsv(oggetto, w);
+            }
+            
+            w.append(gestoreGioco.getX() + "," + gestoreGioco.getY() + "\n");
+            salvaMappaCsv(gestoreGioco.getMappa(), w);
+            
+            w.append(gestoreGioco.getIdCreabileCella() + "\n");
+            
+            w.append(gestoreGioco.getMovimentoPossibile() + "\n");
+        }
+        catch(Exception e){}
+    }
+    
+    public static void salvaOggettoCsv(Oggetto oggetto, BufferedWriter w){
+        try{
+            if(oggetto == null){
+                w.append("null\n");
+                return;
+            }
+            
+            w.append((oggetto instanceof OggettoConsumabile ? "consumabile" : "equipaggiabile") + ",");
+            w.append(oggetto.getNome() + ",");
+            String filepath = oggetto.getSprite().toString();
+            w.append("img/" + filepath.substring(filepath.lastIndexOf("\\")+1) + ",");
+            
+            if(oggetto instanceof OggettoConsumabile consumabile){
+                w.append(consumabile.getStatPrincipale() + ",");
+                w.append(consumabile.getTipo().name());
+            }
+            else if(oggetto instanceof OggettoEquipaggiabile equipaggiabile){
+                w.append(equipaggiabile.getStatPrincipale() + ",");
+                w.append(equipaggiabile.getTipo().name());
+            }
+            
+            w.append("\n");
+        }
+        catch(Exception e){}
+
+    }
+    public static void salvaGiocabileCsv(Giocabile giocabile, BufferedWriter w){
+        try{
+            w.append(giocabile.getClass().getSimpleName() + ",");
+            w.append(giocabile.getNome() + ",");
+            String filepath = giocabile.getSprite().toString();
+            w.append("img/" + filepath.substring(filepath.lastIndexOf("\\")+1) + ",");
+            w.append(giocabile.getVita() + ",");
+            w.append(giocabile.getVitaMax() + ",");
+            w.append(giocabile.getDanno() + ",");
+
+            if(giocabile instanceof Giocatore giocatore){
+                w.append(giocatore.getFame() + ",");
+                w.append(giocatore.getMente() + "\n");
+
+                salvaOggettoCsv(giocatore.getOggettoDifensivo(), w);
+                salvaOggettoCsv(giocatore.getOggettoOffensivo(), w);
+            }
+        }
+        catch(Exception e){}
+    }
+    public static void salvaMappaCsv(Mappa mappa, BufferedWriter w){
+        try{
+            w.append(mappa.getRighe() + "\n");
+            
+            for(Cella[] riga : mappa.getGriglia(false)){
+                for(Cella cella : riga){
+                    if(cella == null){
+                        w.append("null,");
+                        continue;
+                    }
+                    
+                    w.append(cella.getTipo().name() + ",");
+                    w.append(cella.getIdCreabile() + ",");
+                    w.append(cella.getStato() + "\n");
+                }
+            }
+        }
+        catch(Exception e){}
     }
 }

@@ -26,6 +26,7 @@ public abstract class Giocabile implements Cloneable, Serializable{
     private String nome;
     private ImageIcon sprite;
     private GestoreGioco gestoreGioco;
+    
     /**
      * 
      * @param nome nome del Giocabile

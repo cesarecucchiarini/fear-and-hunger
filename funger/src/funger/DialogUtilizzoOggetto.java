@@ -40,7 +40,6 @@ public class DialogUtilizzoOggetto extends JDialog{
             panelDescrizione.add(new JLabel(oggetto.getNome()));
             panelDescrizione.add(new JLabel(((OggettoEquipaggiabile) oggetto).getTipo().name()));
             panelDescrizione.add(new JLabel(((OggettoEquipaggiabile) oggetto).getStatPrincipale()+""));
-            panelDescrizione.add(new JLabel(((OggettoEquipaggiabile) oggetto).getAgilita()+""));
         }
         else{
             panelDescrizione.add(new JLabel(oggetto.getNome()));

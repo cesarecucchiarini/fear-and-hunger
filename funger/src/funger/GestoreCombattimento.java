@@ -42,7 +42,8 @@ public class GestoreCombattimento implements Serializable{
     public boolean controllaFineCombattimento(){
         if(!combattimento){
             gestoreGioco.finisciAbilita();
-            GestoreForm.chiudiCombattimento();
+            if(gestoreGioco.getGioco())
+                GestoreForm.chiudiCombattimento();
             return true;
         }
         else if(nemico.controllaMorte()){
