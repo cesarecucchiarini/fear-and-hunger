@@ -73,7 +73,7 @@ public class GestoreMappa {
             else
                 posAttuale = new int[] {posAttuale[0], posAttuale[1] + ((posAttuale[1] - posFine[1]) < 0 ? 1 : -1)};
             
-            mappa.aggiungiCella(new Cella(TipoCella.VUOTO), posAttuale[0], posAttuale[1]);
+            mappa.aggiungiCella(generaCellaCasuale(false), posAttuale[0], posAttuale[1]);
             celle.add(posAttuale);
         }
         
@@ -108,25 +108,25 @@ public class GestoreMappa {
         Cella c;
         
         if(!mappa.cellaInizializzata(x+1, y)){
-            c = generaCellaCasuale();
+            c = generaCellaCasuale(true);
             mappa.aggiungiCella(c, x+1, y);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x+1, y});
         }
         if(!mappa.cellaInizializzata(x-1, y)){
-            c = generaCellaCasuale();
+            c = generaCellaCasuale(true);
             mappa.aggiungiCella(c, x-1, y);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x-1, y});
         }
         if(!mappa.cellaInizializzata(x, y+1)){
-            c = generaCellaCasuale();
+            c = generaCellaCasuale(true);
             mappa.aggiungiCella(c, x, y+1);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x, y+1});
         }
         if(!mappa.cellaInizializzata(x, y-1)){
-            c = generaCellaCasuale();
+            c = generaCellaCasuale(true);
             mappa.aggiungiCella(c, x, y-1);
             if(!c.getTipo().equals(TipoCella.MURO))
                 celleCreate.add(new int[]{x, y-1});
@@ -139,9 +139,10 @@ public class GestoreMappa {
      *  
      * @return cella creata casualmente
      */
-    public static Cella generaCellaCasuale(){
+    public static Cella generaCellaCasuale(boolean muro){
         Cella c;
-        switch(rnd.nextInt(3)){
+        int tipoCella = rnd.nextInt(muro ? 0 : 1, 3);
+        switch(tipoCella){
             default -> {c = new Cella();}
             case 1 -> {c = new Cella(TipoCella.VUOTO);}
             case 2 -> {c = new Cella(TipoCella.PIENO, GestoreCreabili.getRandomIdCreabile(true));}

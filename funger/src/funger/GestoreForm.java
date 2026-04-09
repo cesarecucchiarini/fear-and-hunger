@@ -70,11 +70,15 @@ public class GestoreForm {
     
     public static void morte(){
         form.dispose();
+        formMappa.dispose();
+        formInventario.dispose();
         form = new FormMorte();
     }
     
     public static void vittoria(){
         form.dispose();
+        formMappa.dispose();
+        formInventario.dispose();
         form = new FormVittoria();
     }
     

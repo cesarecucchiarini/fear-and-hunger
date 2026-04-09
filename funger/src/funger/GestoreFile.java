@@ -57,6 +57,7 @@ public class GestoreFile {
                 CharacterFactory factory = CHARACTER_FACTORIES.get(type);
                 if (factory != null) {
                     Creabile c = factory.createGiocatore(split[2], "img/"+split[1], Integer.parseInt(split[3]), Integer.parseInt(split[4]), gestoreGioco);
+                    c.getSprite();
                     GestoreCreabili.aggiungiCreabile(c);
                 }
             }

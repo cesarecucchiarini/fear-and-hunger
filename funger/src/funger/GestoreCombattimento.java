@@ -20,7 +20,7 @@ public class GestoreCombattimento implements Serializable{
     private int indiceCorrente;
     private boolean combattimento;
 
-    public GestoreCombattimento(GestoreGioco gestoreGioco) {
+    public GestoreCombattimento(GestoreGioco gestoreGioco){
         this.gestoreGioco = gestoreGioco;
     }
     
@@ -41,19 +41,18 @@ public class GestoreCombattimento implements Serializable{
     
     public boolean controllaFineCombattimento(){
         if(!combattimento){
-            nemico = null;
             gestoreGioco.finisciAbilita();
             GestoreForm.chiudiCombattimento();
             return true;
         }
         else if(nemico.controllaMorte()){
-            nemico = null;
+            combattimento = false;
             gestoreGioco.finisciAbilita();
             GestoreForm.chiudiCombattimento();
             return true;
         }
-        else if(party.get(0).controllaMorte()){
-            nemico = null;
+        else if(!gestoreGioco.getGioco()){
+            combattimento = false;
             gestoreGioco.finisciAbilita();
             GestoreForm.morte();
             return true;
@@ -65,6 +64,7 @@ public class GestoreCombattimento implements Serializable{
     public void cambiaTurno(){
         if(controllaFineCombattimento())
             return;
+        
         indiceCorrente++;
         if(indiceCorrente % (party.size()+1) == party.size()){
             giocabileCorrente = nemico;
@@ -79,6 +79,7 @@ public class GestoreCombattimento implements Serializable{
     public void controllaAttacco(){
         if(controllaFineCombattimento())
             return;
+        
         if(!(giocabileCorrente instanceof Giocatore)){
             giocabileCorrente.attacca();
             GestoreForm.aggiornaProgressBars();
@@ -115,6 +116,6 @@ public class GestoreCombattimento implements Serializable{
     }
 
     public boolean inBattaglia() {
-        return nemico != null;
+        return combattimento;
     }
 }

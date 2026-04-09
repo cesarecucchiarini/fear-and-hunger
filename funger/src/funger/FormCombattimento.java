@@ -5,14 +5,10 @@
 package funger;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
-import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,8 +19,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
-import javax.swing.JScrollBar;
-
 /**
  *
  * @author sergi
@@ -184,6 +178,7 @@ public class FormCombattimento extends javax.swing.JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e){
                     javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(Logger.getTextArea());
+                    scrollPane.setMaximumSize(new Dimension(100, 200));
                     javax.swing.JOptionPane.showMessageDialog(
                         null,              // The parent JFrame (FormCombattimento)
                         scrollPane,        // The component to show
